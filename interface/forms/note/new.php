@@ -63,8 +63,11 @@ var mypcc = '<?php echo $GLOBALS['phone_country_code'] ?>';
 </div>
 
 <select name="note_type">
-<option value="WORK NOTE"><?php echo xlt('WORK NOTE'); ?></option>
-<option value="SCHOOL NOTE"><?php echo xlt('SCHOOL NOTE'); ?></option>
+<option value="SCHOOL NOTE"><?php xl('SCHOOL NOTE','e'); ?></option>
+<option value="WORK NOTE"><?php xl('WORK NOTE','e'); ?></option>
+<option value="PROVIDER COMMUNICATION"><?php xl("PROVIDER COMMUNICATION",'e');?></option>
+<option value="REFERRAL"><?php xl('REFERRAL','e'); ?></option></select>
+
 </select>
 <br>
 <b><?php echo xlt('MESSAGE:'); ?></b>
@@ -125,5 +128,5 @@ $(document).ready(function(){
 });
 
 </script>
-
+<script type="text/javascript" src="<?php echo $GLOBALS['webroot'] ?>/interface/forms/note/updates.js"></script>
 </html>

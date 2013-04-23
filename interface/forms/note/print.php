@@ -31,13 +31,25 @@ if ($obj['date_of_signature'] != "") {
 <body class="body_top">
 
 <form method=post action="">
-<span class="title"><?php echo xlt('Work/School Note'); ?></span><br></br>
-<?php echo xlt('Printed'); ?> <?php echo dateformat(); ?>
+<span class="title"><?php 
+    $title='Work/School Note';
+    if($obj['note_type']=="PROVIDER COMMUNICATION")
+    {
+        $title="Provider Communication";
+    }
+    else if($obj['note_type']=="REFERRAL")
+    {
+        $title="Referral";
+    }
+    xl($title,'e'); ?>
+</span><br></br>
+<?php xl('Printed','e'); ?> <?php echo dateformat(); ?>
 <br><br>
 <select name="note_type">
-<option value="WORK NOTE" <?php if ($obj['note_type']=="WORK NOTE") echo " SELECTED"; ?>><?php echo xlt('WORK NOTE'); ?></option>
-<option value="SCHOOL NOTE" <?php if ($obj['note_type']=="SCHOOL NOTE") echo " SELECTED"; ?>><?php echo xlt('SCHOOL NOTE'); ?></option>
-</select>
+<option value="WORK NOTE" <?php if ($obj['note_type']=="WORK NOTE") echo " SELECTED"; ?>><?php xl('WORK NOTE','e'); ?></option>
+<option value="SCHOOL NOTE" <?php if ($obj['note_type']=="SCHOOL NOTE") echo " SELECTED"; ?>><?php xl('SCHOOL NOTE','e'); ?></option>
+<option value="PROVIDER COMMUNICATION" <?php if ($obj['note_type']=="PROVIDER COMMUNICATION") echo " SELECTED"; ?>><?php xl('PROVIDER COMMUNICATION','e'); ?></option>
+<option value="REFERRAL" <?php if ($obj['note_type']=="REFERRAL") echo " SELECTED"; ?>><?php xl('REFERRAL','e'); ?></option></select>
 <br>
 <b><?php echo xlt('MESSAGE:'); ?></b>
 <br>

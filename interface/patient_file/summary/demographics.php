@@ -491,8 +491,8 @@ $(window).load(function() {
   if($GLOBALS['erx_enable']){
 	echo '<td style="padding-left:1em;"><a class="css_button" href="../../eRx.php?page=medentry" onclick="top.restoreSession()">';
 	echo "<span>".htmlspecialchars(xl('NewCrop MedEntry'),ENT_NOQUOTES)."</span></a></td>";
-	echo '<td style="padding-left:1em;"><a class="css_button iframe1" href="../../soap_functions/soap_accountStatusDetails.php" onclick="top.restoreSession()">';
-	echo "<span>".htmlspecialchars(xl('NewCrop Account Status'),ENT_NOQUOTES)."</span></a></td><td id='accountstatus'></td>";
+	echo '<td style="padding-left:1em;"><a class="css_button" href="../../eRx.php?page=compose" onclick="top.restoreSession()">';
+	echo "<span>".htmlspecialchars(xl('Compose Rx'),ENT_NOQUOTES)."</span></a></td>";
    }
   //Patient Portal
   $portalUserSetting = true; //flag to see if patient has authorized access to portal
@@ -581,7 +581,75 @@ if ($GLOBALS['patient_id_category_name']) {
     <div style='float:left; margin-right:20px'>
      <table cellspacing=0 cellpadding=0>
       <tr<?php if ($GLOBALS['athletic_team']) echo " style='display:none;'"; ?>>
-       <td>
+<?php if ($vitals_is_registered && acl_check('patients', 'med')) { ?>
+    <tr>
+     <td width='650px'>
+<?php // vitals expand collapse widget
+  $widgetTitle = xl("Vitals");
+  $widgetLabel = "vitals";
+  $widgetButtonLabel = xl("Trend");
+  $widgetButtonLink = "../encounter/trend_form.php?formname=vitals";
+  $widgetButtonClass = "";
+  $linkMethod = "html";
+  $bodyClass = "notab";
+  // check to see if any vitals exist
+  $existVitals = sqlQuery("SELECT * FROM form_vitals WHERE pid=?", array($pid) );
+  if ($existVitals) {
+    $widgetAuth = true;
+  }
+  else {
+    $widgetAuth = false;
+  }
+  $fixedWidth = true;
+  expand_collapse_widget($widgetTitle, $widgetLabel, $widgetButtonLabel,
+    $widgetButtonLink, $widgetButtonClass, $linkMethod, $bodyClass,
+    $widgetAuth, $fixedWidth);
+?>
+      <br/>
+      <div style='margin-left:10px' class='text'><img src='../../pic/ajax-loader.gif'/></div><br/>
+      </div>
+     </td>
+     
+<?php
+            // History lookup
+            if ( (acl_check('patients', 'med')) ) { // && $GLOBALS['show_history_widget'] ) {
+                 $result = getHistoryData($pid);
+                 if (!is_array($result)) {
+                  newHistoryData($pid);
+                  $result = getHistoryData($pid);
+                 } ?>
+               <tr>
+                   <td width='650px'>
+               <?php
+            // History expand collapse widget
+                $widgetTitle = xl("History");
+                $widgetLabel = "history";
+                $widgetButtonLabel = xl("Edit");
+                $widgetButtonLink = "../history/history.php";
+                $widgetButtonClass = "";
+                $linkMethod = "html";
+                $bodyClass = "";
+                $widgetAuth = ($thisauth == "write");
+                $fixedWidth = true;
+                expand_collapse_widget($widgetTitle, $widgetLabel, $widgetButtonLabel,
+                  $widgetButtonLink, $widgetButtonClass, $linkMethod, $bodyClass,
+                  $widgetAuth, $fixedWidth);
+                ?>
+                        <div id="HIS" >
+                          <ul class="tabNav">
+                           <?php display_layout_tabs('HIS', $result, $result2); ?>
+                          </ul>
+                          <div class="tabContainer">
+                           <?php display_layout_tabs_data('HIS', $result, $result2); ?>
+                          </div>
+                         </div>
+                      </div> <!--required for expand_collapse_widget -->
+                   </td>
+                  </tr>
+                <?php
+                } 
+                ?>     
+	  <td>
 <?php
 // Billing expand collapse widget
 $widgetTitle = xl("Billing");
@@ -844,16 +912,19 @@ if ( $insurance_count > 0 ) {
 							<?php if ($row['copay'] != "") { ?>
 								  <span class='bold'><?php echo htmlspecialchars(xl('CoPay'),ENT_NOQUOTES); ?>: </span>
 								  <span class='text'><?php echo htmlspecialchars($row['copay'],ENT_NOQUOTES); ?></span>
-                  <br />
+                                                                  <br />
 							<?php } ?>
 								  <span class='bold'><?php echo htmlspecialchars(xl('Accept Assignment'),ENT_NOQUOTES); ?>:</span>
 								  <span class='text'><?php if($row['accept_assignment'] == "TRUE") echo xl("YES"); ?>
 								  <?php if($row['accept_assignment'] == "FALSE") echo xl("NO"); ?></span>
 							<?php if (!empty($row['policy_type'])) { ?>
-                  <br />
+                                                                  <br />
 								  <span class='bold'><?php echo htmlspecialchars(xl('Secondary Medicare Type'),ENT_NOQUOTES); ?>: </span>
 								  <span class='text'><?php echo htmlspecialchars($policy_types[$row['policy_type']],ENT_NOQUOTES); ?></span>
 							<?php } ?>
+								  <span class='bold'><?php echo htmlspecialchars(xl('California Children\'s Services'),ENT_NOQUOTES); ?>:</span>
+								  <span class='text'><?php if($row['cal_child_services'] == "TRUE") echo xl("YES"); ?>
+								  <?php if($row['cal_child_services'] == "FALSE") echo xl("NO"); ?></span>
 								 </td>
 								 <td valign='top'></td>
 								 <td valign='top'></td>
@@ -950,35 +1021,6 @@ expand_collapse_widget($widgetTitle, $widgetLabel, $widgetButtonLabel,
      </td>
     </tr>		
 
-<?php if ($vitals_is_registered && acl_check('patients', 'med')) { ?>
-    <tr>
-     <td width='650px'>
-<?php // vitals expand collapse widget
-  $widgetTitle = xl("Vitals");
-  $widgetLabel = "vitals";
-  $widgetButtonLabel = xl("Trend");
-  $widgetButtonLink = "../encounter/trend_form.php?formname=vitals";
-  $widgetButtonClass = "";
-  $linkMethod = "html";
-  $bodyClass = "notab";
-  // check to see if any vitals exist
-  $existVitals = sqlQuery("SELECT * FROM form_vitals WHERE pid=?", array($pid) );
-  if ($existVitals) {
-    $widgetAuth = true;
-  }
-  else {
-    $widgetAuth = false;
-  }
-  $fixedWidth = true;
-  expand_collapse_widget($widgetTitle, $widgetLabel, $widgetButtonLabel,
-    $widgetButtonLink, $widgetButtonClass, $linkMethod, $bodyClass,
-    $widgetAuth, $fixedWidth);
-?>
-      <br/>
-      <div style='margin-left:10px' class='text'><img src='../../pic/ajax-loader.gif'/></div><br/>
-      </div>
-     </td>
-    </tr>
 <?php } // end if ($vitals_is_registered && acl_check('patients', 'med')) ?>
 
 <?php
@@ -1028,7 +1070,7 @@ expand_collapse_widget($widgetTitle, $widgetLabel, $widgetButtonLabel,
     <!-- end left column div -->
 
     <!-- start right column div -->
-	<div>
+ <div>
     <table>
     <tr>
     <td>
@@ -1255,7 +1297,7 @@ expand_collapse_widget($widgetTitle, $widgetLabel, $widgetButtonLabel,
                 $etitle = xl('Comments').": ".($row['pc_hometext'])."\r\n".$etitle;
             }
             echo "<a href='javascript:oldEvt(" . htmlspecialchars($row['pc_eid'],ENT_QUOTES) . ")' title='" . htmlspecialchars($etitle,ENT_QUOTES) . "'>";
-            echo "<b>" . htmlspecialchars(xl($dayname) . ", " . $row['pc_eventDate'],ENT_NOQUOTES) . "</b>" . xlt("Status") .  "(";
+            echo "<b>" . htmlspecialchars(xl($dayname) . ", " . $row['pc_eventDate'],ENT_NOQUOTES) . "</b> Status (";
             echo " " .  generate_display_field(array('data_type'=>'1','list_id'=>'apptstat'),$row['pc_apptstatus']) . ")<br>";   // can't use special char parser on this
             echo htmlspecialchars("$disphour:$dispmin " . xl($dispampm) . " " . xl_appt_category($row['pc_catname']),ENT_NOQUOTES) . "<br>\n";
             echo htmlspecialchars($row['fname'] . " " . $row['lname'],ENT_NOQUOTES) . "</a><br>\n";
@@ -1321,22 +1363,21 @@ expand_collapse_widget($widgetTitle, $widgetLabel, $widgetButtonLabel,
         }
     }
 // END of past appointments            
-            
-			?>
+
+    ?>
 		</div>
 
 		<div id='stats_div'>
             <br/>
-            <div style='margin-left:10px' class='text'><img src='../../pic/ajax-loader.gif'/></div><br/>
+            <div style='margin-left:10px' class='text'><img src='../../pic/ajax-loader.gif'/><div><br/>
         </div>
     </td>
     </tr>
     </table>
 
 	</div> <!-- end right column div -->
-
+        
   </td>
-
  </tr>
 </table>
 
@@ -1349,4 +1390,7 @@ expand_collapse_widget($widgetTitle, $widgetLabel, $widgetButtonLabel,
 <?php } ?>
 
 </body>
+<script type="text/javascript" src="demographics_ordering.js"></script>
+<?php require_once("../../printouts/chooser.php"); ?>
+<?php require_once("../../stats/demographics_setup.php"); ?>
 </html>

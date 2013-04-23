@@ -149,9 +149,7 @@ if ($charttype == 'birth') {
 
     $ageOffset = 0;
     $heightOffset = 15; // Substract 15 because the graph starts at 15 inches
-    $weightOffset = 3;  // graph starts at 3 lbs
-	$WToffset = 0; //for wt and ht table at bottom half of HC graph
-	$HToffset = 18; // starting inch for wt and ht table at bottom half of HC graph
+    $weightOffset = 3;  // graph starts at 0 lbs
     
     // pixel positions and offsets for data table
     $datatable_x = 370;

@@ -88,6 +88,7 @@ function choose_search_diag(data,event,parent)
         new_justify.source_idx=99999;
         new_justify.create_problem(data.allowed_to_create_problem_from_diagnosis);
         new_justify.allowed_to_create_problem_from_diagnosis(data.allowed_to_create_problem_from_diagnosis);
+        new_justify.create_problem(true);
         parent.diagnosis_options.push(new_justify);
         parent.added_keys[code_key]=new_justify;
         update_diagnosis_options(parent.diagnosis_options,new_justify);
@@ -298,7 +299,7 @@ function setup_justify(model,current,patient,common)
     for(idx=0;idx<patient.length;idx++)
     {
         cur_entry=patient[idx];
-        if((cur_entry.code!=null) || cur_entry.code_type!="")
+        if((cur_entry.code!=null) && cur_entry.code_type!="")
         {         
             new_justify=new justify_entry(cur_entry);
             if(typeof model.added_keys[new_justify.key()]=='undefined')

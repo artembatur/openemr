@@ -34,17 +34,26 @@
  $fake_register_globals=false;
  $sanitize_all_escapes=true;
 
-require_once('../../globals.php');
-require_once($GLOBALS['srcdir'].'/patient.inc');
-require_once($GLOBALS['srcdir'].'/forms.inc');
-require_once($GLOBALS['srcdir'].'/calendar.inc');
-require_once($GLOBALS['srcdir'].'/formdata.inc.php');
-require_once($GLOBALS['srcdir'].'/options.inc.php');
-require_once($GLOBALS['srcdir'].'/encounter_events.inc.php');
-require_once($GLOBALS['srcdir'].'/acl.inc');
+    $arrived=0;
+    $arrived_enc=0;
+    if(isset($_REQUEST['eid']))
+       $created_eid=$_REQUEST['eid'];
+    else
+       $created_eid=0; 
+ require_once("../../globals.php");
+ require_once("$srcdir/patient.inc");
+ require_once("$srcdir/forms.inc");
+ require_once("$srcdir/calendar.inc");
+ require_once("$srcdir/formdata.inc.php");
+ require_once("$srcdir/options.inc.php");
+ require_once("$srcdir/encounter_events.inc.php");
+ require_once("$srcdir/acl.inc");
 
- //Check access control
- if (!acl_check('patients','appt','',array('write','wsome') ))
+ $my_permission = acl_check('patients', 'appt');
+// Add these restrictions back using new acl return value parameter when
+//  that mechanism is added to codebase.
+// if ($my_permission !== 'write' && $my_permission !== 'wsome')
+ if (!$my_permission)
    die(xl('Access not allowed'));
 
 /* Things that might be passed by our opener. */
@@ -83,7 +92,7 @@ require_once($GLOBALS['srcdir'].'/acl.inc');
 
 function InsertEventFull()
  {
-	global $new_multiple_value,$provider,$event_date,$duration,$recurrspec,$starttime,$endtime,$locationspec;
+	global $new_multiple_value,$provider,$event_date,$duration,$recurrspec,$starttime,$endtime,$locationspec,$created_eid;
 	// =======================================
 	// multi providers case
 	// =======================================
@@ -105,7 +114,8 @@ function InsertEventFull()
                 $args['starttime'] = $starttime;
                 $args['endtime'] = $endtime;
                 $args['locationspec'] = $locationspec;
-                InsertEvent($args);
+                $created_eid = InsertEvent($args);
+		
             }
 
         // ====================================
@@ -121,12 +131,13 @@ function InsertEventFull()
             $args['starttime'] = $starttime;
             $args['endtime'] = $endtime;
             $args['locationspec'] = $locationspec;
-            InsertEvent($args);
+            $created_eid = InsertEvent($args);
+	    
         }
  }
 function DOBandEncounter()
  {
-   global $event_date,$info_msg;
+   global $event_date,$info_msg,$created_eid;
 	 // Save new DOB if it's there.
 	 $patient_dob = trim($_POST['form_dob']);
 	 if ($patient_dob && $_POST['form_pid']) {
@@ -136,14 +147,44 @@ function DOBandEncounter()
 
 	 // Auto-create a new encounter if appropriate.
 	 //
-	 if ($GLOBALS['auto_create_new_encounters'] && $_POST['form_apptstatus'] == '@' && $event_date == date('Y-m-d'))
+	 if ($GLOBALS['auto_create_new_encounters'] && ($_POST['form_apptstatus'] == '@' || $_POST['form_apptstatus'] =='~') && $event_date == date('Y-m-d') && !$_POST['status_before_post'])
+
 	 {
 		 $encounter = todaysEncounterCheck($_POST['form_pid'], $event_date, $_POST['form_comments'], $_POST['facility'], $_POST['billing_facility'], $_POST['form_provider'], $_POST['form_category'], false);
 		 if($encounter){
 				 $info_msg .= xl("New encounter created with id"); 
 				 $info_msg .= " $encounter";
+				 //ViSolve:-Mapping the Postcalendar appointment and encounter created - in a table 'appointment_encounter'
+				 sqlInsert("Insert into appointment_encounter SET eid= ? , encounter= ?", array($created_eid,$encounter));
 		 }
 	 }
+	// ViSolve:-Edit Appointment(@) - instead of creating new encounter, it will update already created encounter
+	else if($GLOBALS['auto_create_new_encounters'] && $_POST['form_apptstatus'] == '@' && $event_date == date('Y-m-d') && $_POST['status_before_post'] && $_POST['created_encounter'] )	
+	{
+		$event_date = date('Y-m-d');
+		$visit_reason = $_POST['form_comments'] ? $_POST['form_comments'] : 'Please indicate visit reason';
+  		$tmprow = sqlQuery("SELECT username, facility, facility_id FROM users WHERE id = ?", array($_SESSION["authUserID"]) );
+ 		$username = $tmprow['username'];
+  		$facility = $tmprow['facility'];
+  		$facility_id = $_POST['facility'] ? (int)$_POST['facility'] : $tmprow['facility_id'];
+        	$billing_facility = $_POST['billing_facility'] ? (int)$_POST['billing_facility'] : $tmprow['facility_id'];
+        	$visit_provider = $_POST['form_provider'] ? (int)$_POST['form_provider'] : '(NULL)';
+        	$visit_cat = $_POST['form_category'] ? $_POST['form_category'] : '(NULL)';
+		$patient_id = $_POST['form_pid'];
+		$tmprow = sqlQuery("SELECT encounter FROM form_encounter WHERE " .
+    		"pid = ? AND date = ? " .
+    		"ORDER BY encounter DESC LIMIT 1",array($patient_id,"$event_date 00:00:00"));
+  		$encounter =  $_POST['created_encounter'];	
+		sqlInsert("UPDATE form_encounter SET " .
+      			"date = ?, " .
+      			"reason = ?, " .
+      			"facility = ?, " .
+      			"facility_id = ?, " .
+      			"billing_facility = ?, " .
+                        "provider_id = ?, " .
+      			"pid = ?, " .
+                        "pc_catid = ? where encounter = ?",array($event_date,$visit_reason,$facility,$facility_id,$billing_facility,$visit_provider,$patient_id,$visit_cat,$encounter));
+	}
  }
 //================================================================================================================
 
@@ -551,7 +592,7 @@ if ($_POST['form_action'] == "save") {
          * ======================================================*/
 
 		InsertEventFull();
-		
+
     }
 
     // done with EVENT insert/update statements
@@ -730,6 +771,18 @@ if ($_POST['form_action'] == "save") {
       $repeattype = 6;
     }
   }
+//ViSolve:-Save the appointment status (in edit mode) and if the status is "@" then saves the encounter too
+if(($row['pc_apptstatus']=='@') || $row['pc_apptstatus']=='~')
+{
+$enc_val = sqlQuery("select encounter from appointment_encounter where eid= ?",array($eid));
+$arrived_enc = htmlspecialchars($enc_val['encounter'], ENT_NOQUOTES);
+$arrived = 1;
+}
+else
+{
+$arrived = 0;
+$arrived_enc = 0;
+}
 
   $hometext = $row['pc_hometext'];
   if (substr($hometext, 0, 6) == ':text:') $hometext = substr($hometext, 6);
@@ -772,11 +825,12 @@ if ($_POST['form_action'] == "save") {
 
  // If we have a patient ID, get the name and phone numbers to display.
  if ($patientid) {
-  $prow = sqlQuery("SELECT lname, fname, phone_home, phone_biz, DOB " .
+  $prow = sqlQuery("SELECT lname, fname, phone_home,phone_cell, phone_biz, DOB " .
    "FROM patient_data WHERE pid = ?", array($patientid) );
   $patientname = $prow['lname'] . ", " . $prow['fname'];
-  if ($prow['phone_home']) $patienttitle .= " H=" . $prow['phone_home'];
-  if ($prow['phone_biz']) $patienttitle  .= " W=" . $prow['phone_biz'];
+  if ($prow['phone_home']) $patienttitle .= " H=" ."<b>".$prow['phone_home']."</b>";
+  if ($prow['phone_cell']) $patienttitle  .= " M=" ."<b>". $prow['phone_cell']."</b>";
+  if ($prow['phone_biz']) $patienttitle  .= " W=" ."<b>". $prow['phone_biz']."</b>";
  }
 
  // Get the providers list.
@@ -1445,6 +1499,10 @@ if ($repeatexdate != "") {
   </td>
   <td colspan='4' nowrap>
    <input type='text' size='40' name='form_comments' style='width:100%' value='<?php echo attr($hometext); ?>' title='<?php echo xla('Optional information about this event');?>' />
+<!--//ViSolve: Save the appointment status and encounter -->
+	<input type='hidden' value='<?php echo attr($arrived); ?>' name='status_before_post' />
+	 <input type='hidden' value='<?php echo attr($arrived_enc); ?>' name='created_encounter' />
+
   </td>
  </tr>
 
@@ -1616,7 +1674,6 @@ function SubmitForm() {
   top.restoreSession();
   f.submit();
  <?php } ?>
-
   return true;
 }
 

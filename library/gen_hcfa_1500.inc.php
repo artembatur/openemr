@@ -627,8 +627,11 @@ function gen_hcfa_1500_page($pid, $encounter, &$log, &$claim) {
    }
    else if($GLOBALS['cms_1500_box_31_format']==1)
    {
-      put_hcfa(60, 1, 22, $claim->providerFirstName()." ".$claim->providerLastName());   
+      put_hcfa(60, 1, 14, $claim->providerFirstName()." ".$claim->providerLastName());
+  
+      put_hcfa(60, 15,22, date("m/d/y") );
    }
+          
   //
   // $tmp = $claim->providerFirstName();
   // if ($claim->providerMiddleName()) $tmp .= ' ' . substr($claim->providerMiddleName(),0,1);

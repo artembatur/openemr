@@ -189,24 +189,8 @@ $form_orderby = getComparisonOrder( $_REQUEST['form_orderby'] ) ?  $_REQUEST['fo
 			<tr>
 				<td class='label'><?php xl('Status','e'); ?>:</td>
 				<td><?php generate_form_field(array('data_type'=>1,'field_id'=>'apptstatus','list_id'=>'apptstat','empty_title'=>'All'),$_POST['form_apptstatus']);?></td>
-				<td><?php echo xlt('Category')?></td>
-				<td>
-                                    <select id="form_apptcat" name="form_apptcat">
-                                        <?php
-                                            $categories=fetchAppointmentCategories();
-                                            echo "<option value='ALL'>".xlt("All")."</option>";
-                                            while($cat=sqlFetchArray($categories))
-                                            {
-                                                echo "<option value='".attr($cat['id'])."'";
-                                                if($cat['id']==$_POST['form_apptcat'])
-                                                {
-                                                    echo " selected='true' ";
-                                                }
-                                                echo    ">".text(xl_appt_category($cat['category']))."</option>";
-                                            }
-                                        ?>
-                                    </select>
-                                </td>
+				// Remove appt category (KY)
+				<td colspan="2">&nbsp;</td>
 			</tr>
 			
 			<tr>
@@ -291,16 +275,9 @@ if ($_POST['form_refresh'] || $_POST['form_orderby']) {
 	
 	$lastdocname = "";
 	//Appointment Status Checking
-        $form_apptstatus = $_POST['form_apptstatus'];
-        $form_apptcat=null;
-	if(isset($_POST['form_apptcat']))
-        {
-            if($form_apptcat!="ALL")
-            {
-                $form_apptcat=intval($_POST['form_apptcat']);
-            }
-        }
-            
+	// Remove appt catg (KY)
+	$form_apptstatus = $_POST['form_apptstatus'];
+	
 	//Without provider and facility data checking
 	$with_out_provider = null;
 	$with_out_facility = null;
@@ -312,7 +289,7 @@ if ($_POST['form_refresh'] || $_POST['form_orderby']) {
 	if( isset($_POST['with_out_facility']) ){
 		$with_out_facility = $_POST['with_out_facility'];
 	}
-	$appointments = fetchAppointments( $from_date, $to_date, $patient, $provider, $facility, $form_apptstatus, $with_out_provider, $with_out_facility,$form_apptcat );
+	$appointments = fetchAppointments( $from_date, $to_date, $patient, $provider, $facility, $form_apptstatus, $with_out_provider, $with_out_facility );
 	
 	if ( $show_available_times ) {
 		$availableSlots = getAvailableSlots( $from_date, $to_date, $provider, $facility );

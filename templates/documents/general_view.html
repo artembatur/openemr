@@ -40,30 +40,18 @@
 	{literal}}{/literal}
  {literal}}{/literal}
 
- // Process click on Import link.
- function import_ccr(docid) {literal}{
-  top.restoreSession();
-  $.ajax({
-    url: "library/ajax/ccr_import_ajax.php",
-    type: "POST",
-    dataType: "html",
-    data:
+{literal}
+    function reviewed()
     {
-      ccr_ajax : "yes",
-      document_id : docid,
-    },
-    success: function(data){
-      alert(data);
-      top.restoreSession();
-      document.location.reload();
-    },
-    error:function(){
-      alert("failure");
+
+        var note=document.getElementsByName("note");
+        if(note.length==1)
+            {
+                note[0].value="Reviewed";
+                document.forms['notes'].submit();
+            }
     }
-  });
- }{/literal}
-
-
+{/literal}
 </script>
 
 </head>
@@ -177,7 +165,7 @@
                     </div>
                     <div style="float:none">
                         <a href="javascript:;" onclick="document.forms['notes'].submit();">(<span>{xl t='add'}</span>)</a>
-                    </div>
+                        <a href="javascript:;" onclick="reviewed();">(<span>{xl t='reviewed'}</span>)</a>
                 <div>
                     <textarea cols="53" rows="8" wrap="virtual" name="note" style="width:100%"></textarea><br>
                     <input type="hidden" name="process" value="{$PROCESS}" />
@@ -223,4 +211,6 @@
 </table>
 <script language='JavaScript'>
  Calendar.setup({literal}{{/literal}inputField:"docdate", ifFormat:"%Y-%m-%d", button:"img_docdate"{literal}}{/literal});
+
+ }
 </script>

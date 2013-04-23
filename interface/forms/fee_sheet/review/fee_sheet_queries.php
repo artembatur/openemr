@@ -49,7 +49,7 @@ function update_issues($pid,$encounter,$diags)
     $target_date=$res['date'];
     $lists_params=array();
     $encounter_params=array();
-    $sqlUpdateIssueDescription="UPDATE lists SET title=?, modifydate=NOW() WHERE id=? AND TITLE!=?";
+    $sqlUpdateIssueDescription="UPDATE lists SET title=? WHERE id=? AND TITLE!=?";
     
     $sqlFindProblem = "SELECT id, title FROM lists WHERE ";
     $sqlFindProblem.= " ( (`begdate` IS NULL) OR (`begdate` IS NOT NULL AND `begdate`<=?) ) AND " ; array_push($lists_params,$target_date);
@@ -158,27 +158,31 @@ function create_diags($req_pid,$req_encounter,$diags)
     $findRow= " SELECT id,code_text FROM billing where activity=1 AND encounter=? AND pid=? and code_type=? and code=?";
     foreach($diags as $diag)
     {
-        $find_params=array($req_encounter,$req_pid,$diag->getCode_type(),$diag->getCode());
-        $search=sqlStatement($findRow,$find_params);
-        $count=sqlNumRows($search);
-        if($count==0)
-        {
-            $bound_params=array();
-            array_push($bound_params,$req_encounter);
-            $diag->addArrayParams($bound_params);
-            array_push($bound_params,$req_pid,$authorized,$_SESSION['authId'],$_SESSION['authProvider'],$provid);       
-            $res=sqlInsert($sqlCreateDiag,$bound_params);
-        }
-        else
-        {
-            // update the code_text;
-            $billing_entry=sqlFetchArray($search);
-            $code_text=$billing_entry['code_text'];
-            if($code_text!=$diag->description)
+        if((!$diag->getCode_type()=='') && (!$diag->getCode()==''))
+        {            
+            $find_params=array($req_encounter,$req_pid,$diag->getCode_type(),$diag->getCode());
+            $search=sqlStatement($findRow,$find_params);
+            $count=sqlNumRows($search);
+            if($count==0)
             {
-                sqlStatement($sqlUpdateDescription,array($diag->description,$billing_entry['id']));
+                $bound_params=array();
+                array_push($bound_params,$req_encounter);
+                $diag->addArrayParams($bound_params);
+                array_push($bound_params,$req_pid,$authorized,$_SESSION['authId'],$_SESSION['authProvider'],$provid);       
+                $res=sqlInsert($sqlCreateDiag,$bound_params);
+            }
+            else
+            {
+                // update the code_text;
+                $billing_entry=sqlFetchArray($search);
+                $code_text=$billing_entry['code_text'];
+                if($code_text!=$diag->description)
+                {
+                    sqlStatement($sqlUpdateDescription,array($diag->description,$billing_entry['id']));
+                }
             }
         }
+
     }
 }
 
@@ -211,12 +215,15 @@ function create_procs($req_pid,$req_encounter,$procs)
             "?,'')";        // justify, notecodes
     foreach($procs as $proc)
     {
-        $insert_params=array();
-        array_push($insert_params,$req_encounter);
-        $proc->addArrayParams($insert_params);
-        array_push($insert_params,$req_pid,$authorized,$_SESSION['authId'],$_SESSION['authProvider'],$provid);
-        $proc->addProcParameters($insert_params);
-        sqlInsert($sql.$param,$insert_params);        
+        if(($proc->getCode()!='')&&($proc->getCode_type()!=''))
+        {
+            $insert_params=array();
+            array_push($insert_params,$req_encounter);
+            $proc->addArrayParams($insert_params);
+            array_push($insert_params,$req_pid,$authorized,$_SESSION['authId'],$_SESSION['authProvider'],$provid);
+            $proc->addProcParameters($insert_params);
+            sqlInsert($sql.$param,$insert_params);                    
+        }
     }
 }
 

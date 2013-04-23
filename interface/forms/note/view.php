@@ -56,7 +56,7 @@ if ($obj['date_of_signature'] != "") {
 var mypcc = '<?php echo $GLOBALS['phone_country_code'] ?>';
 
 function PrintForm() {
-    newwin = window.open("<?php echo $rootdir."/forms/".$form_name."/print.php?id=".attr($_GET["id"]); ?>","mywin");
+    newwin = window.open("<?php echo $rootdir."/patient_file/report/custom_report.php?printable=1&note_".$_GET["id"]."=".$encounter; ?>");
 }
 
 </script>
@@ -74,8 +74,11 @@ function PrintForm() {
 </div>
 
 <select name="note_type">
-<option value="WORK NOTE" <?php if ($obj['note_type']=="WORK NOTE") echo " SELECTED"; ?>><?php echo xlt('WORK NOTE'); ?></option>
-<option value="SCHOOL NOTE" <?php if ($obj['note_type']=="SCHOOL NOTE") echo " SELECTED"; ?>><?php echo xlt('SCHOOL NOTE'); ?></option>
+<option value="WORK NOTE" <?php if ($obj['note_type']=="WORK NOTE") echo " SELECTED"; ?>><?php xl('WORK NOTE','e'); ?></option>
+<option value="SCHOOL NOTE" <?php if ($obj['note_type']=="SCHOOL NOTE") echo " SELECTED"; ?>><?php xl('SCHOOL NOTE','e'); ?></option>
+<option value="PROVIDER COMMUNICATION" <?php if ($obj['note_type']=="PROVIDER COMMUNICATION") echo " SELECTED"; ?>><?php xl('PROVIDER COMMUNICATION','e'); ?></option>
+<option value="REFERRAL" <?php if ($obj['note_type']=="REFERRAL") echo " SELECTED"; ?>><?php xl('REFERRAL','e'); ?></option></select>
+
 </select>
 <br>
 <b><?php echo xlt('MESSAGE:'); ?></b>
@@ -128,6 +131,6 @@ $(document).ready(function(){
 });
 
 </script>
-
+<script type="text/javascript" src="<?php echo $GLOBALS['webroot'] ?>/interface/forms/note/updates.js"></script>
 </html>
 

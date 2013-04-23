@@ -29,6 +29,7 @@ require_once("$srcdir/acl.inc");
 require_once("$srcdir/formatting.inc.php");
 require_once("$srcdir/formdata.inc.php");
 
+<<<<<<< HEAD
 $date             = (isset($_POST['form_date']))            ? $_POST['form_date'] : '';
 $onset_date       = (isset($_POST['form_onset_date']))      ? $_POST['form_onset_date'] : '';
 $sensitivity      = (isset($_POST['form_sensitivity']))     ? $_POST['form_sensitivity'] : '';
@@ -38,6 +39,20 @@ $billing_facility = (isset($_POST['billing_facility']))     ? $_POST['billing_fa
 $reason           = (isset($_POST['reason']))               ? $_POST['reason'] : '';
 $mode             = (isset($_POST['mode']))                 ? $_POST['mode'] : '';
 $referral_source  = (isset($_POST['form_referral_source'])) ? $_POST['form_referral_source'] : '';
+=======
+$conn = $GLOBALS['adodb']['db'];
+
+$date             = formData('form_date');
+$onset_date       = formData('form_onset_date');
+$sensitivity      = formData('form_sensitivity');
+$pc_catid         = formData('pc_catid');
+$facility_id      = formData('facility_id');
+$billing_facility = formData('billing_facility');
+$reason           = formData('reason');
+$mode             = formData('mode');
+$referral_source  = formData('form_referral_source');
+$arrivedwith  = formData('form_arrivedwith');
+>>>>>>> c230482... Santiago Peds - Customizations (Kevin Yeh, mostly)
 
 $facilityresult = sqlQuery("select name FROM facility WHERE id = ?", array($facility_id));
 $facility = $facilityresult['name'];
@@ -59,6 +74,7 @@ if ($mode == 'new')
       "onset_date = '" . add_escape_custom($onset_date) . "', " .
       "reason = '" . add_escape_custom($reason) . "', " .
       "facility = '" . add_escape_custom($facility) . "', " .
+<<<<<<< HEAD
       "pc_catid = '" . add_escape_custom($pc_catid) . "', " .
       "facility_id = '" . add_escape_custom($facility_id) . "', " .
       "billing_facility = '" . add_escape_custom($billing_facility) . "', " .
@@ -67,6 +83,17 @@ if ($mode == 'new')
       "pid = '" . add_escape_custom($pid) . "', " .
       "encounter = '" . add_escape_custom($encounter) . "', " .
       "provider_id = '" . add_escape_custom($provider_id) . "'"),
+=======
+      "pc_catid = '$pc_catid', " .
+      "facility_id = '$facility_id', " .
+      "billing_facility = '$billing_facility', " .
+      "sensitivity = '$sensitivity', " .
+      "referral_source = '$referral_source', " .
+      "arrivedwith = '$arrivedwith', " .
+      "pid = '$pid', " .
+      "encounter = '$encounter', " .
+      "provider_id = '$provider_id'"),
+>>>>>>> c230482... Santiago Peds - Customizations (Kevin Yeh, mostly)
     "newpatient", $pid, $userauthorized, $date);
 }
 else if ($mode == 'update')
@@ -81,6 +108,7 @@ else if ($mode == 'update')
   $datepart = acl_check('encounters', 'date_a') ? "date = '" . add_escape_custom($date) . "', " : "";
   sqlStatement("UPDATE form_encounter SET " .
     $datepart .
+<<<<<<< HEAD
     "onset_date = '" . add_escape_custom($onset_date) . "', " .
     "reason = '" . add_escape_custom($reason) . "', " .
     "facility = '" . add_escape_custom($facility) . "', " .
@@ -90,6 +118,18 @@ else if ($mode == 'update')
     "sensitivity = '" . add_escape_custom($sensitivity) . "', " .
     "referral_source = '" . add_escape_custom($referral_source) . "' " .
     "WHERE id = '" . add_escape_custom($id) . "'");
+=======
+    "onset_date = '$onset_date', " .
+    "reason = '$reason', " .
+    "facility = '$facility', " .
+    "pc_catid = '$pc_catid', " .
+    "facility_id = '$facility_id', " .
+    "billing_facility = '$billing_facility', " .
+    "sensitivity = '$sensitivity', " .
+    "referral_source = '$referral_source', " .
+    "arrivedwith = '$arrivedwith' " .	
+    "WHERE id = '$id'");
+>>>>>>> c230482... Santiago Peds - Customizations (Kevin Yeh, mostly)
 }
 else {
   die("Unknown mode '" . text($mode) . "'");

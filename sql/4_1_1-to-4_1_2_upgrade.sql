@@ -496,3 +496,25 @@ ALTER TABLE `documents` ADD COLUMN `imported` TINYINT DEFAULT 0 NULL COMMENT 'Pa
 #EndIf
 
 
+
+#IfNotTable rsa_pairs
+CREATE TABLE `rsa_pairs` (
+  `public` text NOT NULL,
+  `private` text NOT NULL,
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDb;
+#EndIf
+
+#IfMissingColumn patient_access_onsite portal_salt
+ALTER TABLE `patient_access_onsite` ADD COLUMN `portal_salt` VARCHAR(100) NULL;
+#Endif
+
+#IfNotTable appointment_encounter
+CREATE TABLE `appointment_encounter` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `eid` int NOT NULL,
+  `encounter` int not null,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM;
+#EndIf
+
