@@ -97,14 +97,17 @@ function gen_hcfa_1500_page($pid, $encounter, &$log, &$claim) {
   put_hcfa(5, 41, 31, $tmp . $claim->payerState() . ' ' . $claim->payerZip());
 
   // Box 1. Insurance Type
-  $ct = $claim->claimType();
-  $tmpcol = 45;                        // Other
-  if      ($ct === 'MB') $tmpcol =  1; // Medicare
-  else if ($ct === 'MC') $tmpcol =  8; // Medicaid
-  else if ($ct === 'CH') $tmpcol = 15; // Champus
-  else if ($ct === 'CH') $tmpcol = 24; // Champus VA (why same code?)
-  else if ($ct === 'BL') $tmpcol = 31; // Group Health Plan (only BCBS?)
-  else if ($ct === '16') $tmpcol = 39; // FECA
+  // claimTypeRaw() gets the integer value from insurance_companies.freeb_type.
+  // Previous version of this code called claimType() which maps freeb_type to
+  // a 2-character code and that was not specific enough.
+  $ct = $claim->claimTypeRaw();
+  $tmpcol = 45;                    // Other
+  if      ($ct == 2) $tmpcol =  1; // Medicare
+  else if ($ct == 3) $tmpcol =  8; // Medicaid
+  else if ($ct == 5) $tmpcol = 15; // TriCare (formerly CHAMPUS)
+  else if ($ct == 4) $tmpcol = 24; // Champus VA
+  else if ($ct == 6) $tmpcol = 31; // Group Health Plan (only BCBS?)
+  else if ($ct == 7) $tmpcol = 39; // FECA
   put_hcfa(8, $tmpcol, 1, 'X');
 
   // Box 1a. Insured's ID Number
@@ -328,8 +331,9 @@ function gen_hcfa_1500_page($pid, $encounter, &$log, &$claim) {
   put_hcfa(32, 5, 2, substr($tmp,6,2));
   put_hcfa(32, 8, 4, substr($tmp,0,4));
   
-  if(hcfa_1500_version_02_12())
+  if(hcfa_1500_version_02_12() && !empty($tmp))
   {
+    // Only include the Box 14 qualifier if there we are using version 02/12 and there is a Box 14 date.
     put_hcfa(32, 16, 3, $claim->box14qualifier());
       
   }
@@ -337,6 +341,7 @@ function gen_hcfa_1500_page($pid, $encounter, &$log, &$claim) {
   $tmp = $claim->dateInitialTreatment();
   if(hcfa_1500_version_02_12() && !empty($tmp))
   {
+    // Only include the Box 15 qualifier if there we are using version 02/12 and there is a Box 15 date.
     put_hcfa(32, 31, 3, $claim->box15qualifier());    
   }
 
@@ -366,10 +371,14 @@ function gen_hcfa_1500_page($pid, $encounter, &$log, &$claim) {
     (empty($GLOBALS['MedicareReferrerIsRenderer']) || $claim->claimType() != 'MB'))
   {
     // Box 17a. Referring Provider Alternate Identifier
+    // Commented this out because UPINs are obsolete, leaving the code as an
+    // example in case some other identifier needs to be supported.
+    /*****************************************************************
     if ($claim->referrerUPIN() && $claim->claimType() != 'MB') {
       put_hcfa(33, 30,  2, '1G');
       put_hcfa(33, 33, 15, $claim->referrerUPIN());
     }
+    *****************************************************************/
 
     // Box 17. Name of Referring Provider or Other Source
     $tmp = $claim->referrerLastName() . ', ' . $claim->referrerFirstName();
