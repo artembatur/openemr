@@ -8,9 +8,9 @@ $disable_utf8_flag = false;
 
 $host	= 'localhost';
 $port	= '3306';
-$login	= 'openemr';
-$pass	= 'openemr';
-$dbase	= 'openemr';
+$login	= 'root';
+$pass	= '2muchfun4me!';
+$dbase	= 'drkayproduction';
 
 $sqlconf = array();
 global $sqlconf;
@@ -24,8 +24,8 @@ $sqlconf["dbase"] = $dbase;
 //////////////////////////
 //////////////////////////
 //////DO NOT TOUCH THIS///
-$config = 0; /////////////
+$config = 1; /////////////
 //////////////////////////
 //////////////////////////
-//////////////////////////
+///////development///////////////////
 ?>
