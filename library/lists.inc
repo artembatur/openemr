@@ -55,6 +55,17 @@ else { // default version
     //
   );
 }
+function collect_issue_type_category() {
+  if (!empty($GLOBALS['ippf_specific'])) { // IPPF version
+    return "ippf_specific";
+  }
+  else if (!empty($GLOBALS['athletic_team'])) { // Athletic team version
+    return "athletic_team";
+  }
+  else { // Default version
+    return "default";
+  }
+}
 
 // Build the $ISSUE_TYPES array (see script header for description)
 $res = sqlStatement("SELECT * FROM `issue_types` WHERE active=1 AND `category`=? ORDER BY `ordering` ASC", array( collect_issue_type_category() ));
