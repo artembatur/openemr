@@ -1,12 +1,8 @@
 <?php
-/**
- * patient.inc includes functions for manipulating patient information.
- *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
- */
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
 
 require_once("{$GLOBALS['srcdir']}/sql.inc");
 require_once(dirname(__FILE__) . "/classes/WSWrapper.class.php");
@@ -39,16 +35,6 @@ $policy_types = array(
   '47' => xl('Other Liability Insurance is Primary'),
 );
 
-/**
- * Get a patient's demographic data.
- *
- * @param int    $pid   The PID of the patient
- * @param string $given an optional subsection of the patient's demographic
- *                      data to retrieve.
- * @return array The requested subsection of a patient's demographic data.
- *               If no subsection was given, returns everything, with the
- *               date of birth as the last field.
- */
 function getPatientData($pid, $given = "*, DATE_FORMAT(DOB,'%m/%d/%Y') as DOB_TS") {
     $sql = "select $given from patient_data where pid=? order by date DESC limit 0,1";
     return sqlQuery($sql, array($pid) );
@@ -977,7 +963,8 @@ function newInsuranceData(
   $effective_date = "0000-00-00",
   $accept_assignment = "TRUE",
   $policy_type = "",
-  $cal_child_services = "FALSE")
+  $cal_child_services = "FALSE",
+  $county_code = ""      )
 {
   if (strlen($type) <= 0) return FALSE;
 
@@ -1053,6 +1040,7 @@ function newInsuranceData(
     $data['accept_assignment'] = $accept_assignment;
     $data['policy_type'] = $policy_type;
     $data['cal_child_services'] = $cal_child_services;
+    $data['county_code'] = $county_code;
     updateInsuranceData($idrow['id'], $data);
     return $idrow['id'];
   }
@@ -1087,7 +1075,8 @@ function newInsuranceData(
       date = '$effective_date',
       accept_assignment = '$accept_assignment',
       policy_type = '$policy_type',
-      cal_child_services = '$cal_child_services'
+      cal_child_services = '$cal_child_services',
+      county_code = '$county_code'
     ");
   }
 }
@@ -1604,75 +1593,17 @@ function DBToDate ($date)
     return $date;
 }
 
-/**
- * Get up to 3 insurances (primary, secondary, tertiary) that are effective
- * for the given patient on the given date.
- *
- * @param int     The PID of the patient.
- * @param string  Date in yyyy-mm-dd format.
- * @return array  Array of 0-3 insurance_data rows.
- */
-function getEffectiveInsurances($patient_id, $encdate) {
-  $insarr = array();
-  foreach (array('primary','secondary','tertiary') as $instype) {
-    $tmp = sqlQuery("SELECT * FROM insurance_data " .
-      "WHERE pid = ? AND type = ? " .
-      "AND date <= ? ORDER BY date DESC LIMIT 1",
-      array($patient_id, $instype, $encdate));
-    if (empty($tmp['provider'])) break;
-    $insarr[] = $tmp;
-  }
-  return $insarr;
-}
-
-/**
- * Get the patient's balance due. Normally this excludes amounts that are out
- * to insurance.  If you want to include what insurance owes, set the second
- * parameter to true.
- *
- * @param int     The PID of the patient.
- * @param boolean Indicates if amounts owed by insurance are to be included.
- * @return number The balance.
- */
-function get_patient_balance($pid, $with_insurance=false) {
+function get_patient_balance($pid) {
   if ($GLOBALS['oer_config']['ws_accounting']['enabled'] === 2) {
-    $balance = 0;
-    $feres = sqlStatement("SELECT date, encounter, last_level_billed, " .
-      "last_level_closed, stmt_count " .
-      "FROM form_encounter WHERE pid = ?", array($pid));
-    while ($ferow = sqlFetchArray($feres)) {
-      $encounter = $ferow['encounter'];
-      $dos = substr($ferow['date'], 0, 10);
-      $insarr = getEffectiveInsurances($pid, $dos);
-      $inscount = count($insarr);
-      if (!$with_insurance && $ferow['last_level_closed'] < $inscount && $ferow['stmt_count'] == 0) {
-        // It's out to insurance so only the co-pay might be due.
-        $brow = sqlQuery("SELECT SUM(fee) AS amount FROM billing WHERE " .
-          "pid = ? AND encounter = ? AND " .
-          "code_type = 'copay' AND activity = 1",
-          array($pid, $encounter));
-        $drow = sqlQuery("SELECT SUM(pay_amount) AS payments " .
-          "FROM ar_activity WHERE " .
-          "pid = ? AND encounter = ? AND payer_type = 0",
-          array($pid, $encounter));
-        $ptbal = $insarr[0]['copay'] + $brow['amount'] - $drow['payments'];
-        if ($ptbal > 0) $balance += $ptbal;
-      }
-      else {
-        // Including insurance or not out to insurance, everything is due.
-        $brow = sqlQuery("SELECT SUM(fee) AS amount FROM billing WHERE " .
-          "pid = ? AND encounter = ? AND " .
-          "activity = 1", array($pid, $encounter));
-        $drow = sqlQuery("SELECT SUM(pay_amount) AS payments, " .
-          "SUM(adj_amount) AS adjustments FROM ar_activity WHERE " .
-          "pid = ? AND encounter = ?", array($pid, $encounter));
-        $srow = sqlQuery("SELECT SUM(fee) AS amount FROM drug_sales WHERE " .
-          "pid = ? AND encounter = ?", array($pid, $encounter));
-        $balance += $brow['amount'] + $srow['amount']
-          - $drow['payments'] - $drow['adjustments'];
-      }
-    }
-    return sprintf('%01.2f', $balance);
+    $brow = sqlQuery("SELECT SUM(fee) AS amount FROM billing WHERE " .
+      "pid = ? AND activity = 1", array($pid) );
+    $srow = sqlQuery("SELECT SUM(fee) AS amount FROM drug_sales WHERE " .
+      "pid = ?", array($pid) );
+    $drow = sqlQuery("SELECT SUM(pay_amount) AS payments, " .
+      "SUM(adj_amount) AS adjustments FROM ar_activity WHERE " .
+      "pid = ?", array($pid) );
+    return sprintf('%01.2f', $brow['amount'] + $srow['amount']
+      - $drow['payments'] - $drow['adjustments']);
   }
   else if ($GLOBALS['oer_config']['ws_accounting']['enabled']) {
     // require_once($GLOBALS['fileroot'] . "/library/classes/WSWrapper.class.php");
