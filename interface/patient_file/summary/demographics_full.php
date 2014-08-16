@@ -536,7 +536,7 @@ $group_seq=0; // this gives the DIV blocks unique IDs
 			 <td><span class=required><?php xl('County Code','e'); ?></span></td>
 			 <td class='required'>:</td>
 
-                         <td><?php echo generate_select_list("i".$i."county_code", "county_code", $result3["county_code"], "County Code","County","class1 text");?></td>
+                         <td><?php echo generate_select_list("i".$i."county_code", "county_code", $result3["county_code"], "County Code","Select County","class1 text");?></td>
 			</tr>
                         
                         
