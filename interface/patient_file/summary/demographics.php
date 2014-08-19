@@ -1,23 +1,8 @@
 <?php
-/**
- *
- * Patient summary screen.
- *
- * LICENSE: This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 3
- * of the License, or (at your option) any later version.
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <http://opensource.org/licenses/gpl-license.php>;.
- *
- * @package OpenEMR
- * @author  Brady Miller <brady@sparmy.com>
- * @link    http://www.open-emr.org
- */
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
 
 //SANITIZE ALL ESCAPES
 $sanitize_all_escapes=true;
@@ -37,7 +22,6 @@ $fake_register_globals=false;
  require_once("../history/history.inc.php");
  require_once("$srcdir/formatting.inc.php");
  require_once("$srcdir/edi.inc");
- require_once("$srcdir/invoice_summary.inc.php");
  require_once("$srcdir/clinical_rules.php");
 
   if ($GLOBALS['concurrent_layout'] && isset($_GET['set_pid'])) {
@@ -484,7 +468,7 @@ $(window).load(function() {
 
   if (acl_check('admin', 'super')) {
    echo "<td style='padding-left:1em;'><a class='css_button iframe' href='../deleter.php?patient=" . 
-    htmlspecialchars($pid,ENT_QUOTES) . "' onclick='top.restoreSession()'>" .
+    htmlspecialchars($pid,ENT_QUOTES) . "'>" .
     "<span>".htmlspecialchars(xl('Delete'),ENT_NOQUOTES).
     "</span></a></td>";
   }
@@ -609,46 +593,8 @@ if ($GLOBALS['patient_id_category_name']) {
       <div style='margin-left:10px' class='text'><img src='../../pic/ajax-loader.gif'/></div><br/>
       </div>
      </td>
-     
-<?php
-            // History lookup
-            if ( (acl_check('patients', 'med')) ) { // && $GLOBALS['show_history_widget'] ) {
-                 $result = getHistoryData($pid);
-                 if (!is_array($result)) {
-                  newHistoryData($pid);
-                  $result = getHistoryData($pid);
-                 } ?>
-               <tr>
-                   <td width='650px'>
-               <?php
-            // History expand collapse widget
-                $widgetTitle = xl("History");
-                $widgetLabel = "history";
-                $widgetButtonLabel = xl("Edit");
-                $widgetButtonLink = "../history/history.php";
-                $widgetButtonClass = "";
-                $linkMethod = "html";
-                $bodyClass = "";
-                $widgetAuth = ($thisauth == "write");
-                $fixedWidth = true;
-                expand_collapse_widget($widgetTitle, $widgetLabel, $widgetButtonLabel,
-                  $widgetButtonLink, $widgetButtonClass, $linkMethod, $bodyClass,
-                  $widgetAuth, $fixedWidth);
-                ?>
-                        <div id="HIS" >
-                          <ul class="tabNav">
-                           <?php display_layout_tabs('HIS', $result, $result2); ?>
-                          </ul>
-                          <div class="tabContainer">
-                           <?php display_layout_tabs_data('HIS', $result, $result2); ?>
-                          </div>
-                         </div>
-                      </div> <!--required for expand_collapse_widget -->
-                   </td>
-                  </tr>
-                <?php
-                } 
-                ?>     
+    </tr>	  
+
 	  <td>
 <?php
 // Billing expand collapse widget
@@ -673,46 +619,33 @@ expand_collapse_widget($widgetTitle, $widgetLabel, $widgetButtonLabel,
 ?>
         <br>
 <?php
-		//PATIENT BALANCE,INS BALANCE naina@capminds.com
-		$patientbalance = get_patient_balance($pid, false);
-		//Debit the patient balance from insurance balance
-		$insurancebalance = get_patient_balance($pid, true) - $patientbalance;
-	   $totalbalance=$patientbalance + $insurancebalance;
  if ($GLOBALS['oer_config']['ws_accounting']['enabled']) {
  // Show current balance and billing note, if any.
-  echo "<table border='0'><tr><td>" .
-  "<table ><tr><td><span class='bold'><font color='red'>" .
-   xlt('Patient Balance Due') .
-   " : " . text(oeFormatMoney($patientbalance)) .
-   "</font></span></td></tr>".
-     "<tr><td><span class='bold'><font color='red'>" .
-   xlt('Insurance Balance Due') .
-   " : " . text(oeFormatMoney($insurancebalance)) .
-   "</font></span></td></tr>".
-   "<tr><td><span class='bold'><font color='red'>" .
-   xlt('Total Balance Due').
-   " : " . text(oeFormatMoney($totalbalance)) .
-   "</font></span></td></td></tr>";
+  echo "        <div style='margin-left: 10px; margin-right: 10px'>" .
+   "<span class='bold'><font color='#ee6600'>" .
+   htmlspecialchars(xl('Balance Due'),ENT_NOQUOTES) .
+   ": " . htmlspecialchars(oeFormatMoney(get_patient_balance($pid)),ENT_NOQUOTES) .
+   "</font></span><br>";
   if ($result['genericname2'] == 'Billing') {
-   echo "<tr><td><span class='bold'><font color='red'>" .
-    xlt('Billing Note') . ":" .
-    text($result['genericval2']) .
-    "</font></span></td></tr>";
+   echo "<span class='bold'><font color='red'>" .
+    htmlspecialchars(xl('Billing Note'),ENT_NOQUOTES) . ":" .
+    htmlspecialchars($result['genericval2'],ENT_NOQUOTES) .
+    "</font></span><br>";
   } 
   if ($result3['provider']) {   // Use provider in case there is an ins record w/ unassigned insco
-   echo "<tr><td><span class='bold'>" .
-    xlt('Primary Insurance') . ': ' . text($insco_name) .
+   echo "<span class='bold'>" .
+    htmlspecialchars(xl('Primary Insurance'),ENT_NOQUOTES) . ': ' . htmlspecialchars($insco_name,ENT_NOQUOTES) .
     "</span>&nbsp;&nbsp;&nbsp;";
    if ($result3['copay'] > 0) {
     echo "<span class='bold'>" .
-    xlt('Copay') . ': ' .  text($result3['copay']) .
+     htmlspecialchars(xl('Copay'),ENT_NOQUOTES) . ': ' .  htmlspecialchars($result3['copay'],ENT_NOQUOTES) .
      "</span>&nbsp;&nbsp;&nbsp;";
    }
    echo "<span class='bold'>" .
-    xlt('Effective Date') . ': ' .  text(oeFormatShortDate($result3['effdate'])) .
-    "</span></td></tr>";
+    htmlspecialchars(xl('Effective Date'),ENT_NOQUOTES) . ': ' .  htmlspecialchars(oeFormatShortDate($result3['effdate'],ENT_NOQUOTES)) .
+    "</span>";
   }
-  echo "</table></td></tr></td></tr></table><br>";
+  echo "</div><br>";
  }
 ?>
         </div> <!-- required for expand_collapse_widget -->
@@ -867,7 +800,9 @@ if ( $insurance_count > 0 ) {
 								  <?php echo htmlspecialchars(xl('Plan Name'),ENT_NOQUOTES); ?>: 
 								  <?php echo htmlspecialchars($row['plan_name'],ENT_NOQUOTES); ?><br>
 								  <?php echo htmlspecialchars(xl('Group Number'),ENT_NOQUOTES); ?>: 
-								  <?php echo htmlspecialchars($row['group_number'],ENT_NOQUOTES); ?></span>
+								  <?php echo htmlspecialchars($row['group_number'],ENT_NOQUOTES); ?><br>
+                                                                  <?php echo htmlspecialchars(xl('County Code'),ENT_NOQUOTES); ?>:
+                                                                  <?php echo htmlspecialchars($row['county_code'],ENT_NOQUOTES); ?></span>
 								 </td>
 								 <td valign='top'>
 								  <span class='bold'><?php echo htmlspecialchars(xl('Subscriber'),ENT_NOQUOTES); ?>: </span><br>
@@ -1070,7 +1005,7 @@ expand_collapse_widget($widgetTitle, $widgetLabel, $widgetButtonLabel,
     <!-- end left column div -->
 
     <!-- start right column div -->
- <div>
+	<div>
     <table>
     <tr>
     <td>
@@ -1148,7 +1083,7 @@ expand_collapse_widget($widgetTitle, $widgetLabel, $widgetButtonLabel,
               $idDoc = $myrows4['id'];
               echo "<a href='$web_root/controller.php?document&retrieve&patient_id=" .
                     htmlspecialchars($pid,ENT_QUOTES) . "&document_id=" .
-                    htmlspecialchars($idDoc,ENT_QUOTES) . "&as_file=true' onclick='top.restoreSession()'>" .
+                    htmlspecialchars($idDoc,ENT_QUOTES) . "&as_file=true'>" .
                     htmlspecialchars(xl_document_category($nameDoc),ENT_NOQUOTES) . "</a> " .
                     htmlspecialchars($dateDoc,ENT_NOQUOTES);
               echo "<br>";
@@ -1311,7 +1246,7 @@ expand_collapse_widget($widgetTitle, $widgetLabel, $widgetButtonLabel,
     }
             
 	// Show PAST appointments.
-	if (isset($pid) && !$GLOBALS['disable_calendar'] && $GLOBALS['num_past_appointments_to_show'] > 0) {
+	if (isset($pid) && !$GLOBALS['disable_calendar']) {
 	 $query = "SELECT e.pc_eid, e.pc_aid, e.pc_title, e.pc_eventDate, " .
 	  "e.pc_startTime, e.pc_hometext, u.fname, u.lname, u.mname, " .
 	  "c.pc_catname, e.pc_apptstatus " .
@@ -1319,8 +1254,7 @@ expand_collapse_widget($widgetTitle, $widgetLabel, $widgetButtonLabel,
 	  "openemr_postcalendar_categories AS c WHERE " .
 	  "e.pc_pid = ? AND e.pc_eventDate < CURRENT_DATE AND " .
 	  "u.id = e.pc_aid AND e.pc_catid = c.pc_catid " .
-	  "ORDER BY e.pc_eventDate, e.pc_startTime DESC " . 
-      "LIMIT " . $GLOBALS['num_past_appointments_to_show'];
+	  "ORDER BY e.pc_eventDate DESC, e.pc_startTime DESC LIMIT 3";
 	
      $pres = sqlStatement($query, array($pid) );
 
@@ -1328,9 +1262,8 @@ expand_collapse_widget($widgetTitle, $widgetLabel, $widgetButtonLabel,
         $widgetTitle = xl("Past Appoinments");
         $widgetLabel = "past_appointments";
         $widgetButtonLabel = '';
-        $widgetButtonLink = '';
-        $widgetButtonClass = '';
-        $linkMethod = "javascript";
+		$widgetButtonLink = '';
+		$widgetButtonClass = '';
         $bodyClass = "summary_item small";
         $widgetAuth = false; //no button
         $fixedWidth = false;
@@ -1350,7 +1283,7 @@ expand_collapse_widget($widgetTitle, $widgetLabel, $widgetButtonLabel,
                 $etitle = xl('Comments').": ".($row['pc_hometext'])."\r\n".$etitle;
             }
             echo "<a href='javascript:oldEvt(" . htmlspecialchars($row['pc_eid'],ENT_QUOTES) . ")' title='" . htmlspecialchars($etitle,ENT_QUOTES) . "'>";
-            echo "<b>" . htmlspecialchars(xl($dayname) . ", " . $row['pc_eventDate'],ENT_NOQUOTES) . "</b>" . xlt("Status") .  "(";
+            echo "<b>" . htmlspecialchars(xl($dayname) . ", " . $row['pc_eventDate'],ENT_NOQUOTES) . "</b> Status (";
             echo " " .  generate_display_field(array('data_type'=>'1','list_id'=>'apptstat'),$row['pc_apptstatus']) . ")<br>";   // can't use special char parser on this
             echo htmlspecialchars("$disphour:$dispmin ") . xl($dispampm) . " ";
             echo htmlspecialchars($row['fname'] . " " . $row['lname'],ENT_NOQUOTES) . "</a><br>\n";
@@ -1363,21 +1296,22 @@ expand_collapse_widget($widgetTitle, $widgetLabel, $widgetButtonLabel,
         }
     }
 // END of past appointments            
-
-    ?>
+            
+			?>
 		</div>
 
 		<div id='stats_div'>
             <br/>
-            <div style='margin-left:10px' class='text'><img src='../../pic/ajax-loader.gif'/><div><br/>
+            <div style='margin-left:10px' class='text'><img src='../../pic/ajax-loader.gif'/></div><br/>
         </div>
     </td>
     </tr>
     </table>
 
 	</div> <!-- end right column div -->
-        
+
   </td>
+
  </tr>
 </table>
 
