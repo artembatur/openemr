@@ -1,0 +1,48 @@
+MSH|^~\&|1100|SO|WMTECH|TE030969|201406021438||ORU|0007|P|2.3
+PID|1|11394|15396940650|11394|Testpatient^Nine||19851014|F|||18612 Everly Manor Dr.^^Santa Cruz^CA^95060-|||||||94600810^^^04^^F
+NTE|1|L|Source.............Cervical
+NTE|2|L|LMP / Prev Treat...LMP=010111;Radiation
+NTE|3|L|Other..............Estrogen Replace Rx
+NTE|4|L|No. of containers..01 CYTYC Thin Prep Vial
+ORC|RE|53778^LAB|15396940650^LAB||||||201406020000|||1962616656^Kay^J^^^^^N
+OBR|1|53778^LAB|15396940650^LAB|196565^Pap IG, Ct-Ng, rfx HPV all^L|||201406020711|||||||201406021401||||53778||53778||201406021438|||F
+OBX|1|TX|191108^DIAGNOSIS:^L^22637-3^Path report.final diagnosis^LN|||||||N|F|||201406021421|01
+NTE|1|L|Epithelial Cell Abnormality.
+NTE|2|L|Atypical squamous cells of undetermined significance.
+OBX|2|TX|191109^Specimen adequacy:^L^19764-0^Statement of adequacy^LN|||||||N|F|||201406021422|01
+NTE|1|L|Satisfactory for evaluation. Endocervical and/or squamous
+NTE|2|L|metaplastic cells (endocervical component) are present.
+OBX|3|TX|191160^Clinician provided ICD9:^L^52797-8^Diagnosis ICD code^LN|||||||N|F|||201406021423|01
+NTE|1|L|V72.31 ; Routine gynecological examination
+OBX|4|TX|191174^Clinician provided ICD10:^L^52797-8^Diagnosis ICD code^LN|||||||N|F|||201406021420|01
+OBX|5|TX|191112^Performed by:^L^19767-3^Cytologist^LN|||||||N|F|||201406021420|01
+NTE|1|L|CoPath testing Pathologist/Cytotech
+OBX|6|TX|191113^Electronically signed by:^L^19769-9^Pathologist^LN|||||||N|F|||201406021420|01
+NTE|1|L|Test Cytotech CoPath
+OBX|7|ST|019018^.^L||.|||||N|F|||201406021420|01
+OBX|8|TX|191157^Pathologist provided ICD9:^L^52797-8^Diagnosis ICD code^LN|||||||N|F|||201406021420|01
+OBX|9|TX|191175^Pathologist provided ICD10:^L^52797-8^Diagnosis ICD code^LN|||||||N|F|||201406021420|01
+OBX|10|TX|190120^.^L|||||||N|F|||201406021420|01
+NTE|1|L|The Pap smear is a screening test designed to aid in the detection of
+NTE|2|L|premalignant and malignant conditions of the uterine cervix.  It is not a
+NTE|3|L|diagnostic procedure and should not be used as the sole means of detecting
+NTE|4|L|cervical cancer.  Both false-positive and false-negative reports do occur.
+NTE|5|L| 
+OBX|11|TX|190109^Note:^L|||||||N|F|||201406021421|01
+NTE|1|L|This liquid based ThinPrep(R) pap test was screened with the
+NTE|2|L|use of an image guided system.
+OBX|12|TX|190119^.^L|||||||N|F|||201406021421|02
+NTE|1|L|See below for HPV DNA testing results.
+NTE|2|L| 
+ORC|RE|53778^LAB|15396940650^LAB||||||201406020000|||1962616656^Kay^J^^^^^N
+OBR|2|53778^LAB|15396940650^LAB|507301^HPV, high-risk^L|||201406020711||||G|||201406021401||||53778||53778||201406021438|||F|190119|||196565
+OBX|1|ST|507303^HPV, high-risk^L^30167-1^Human papilloma virus 16+18+31+33+35+39+45+51+52+5^LN||Positive||Negative|A||N|F|||201406021421|02
+NTE|1|L|This high-risk HPV test detects thirteen high-risk types
+NTE|2|L|(16/18/31/33/35/39/45/51/52/56/58/59/68) without differentiation.
+NTE|3|L| 
+ORC|RE|53778^LAB|15396940650^LAB||||||201406020000|||1962616656^Kay^J^^^^^N
+OBR|3|53778^LAB|15396940650^LAB|196565^Pap IG, Ct-Ng, rfx HPV all^L|||201406020711|||||||201406021401||||53778||53778||201406021438|||F
+OBX|1|ST|186114^Chlamydia, Nuc. Acid Amp^L^50387-0^Chlamydia trachomatis rRNA^LN||Positive||Negative|A||N|F|||201406021421|02
+OBX|2|ST|186122^Gonococcus, Nuc. Acid Amp^L^50388-8^Neisseria gonorrhoeae rRNA^LN||Positive||Negative|A||N|F|||201406021421|02
+ZPS|1|01|EDI Testing Lab|555 Anywhere Street^^Anywhere^NC^272150000|3365550001||MD^Pathologist^Testing^^^^MD
+ZPS|2|02|LabCorp Burlington|1447 York Court^^Burlington^NC^272153361|8007624344||MD^Hancock^William F^^^^MD

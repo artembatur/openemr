@@ -1,0 +1,18 @@
+MSH|^~\&|1100|SO|WMTECH|TE030969|201406021438||ORU|0005|P|2.3
+PID|1|11390|15396940640|11390|Testpatient^Five||19820422|M|||81657 Wydown Dr.^^Santa Cruz^CA^95060-|||||||94600810^^^XI^^F
+ORC|RE|53775^LAB|15396940640^LAB||||||201406020000|||1962616656^Kay^J^^^^^N
+OBR|1|53775^LAB|15396940640^LAB|507301^HPV, high-risk^L|||201406020709||1500||||SRC:Source of the microbio logy                       |201406021401|Source of the microbio|||53775||53775||201406021438|||F
+OBX|1|CE|507303^HPV, high-risk^L^30167-1^Human papilloma virus 16+18+31+33+35+39+45+51+52+5^LN||TNP|||||N|X|||201406021419|01
+NTE|1|L|The quantity of specimen remaining in the vial after Pap slide
+NTE|2|L|preparation was less than the 4 mL minimum cell suspension required.
+NTE|3|L|Low sample cellularity may be the cause.  See HPV, low volume rfx
+NTE|4|L|test result.
+NTE|5|L|This high-risk HPV test detects thirteen high-risk types
+NTE|6|L|(16/18/31/33/35/39/45/51/52/56/58/59/68) without differentiation.
+NTE|7|L| 
+ORC|RE|53775^LAB|15396940640^LAB||||||201406020000|||1962616656^Kay^J^^^^^N
+OBR|2|53775^LAB|15396940640^LAB|507405^HPV, low volume rfx^L|||201406020709||1500||G|||201406021401||||53775||53775||201406021438|||F|507303|||507301
+OBX|1|ST|507405^HPV, low volume rfx^L^71431-1^Human papilloma virus 31+33+35+39+45+51+52+56+58+5^LN||Positive||Negative|A||N|F|||201406021419|01
+NTE|1|L|This test detects fourteen high-risk HPV types (16,18,31,33,35,39,45,
+NTE|2|L|51,52,56,58,59,66,68) without differentiation.
+ZPS|1|01|LabCorp Burlington|1447 York Court^^Burlington^NC^272153361|8007624344||MD^Hancock^William F^^^^MD

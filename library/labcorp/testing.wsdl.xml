@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://ws.ncp.labcorp.com" xmlns:tns="http://ws.ncp.labcorp.com" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:sch1="http://www.labcorp.com/ncp/emr/dto/" xmlns:sch0="http://www.labcorp.com/ncp/emr/schema/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" jaxb:extensionBindingPrefixes="xjc" jaxb:version="2.0" targetNamespace="http://www.labcorp.com/ncp/emr/schema/" xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" xmlns:tns="http://www.labcorp.com/ncp/emr/schema/" xmlns:emrTypes="http://www.labcorp.com/ncp/emr/dto/" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns:xs="http://www.w3.org/2001/XMLSchema"><xs:annotation><xs:appinfo>
+			<jaxb:globalBindings>
+				<xjc:simple/>
+			</jaxb:globalBindings>
+		</xs:appinfo></xs:annotation><xs:import namespace="http://www.labcorp.com/ncp/emr/dto/"/><xs:element name="echoRequest" type="tns:EchoRequest"/><xs:complexType name="EchoRequest"><xs:sequence><xs:element name="inString" type="xs:string"/></xs:sequence></xs:complexType><xs:element name="echoResponse" type="tns:EchoResponse"/><xs:complexType name="EchoResponse"><xs:sequence><xs:element name="outString" type="xs:string"/></xs:sequence></xs:complexType><xs:complexType abstract="true" name="EmrServiceResponse"><xs:sequence><xs:element name="successful" type="xs:boolean"/><xs:element minOccurs="0" name="businessError" type="tns:EmrBusinessError"/></xs:sequence></xs:complexType><xs:complexType name="EmrBusinessError"><xs:sequence><xs:element name="errorCode" type="xs:string"/><xs:element name="errorMessage" type="xs:string"/></xs:sequence></xs:complexType><xs:element name="emrPayorSearchRequest" type="tns:EmrPayorSearchRequest"/><xs:complexType name="EmrPayorSearchRequest"><xs:sequence><xs:element name="emrPayorSearchParams" type="emrTypes:EmrPayorSearchParams"/></xs:sequence></xs:complexType><xs:element name="emrPayorSearchResponse" type="tns:EmrPayorSearchResponse"/><xs:complexType name="EmrPayorSearchResponse"><xs:complexContent><xs:extension base="tns:EmrServiceResponse"><xs:sequence><xs:element minOccurs="0" name="emrPayorSearchResult" type="emrTypes:EmrPayorSearchResult"/></xs:sequence></xs:extension></xs:complexContent></xs:complexType><xs:element name="checkABNRequest" type="tns:CheckABN"/><xs:complexType name="CheckABN"><xs:sequence><xs:element name="clientCode" type="xs:string"/><xs:element name="abnRequest" type="tns:AbnRequestType"/><xs:element name="IncludePdfInResponse" type="xs:boolean"/></xs:sequence></xs:complexType><xs:complexType name="AbnRequestType"><xs:sequence><xs:element name="accountNumber" type="xs:string"/><xs:element maxOccurs="unbounded" name="diagCodes" type="xs:string"/><xs:element maxOccurs="unbounded" name="testCodes" type="xs:string"/><xs:element name="patientName" type="xs:string"/><xs:element minOccurs="0" name="identificationNumber" type="xs:string"/><xs:element minOccurs="0" name="sourceName" type="xs:string"/><xs:element minOccurs="0" name="sourceVersion" type="xs:string"/></xs:sequence></xs:complexType><xs:element name="checkABNResponse" type="tns:AbnResponseType"/><xs:complexType name="AbnResponseType"><xs:sequence><xs:element default="false" name="isABNRequired" nillable="true" type="xs:boolean"/><xs:element maxOccurs="unbounded" minOccurs="0" name="abnTest" nillable="true" type="tns:AbnTest"/><xs:element maxOccurs="unbounded" minOccurs="0" name="message" nillable="true" type="tns:Message"/><xs:element maxOccurs="unbounded" minOccurs="0" name="nonSpecificDiagnosisCodes" type="xs:string"/><xs:element maxOccurs="unbounded" minOccurs="0" name="invalidDiagnosisCodes" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="abnContents" type="xs:base64Binary"/><xs:element minOccurs="0" name="contentType" type="xs:string"/><xs:element minOccurs="0" name="estCost" type="xs:int"/><xs:element minOccurs="0" name="outputType" type="xs:string"/><xs:element minOccurs="0" name="businessError" type="tns:EmrBusinessError"/></xs:sequence></xs:complexType><xs:complexType name="Message"><xs:sequence><xs:element name="code" nillable="true" type="xs:string"/><xs:element name="text" nillable="true" type="xs:string"/><xs:element name="type" nillable="true" type="xs:string"/></xs:sequence></xs:complexType><xs:complexType name="AbnTest"><xs:sequence><xs:element maxOccurs="unbounded" minOccurs="0" name="freqCpts" nillable="true" type="tns:AbnCpt"/><xs:element maxOccurs="unbounded" minOccurs="0" name="medNecCpts" nillable="true" type="tns:AbnCpt"/><xs:element name="testCode" nillable="true" type="xs:string"/><xs:element name="ruoDesc" nillable="true" type="xs:string"/><xs:element default="false" name="ruoDescNotFound" type="xs:boolean"/><xs:element default="false" name="ruoIndicator" type="xs:boolean"/><xs:element name="ruoPrice" type="xs:int"/><xs:element default="false" name="ruoPriceNotFound" type="xs:boolean"/><xs:element name="testDesc" nillable="true" type="xs:string"/><xs:element name="testPrice" type="xs:int"/><xs:element minOccurs="0" name="medicareNotPayReason" type="xs:string"/></xs:sequence></xs:complexType><xs:complexType name="AbnCpt"><xs:sequence><xs:element name="code" nillable="true" type="xs:string"/><xs:element name="desc" nillable="true" type="xs:string"/><xs:element name="price" type="xs:int"/><xs:element default="false" name="descNotFound" type="xs:boolean"/><xs:element default="false" name="priceNotFound" type="xs:boolean"/><xs:element name="multiplier" type="xs:int"/></xs:sequence></xs:complexType><xs:element name="returnIdealCollectionRequest" type="tns:ReturnIdealCollectionRequest"/><xs:complexType name="ReturnIdealCollectionRequest"><xs:sequence><xs:element name="clientCode" type="xs:string"/><xs:element name="performingLabCode" type="xs:string"/><xs:element name="testCodesCommaDelimited" type="xs:string"/></xs:sequence></xs:complexType><xs:element name="returnIdealCollectionResponse" type="tns:ReturnIdealCollectionResponse"/><xs:complexType name="ReturnIdealCollectionResponse"><xs:sequence><xs:element minOccurs="0" name="returnIdealCollectionReturn" type="tns:IdealCollection"/></xs:sequence></xs:complexType><xs:complexType name="IdealCollection"><xs:sequence><xs:element maxOccurs="unbounded" name="messages" type="tns:Messages"/><xs:element maxOccurs="unbounded" minOccurs="0" name="collectionInstruction" type="tns:CollectionInstruction"/><xs:element maxOccurs="unbounded" minOccurs="0" name="businessError" type="tns:EmrBusinessError"/></xs:sequence></xs:complexType><xs:complexType name="Messages"><xs:sequence><xs:element minOccurs="0" name="code" type="xs:string"/><xs:element minOccurs="0" name="text" type="xs:string"/><xs:element minOccurs="0" name="error" type="xs:boolean"/></xs:sequence></xs:complexType><xs:complexType name="CollectionInstruction"><xs:sequence><xs:element maxOccurs="unbounded" minOccurs="0" name="shipContainers" type="tns:ShipInventory"/><xs:element maxOccurs="unbounded" minOccurs="0" name="specialInstructions" type="tns:SpecialInstructionMessage"/><xs:element minOccurs="0" name="collectionOrder" type="xs:int"/><xs:element minOccurs="0" name="colQty" type="xs:int"/><xs:element minOccurs="0" name="colSampDesc" type="xs:string"/><xs:element minOccurs="0" name="colSampType" type="xs:string"/><xs:element minOccurs="0" name="colSampTypeDesc" type="xs:string"/><xs:element minOccurs="0" name="colSizeDesc" type="xs:string"/><xs:element minOccurs="0" name="colYieldVol" type="xs:double"/><xs:element minOccurs="0" name="colYieldVolUnits" type="xs:string"/><xs:element minOccurs="0" name="colSampleImageURL" type="xs:string"/></xs:sequence></xs:complexType><xs:complexType name="ShipInventory"><xs:sequence><xs:element minOccurs="0" name="collOriginalsNeeded" type="xs:int"/><xs:element minOccurs="0" name="destLabs" type="xs:string"/><xs:element minOccurs="0" name="originalsNeeded" type="xs:int"/><xs:element minOccurs="0" name="PSCVol" type="xs:double"/><xs:element minOccurs="0" name="PSCVolUnits" type="xs:string"/><xs:element minOccurs="0" name="qty" type="xs:int"/><xs:element minOccurs="0" name="sampDesc" type="xs:string"/><xs:element minOccurs="0" name="sampType" type="xs:string"/><xs:element minOccurs="0" name="sampTypeDesc" type="xs:string"/><xs:element minOccurs="0" name="colSampleImageURL" type="xs:string"/><xs:element minOccurs="0" name="storageCode" type="xs:string"/><xs:element minOccurs="0" name="storageCodeDesc" type="xs:string"/><xs:element minOccurs="0" name="storageShortName" type="xs:string"/><xs:element minOccurs="0" name="unopenedNeeded" type="xs:int"/><xs:element minOccurs="0" name="yieldVol" type="xs:double"/><xs:element minOccurs="0" name="yieldVolUnits" type="xs:string"/></xs:sequence></xs:complexType><xs:complexType name="SpecialInstructionMessage"><xs:sequence><xs:element minOccurs="0" name="specialInstruction" type="xs:string"/><xs:element minOccurs="0" name="specialInstructionCode" type="xs:string"/><xs:element minOccurs="0" name="orderCode" type="xs:string"/><xs:element minOccurs="0" name="specialInstructionSeq" type="xs:string"/><xs:element minOccurs="0" name="specialInstructionType" type="xs:string"/></xs:sequence></xs:complexType></xs:schema>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" jaxb:extensionBindingPrefixes="xjc" jaxb:version="2.0" targetNamespace="http://www.labcorp.com/ncp/emr/dto/" xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" xmlns:tns="http://www.labcorp.com/ncp/emr/dto/" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns:xs="http://www.w3.org/2001/XMLSchema"><xs:complexType name="EmrPayorSearchParams"><xs:sequence><xs:element name="clientCode" type="xs:string"/><xs:element name="payorName" type="xs:string"/><xs:element name="payorAddress" type="tns:Address"/><xs:element name="payorBusinessState" type="tns:TypeCode"/></xs:sequence></xs:complexType><xs:complexType name="Address"><xs:sequence><xs:element name="addressLine1" type="xs:string"/><xs:element minOccurs="0" name="addressLine2" type="xs:string"/><xs:element name="city" type="xs:string"/><xs:element name="state" type="tns:TypeCode"/><xs:element name="zip" type="xs:string"/><xs:element minOccurs="0" name="country" type="xs:string"/></xs:sequence></xs:complexType><xs:complexType name="EmrPayorSearchResult"><xs:sequence><xs:element minOccurs="0" name="dafaultPayor" type="tns:Payor"/><xs:element maxOccurs="unbounded" name="matchedPayor" type="tns:Payor"/></xs:sequence></xs:complexType><xs:complexType name="Payor"><xs:sequence><xs:element minOccurs="0" name="payorFullName" type="xs:string"/><xs:element minOccurs="0" name="payorAddress" type="tns:Address"/><xs:element minOccurs="0" name="payorCode" type="xs:string"/><xs:element minOccurs="0" name="payorCode2" type="xs:string"/><xs:element minOccurs="0" name="payorType" type="tns:TypeCode"/><xs:element minOccurs="0" name="isValidForOeInd" type="xs:boolean"/><xs:element minOccurs="0" name="subscriberNumMaskRegEx" type="xs:string"/><xs:element minOccurs="0" name="subscriberNumAcceptableMask" type="xs:string"/><xs:element minOccurs="0" name="subscriberNumRequiredInd" type="xs:boolean"/><xs:element minOccurs="0" name="subscriberNameRequiredInd" type="xs:boolean"/><xs:element minOccurs="0" name="subscriberRelationshipRequiredInd" type="xs:boolean"/><xs:element minOccurs="0" name="subscriberAddressRequiredInd" type="xs:boolean"/><xs:element minOccurs="0" name="isMultiPlanPayor" type="xs:boolean"/><xs:element minOccurs="0" name="groupNumMaskRegEx" type="xs:string"/><xs:element minOccurs="0" name="groupNumAcceptableMask" type="xs:string"/><xs:element minOccurs="0" name="groupNumRequiredInd" type="xs:boolean"/><xs:element minOccurs="0" name="patNameRequiredInd" type="xs:boolean"/><xs:element minOccurs="0" name="patAddressRequiredInd" type="xs:boolean"/><xs:element minOccurs="0" name="patAgeRequiredInd" type="xs:boolean"/><xs:element minOccurs="0" name="dobRequiredInd" type="xs:boolean"/><xs:element minOccurs="0" name="genderRequiredInd" type="xs:boolean"/><xs:element minOccurs="0" name="payorRequiredInd" type="xs:boolean"/><xs:element minOccurs="0" name="hmoInd" type="xs:string"/><xs:element minOccurs="0" name="hmoTypeCd" type="xs:string"/><xs:element minOccurs="0" name="isWorkersCompInd" type="xs:boolean"/><xs:element minOccurs="0" name="physicianSignatureInd" type="xs:string"/></xs:sequence></xs:complexType><xs:complexType name="TypeCode"><xs:simpleContent><xs:extension base="xs:string"><xs:attribute name="code" type="xs:string"/></xs:extension></xs:simpleContent></xs:complexType></xs:schema>
+  </wsdl:types>
+  <wsdl:message name="checkABNResponse">
+    <wsdl:part element="sch0:checkABNResponse" name="checkABNResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="emrPayorSearchResponse">
+    <wsdl:part element="sch0:emrPayorSearchResponse" name="emrPayorSearchResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="emrPayorSearchRequest">
+    <wsdl:part element="sch0:emrPayorSearchRequest" name="emrPayorSearchRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="checkABNRequest">
+    <wsdl:part element="sch0:checkABNRequest" name="checkABNRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="echoRequest">
+    <wsdl:part element="sch0:echoRequest" name="echoRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="echoResponse">
+    <wsdl:part element="sch0:echoResponse" name="echoResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="returnIdealCollectionRequest">
+    <wsdl:part element="sch0:returnIdealCollectionRequest" name="returnIdealCollectionRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="returnIdealCollectionResponse">
+    <wsdl:part element="sch0:returnIdealCollectionResponse" name="returnIdealCollectionResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="EmrWebService">
+    <wsdl:operation name="returnIdealCollection">
+      <wsdl:input message="tns:returnIdealCollectionRequest" name="returnIdealCollectionRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:returnIdealCollectionResponse" name="returnIdealCollectionResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="echo">
+      <wsdl:input message="tns:echoRequest" name="echoRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:echoResponse" name="echoResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkABN">
+      <wsdl:input message="tns:checkABNRequest" name="checkABNRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:checkABNResponse" name="checkABNResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="emrPayorSearch">
+      <wsdl:input message="tns:emrPayorSearchRequest" name="emrPayorSearchRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:emrPayorSearchResponse" name="emrPayorSearchResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="EmrWebServiceSoap11" type="tns:EmrWebService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="returnIdealCollection">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="returnIdealCollectionRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="returnIdealCollectionResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="echo">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="echoRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="echoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkABN">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="checkABNRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="checkABNResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="emrPayorSearch">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="emrPayorSearchRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="emrPayorSearchResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="EmrWebServiceService">
+    <wsdl:port binding="tns:EmrWebServiceSoap11" name="EmrWebServiceSoap11">
+      <soap:address location="https://emrsvcs-stage.labcorpbeacon.com:7360/emr-service/services"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

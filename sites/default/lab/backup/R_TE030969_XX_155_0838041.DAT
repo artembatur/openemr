@@ -1,0 +1,95 @@
+MSH|^~\&|1100|SO|WMTECH|TE030969|201406040837||ORU|0014|P|2.3
+PID|1|11389|15396940610|11389|Testpatient^Four||19760503|F|||16004 Windgate Ln.^^Santa Cruz^CA^95060-|||||||94600810^^^04^^F
+ORC|RE|53694^LAB|15396940610^LAB||||||201406020000|||1962616656^Kay^J^^^^^N
+OBR|1|53694^LAB|15396940610^LAB|005009^CBC With Differential/Platelet^L|||201405301000||||||SRC:Source of the microbio logy                       |201406021401||||53694||53694||201406040837|||F
+OBX|1|NM|005025^WBC^L^6690-2^Leukocytes^LN||8.9|x10E3/uL|3.4-10.8|||N|F|20130909||201406021414|01
+OBX|2|NM|005033^RBC^L^789-8^Erythrocytes^LN||4.12|x10E6/uL|3.77-5.28|||N|F|20081208||201406021414|01
+OBX|3|NM|005041^Hemoglobin^L^718-7^Hemoglobin^LN||14.0|g/dL|11.1-15.9|||N|F|20081208||201406021414|01
+OBX|4|NM|005058^Hematocrit^L^4544-3^Hematocrit^LN||40.2|%|34.0-46.6|||N|F|20081208||201406021414|01
+OBX|5|NM|015065^MCV^L^787-2^Erythrocyte mean corpuscular volume^LN||18|fL|79-97|L||N|C|20081208||201406040825|01
+NTE|1|L|This is a corrected report.
+NTE|2|L|The previously reported result was:
+NTE|3|L|MCV                       98        HI fL              06/02/2014
+OBX|6|NM|015073^MCH^L^785-6^Erythrocyte mean corpuscular hemoglobin^LN||33.9|pg|26.6-33.0|H||N|F|20081208||201406021414|01
+OBX|7|NM|015081^MCHC^L^786-4^Erythrocyte mean corpuscular hemoglobin concentrat^LN||34.8|g/dL|31.5-35.7|||N|F|20081208||201406021414|01
+OBX|8|NM|105007^RDW^L^788-0^Erythrocyte distribution width^LN||13.8|%|12.3-15.4|||N|F|20081208||201406021414|01
+OBX|9|NM|015172^Platelets^L^777-3^Platelets^LN||224|x10E3/uL|155-379|||N|F|20130909||201406021414|01
+NTE|1|L|               **Effective June 16, 2014, the reference interval**
+NTE|2|L|                 for Platelets will be changing for 13 years and
+NTE|3|L|                 older to:                                 150 - 379
+OBX|10|NM|015107^Neutrophils^L^770-8^Neutrophils/100 leukocytes^LN||56|%|40-74|||N|F|20130909||201406021414|01
+OBX|11|NM|015123^Lymphs^L^736-9^Lymphocytes/100 leukocytes^LN||35|%|14-46|||N|F|20130909||201406021414|01
+OBX|12|NM|015131^Monocytes^L^5905-5^Monocytes/100 leukocytes^LN||7|%|4-12|||N|F|20130909||201406021414|01
+OBX|13|NM|015149^Eos^L^713-8^Eosinophils/100 leukocytes^LN||2|%|0-5|||N|F|20130909||201406021414|01
+OBX|14|NM|015156^Basos^L^706-2^Basophils/100 leukocytes^LN||0|%|0-3|||N|F|20010402||201406021414|01
+OBX|15|NM|015909^Neutrophils (Absolute)^L^751-8^Neutrophils^LN||5.0|x10E3/uL|1.4-7.0|||N|F|20130909||201406021414|01
+OBX|16|NM|015917^Lymphs (Absolute)^L^731-0^Lymphocytes^LN||3.1|x10E3/uL|0.7-3.1|||N|F|20130909||201406021414|01
+OBX|17|NM|015925^Monocytes(Absolute)^L^742-7^Monocytes^LN||0.6|x10E3/uL|0.1-0.9|||N|F|20130909||201406021414|01
+OBX|18|NM|015933^Eos (Absolute)^L^711-2^Eosinophils^LN||0.2|x10E3/uL|0.0-0.4|||N|F|20130909||201406021414|01
+OBX|19|NM|015941^Baso (Absolute)^L^704-7^Basophils^LN||0.0|x10E3/uL|0.0-0.2|||N|F|20081208||201406021414|01
+ORC|RE|53694^LAB|15396940610^LAB||||||201406020000|||1962616656^Kay^J^^^^^N
+OBR|2|53694^LAB|15396940610^LAB|008144^Stool Culture^L|||201405301000|||||||201406021401|Source of the microbio|||53694||53694||201406040837|||F
+OBX|1|ST|008722^Salmonella/Shigella Screen^L^43371-4^Salmonella sp /or Shigella sp identified^LN||Final report|||A||N|F|20031013||201406021413|01
+ORC|RE|53694^LAB|15396940610^LAB||||||201406020000|||1962616656^Kay^J^^^^^N
+OBR|3|53694^LAB|15396940610^LAB|997871^Result^L|||201405301000||||G|||201406021401||||53694||53694||201406040837|||F|008722|||008144
+OBX|1|ST|997141^Result 1^L^6463-4^Bacteria identified^LN||Shigella boydii|||A||N|F|||201406021413|01
+OBX|2|TX|997142^Result 2^L^6463-4^Bacteria identified^LN|||||A||N|F|||201406021413|01
+NTE|1|L|Salmonella typhimurium
+OBX|3|TX|997145^Antimicrobial Susceptibility^L^23658-8^Antibiotic XXX^LN|||||||N|F|||201406021413|01
+NTE|1|L|   ***** S = Susceptible; I = Intermediate; R = Resistant *****
+NTE|2|L|                   P = Positive; N = Negative
+NTE|3|L|            MICS are expressed in micrograms per mL
+NTE|4|L|   Antibiotic                 RSLT#1    RSLT#2    RSLT#3    RSLT#4
+NTE|5|L|Amikacin                         =S        =S
+NTE|6|L|Ampicillin/Sulbactam             =R        =R
+NTE|7|L|Cefepime                         =S        =S
+NTE|8|L|Cefotaxime                       =S        =S
+NTE|9|L|Ceftazidime                      =S        =S
+NTE|10|L|Ceftriaxone                      =S        =S
+NTE|11|L|Ciprofloxacin                    =S        =S
+NTE|12|L|Gentamicin                       =S        =S
+NTE|13|L|Imipenem                         =S        =R
+NTE|14|L|Levofloxacin                     =S        =S
+NTE|15|L|Meropenem                        =S        =S
+NTE|16|L|Piperacillin                     =S        =S
+NTE|17|L|Tetracycline                     =S        =S
+NTE|18|L|Ticarcillin                      =S        =S
+NTE|19|L|Ticarcillin/Clavulanic Acid      =S        =S
+NTE|20|L|Tigecycline                      =S        =S
+NTE|21|L|Tobramycin                       =S        =S
+NTE|22|L|Trimethoprim/Sulfa               =S        =S
+ORC|RE|53694^LAB|15396940610^LAB||||||201406020000|||1962616656^Kay^J^^^^^N
+OBR|4|53694^LAB|15396940610^LAB|008144^Stool Culture^L|||201405301000|||||||201406021401|Source of the microbio|||53694||53694||201406040837|||F
+OBX|1|ST|180141^Campylobacter Culture^L^6331-3^Campylobacter sp identified^LN||Final report|||A||N|F|20031013||201406021414|01
+ORC|RE|53694^LAB|15396940610^LAB||||||201406020000|||1962616656^Kay^J^^^^^N
+OBR|5|53694^LAB|15396940610^LAB|080172^Result^L|||201405301000||||G|||201406021401||||53694||53694||201406040837|||F|180141|||008144
+OBX|1|TX|080173^Result 1^L^6463-4^Bacteria identified^LN|||||A||N|F|||201406021414|01
+NTE|1|L|Campylobacter jejuni ssp. jejuni
+OBX|2|ST|080174^Result 2^L^6463-4^Bacteria identified^LN||Campylobacter coli|||A||N|F|||201406021414|01
+OBX|3|TX|080178^Antimicrobial Susceptibility^L^23658-8^Antibiotic XXX^LN|||||||N|F|||201406021414|01
+NTE|1|L|   ***** S = Susceptible; I = Intermediate; R = Resistant *****
+NTE|2|L|                   P = Positive; N = Negative
+NTE|3|L|            MICS are expressed in micrograms per mL
+NTE|4|L|   Antibiotic                 RSLT#1    RSLT#2    RSLT#3    RSLT#4
+NTE|5|L|Amikacin                         =S        =S
+NTE|6|L|Ampicillin/Sulbactam             =R        =R
+NTE|7|L|Cefepime                         =S        =S
+NTE|8|L|Cefotaxime                       =R        =S
+NTE|9|L|Ceftazidime                      =S        =S
+NTE|10|L|Ceftriaxone                      =R        =S
+NTE|11|L|Ciprofloxacin                    =S        =S
+NTE|12|L|Gentamicin                       =R        =S
+NTE|13|L|Imipenem                         =S        =R
+NTE|14|L|Levofloxacin                     =R        =S
+NTE|15|L|Meropenem                        =S        =S
+NTE|16|L|Piperacillin                     =R        =S
+NTE|17|L|Tetracycline                     =S        =S
+NTE|18|L|Ticarcillin                      =R        =S
+NTE|19|L|Ticarcillin/Clavulanic Acid      =S        =S
+NTE|20|L|Tigecycline                      =R        =S
+NTE|21|L|Tobramycin                       =S        =S
+NTE|22|L|Trimethoprim/Sulfa               =S        =S
+ORC|RE|53694^LAB|15396940610^LAB||||||201406020000|||1962616656^Kay^J^^^^^N
+OBR|6|53694^LAB|15396940610^LAB|008144^Stool Culture^L|||201405301000|||||||201406021401|Source of the microbio|||53694||53694||201406040837|||F
+OBX|1|ST|180935^E coli Shiga Toxin EIA^L^21262-1^Escherichia coli shiga-like^LN||Positive||Negative|A||N|F|||201406021414|01
+ZPS|1|01|EDI Testing Lab|555 Anywhere Street^^Anywhere^NC^272150000|3365550001||MD^Pathologist^Testing^^^^MD

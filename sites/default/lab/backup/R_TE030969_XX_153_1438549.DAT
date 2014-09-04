@@ -1,0 +1,37 @@
+MSH|^~\&|1100|SO|WMTECH|TE030969|201406021438||ORU|0012|P|2.3
+PID|1|11391|15396940626|11391|Testpatient^Six||19860530|F|||41234 Crestview Pl.^^Santa Cruz^CA^95060-|||||||94600810^^^ZZ^^F^Y
+NTE|1|L|TEST(S) ORDERED:                        322777-Renal Panel (10)
+NTE|2|L|000810-Vitamin B12 and Folate           100875-Request Problem
+ORC|RE|53701^LAB|15396940626^LAB||||||201406020000|||1962616656^Kay^J^^^^^N
+OBR|1|53701^LAB|15396940626^LAB|996039^Billing Information Required^L|||201405301004|||||||201406021417||||53701||53701||201406021438|||F
+OBX|1|TX|017139^.^L|||||||N|F|||201406021417|01
+NTE|1|L|To enable LabCorp to file an insurance claim on behalf of your
+NTE|2|L|patient, please provide or update as indicated the required billing
+NTE|3|L|information listed below.  The HIPAA Privacy regulation at 45 CFR
+NTE|4|L|164.506 (c) (3) provides that a covered entity (Physician's Office/
+NTE|5|L|Referring Provider) may disclose "PHI" to another covered entity
+NTE|6|L|(LabCorp) for purposes of payment without patient authorization.
+NTE|7|L| 
+NTE|8|L|Please provide requested information and return via your service
+NTE|9|L|representative or fax to 336-436-4760 within 3 days.
+NTE|10|L
+ORC|RE|53701^LAB|15396940626^LAB||||||201406020000|||1962616656^Kay^J^^^^^N
+OBR|2|53701^LAB|15396940626^LAB|996088^Billing Information Required^L|||201405301004|||||||201406021417||||53701||53701||201406021438|||F
+OBX|1|TX|996655^Insurance Information^L|||||||N|F|||201406021417|01
+NTE|1|L
+NTE|2|L|Information Submitted: 1
+NTE|3|L
+NTE|4|L|Please Provide:
+NTE|5|L| A copy of the front and back of patient's insurance card, or complete
+NTE|6|L| billing information as it appears on the patient's current insurance
+NTE|7|L| card.
+NTE|8|L
+NTE|9|L|Updated/Corrected Information:
+NTE|10|L| Insurance Carrier/Company Name:_______________________________________
+NTE|11|L| 
+NTE|12|L| Subscriber Number:____________________________________________________
+NTE|13|L| 
+NTE|14|L| Group Number or Group Name:___________________________________________
+NTE|15|L| 
+NTE|16|L| Claim Filing Address:_________________________________________________
+ZPS|1|01|EDI Testing Lab|555 Anywhere Street^^Anywhere^NC^272150000|3365550001||MD^Pathologist^Testing^^^^MD

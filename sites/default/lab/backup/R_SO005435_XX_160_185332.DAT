@@ -1,0 +1,37 @@
+MSH|^~\&|1100|SO|WMTECH|SO005435|201406091853||ORU|0001|P|2.3
+PID|1|11386|160X9255020|11386|Testpatient^One||19740530|M|||15432 Log Hill^^Santa Cruz^CA^95060-|||||||04438310^^^XR^^F
+ORC|RE|54439^LAB|160X9255020^LAB||||||201406090000|||1962616656^Kay^J^^^^^N
+OBR|1|54439^LAB|160X9255020^LAB|003038^Urinalysis, Routine^L|||201406091310||||||LabCorp Live Production Te sting.                     |201406091850||||54439||54439||201406091853|||F
+OBX|1|NM|013060^Specific Gravity^L^2965-2^Specific gravity^LN||1.035||1.005-1.030|H||N|F|19960813||201406091851|01
+OBX|2|NM|013078^pH^L^5803-2^pH^LN||8.2||5.0-7.5|H||N|F|19960813||201406091851|01
+OBX|3|ST|013045^Urine-Color^L^5778-6^Color^LN||Yellow||Yellow|||N|F|||201406091851|01
+OBX|4|ST|013052^Appearance^L^5767-9^Appearance^LN||Cloudy||Clear|A||N|F|||201406091851|01
+OBX|5|ST|013185^WBC Esterase^L^5799-2^Leukocyte esterase^LN||Positive||Negative|A||N|F|||201406091851|01
+OBX|6|ST|013094^Protein^L^20454-5^Protein^LN||Positive||Negative/Trace|A||N|F|19960813||201406091851|01
+OBX|7|ST|013086^Glucose^L^2349-9^Glucose^LN||Positive||Negative|A||N|F|||201406091851|01
+OBX|8|ST|013110^Ketones^L^2514-8^Ketones^LN||Positive||Negative|A||N|F|||201406091851|01
+OBX|9|ST|013102^Occult Blood^L^5794-3^Hemoglobin^LN||Negative||Negative|||N|F|||201406091851|01
+OBX|10|ST|013104^Bilirubin^L^5770-3^Bilirubin^LN||Positive||Negative|A||N|F|||201406091851|01
+OBX|11|NM|013105^Urobilinogen,Semi-Qn^L^20405-7^Urobilinogen^LN||2.6|mg/dL|0.0-1.9|H||N|F|20000731||201406091851|01
+OBX|12|ST|013106^Nitrite, Urine^L^5802-4^Nitrite^LN||Positive||Negative|A||N|F|||201406091851|01
+OBX|13|ST|012237^Microscopic Examination^L^12235-8^Microscopic observation^LN||See below:|||||N|F|||201406091851|01
+ORC|RE|54439^LAB|160X9255020^LAB||||||201406090000|||1962616656^Kay^J^^^^^N
+OBR|2|54439^LAB|160X9255020^LAB|333328^Microscopic Examination^L|||201406091310||||G|||201406091850||||54439||54439||201406091853|||F|012237|||003038
+OBX|1|ST|013128^WBC^L^5821-4^Leukocytes^LN||15-20|/hpf|0 -  5|A||N|F|19960313||201406091852|01
+OBX|2|ST|013136^RBC^L^13945-1^Erythrocytes^LN||0-3|/hpf|0 -  2|||N|F|19960313||201406091852|01
+NTE|1|L|                             **Please note reference interval change**
+OBX|3|ST|013148^Epithelial Cells (non renal)^L^5787-7^Epithelial cells^LN||3-5|/hpf|0 - 10|||N|F|||201406091852|01
+OBX|4|ST|013149^Epithelial Cells (renal)^L^26052-1^Epithelial cells.renal^LN||None seen|/hpf|None seen|||N|F|||201406091852|01
+OBX|5|ST|013145^Casts^L^24124-0^Casts^LN||Few|/lpf|None seen|||N|F|||201406091852|01
+OBX|6|ST|013147^Cast Type^L^58436-7^Casts^LN||Few hyaline casts.||N/A|||N|F|20030224||201406091852|01
+OBX|7|TX|013146^Crystals^L^5783-6^Crystals.unidentified^LN||||N/A|A||N|F|||201406091852|01
+NTE|1|L|Few uric acid crystals.
+OBX|8|TX|013152^Crystal Type^L^5782-8^Crystals^LN||||N/A|A||N|F|||201406091852|01
+NTE|1|L|Few triple phosphate crystals
+OBX|9|ST|333351^Mucus Threads^L^8247-9^Mucus^LN||Few||Not Estab.|||N|F|20081117||201406091852|01
+OBX|10|ST|333344^Bacteria^L^5769-5^Bacteria^LN||Moderate||None seen/Few|A||N|F|19960813||201406091852|01
+OBX|11|TX|333419^Yeast^L^5822-2^Yeast^LN||||None seen|||N|F|20010730||201406091852|01
+NTE|1|L|Few budding yeast present.
+OBX|12|ST|013151^Trichomonas^L^5813-1^Trichomonas vaginalis^LN||Trichomonas present.||None seen|A||N|F|||201406091852|01
+OBX|13|ST|333420^Comment^L^11279-7^Urine sediment comments^LN||Comment:|||||N|F|||201406091852|01
+ZPS|1|01|LabCorp EDI Testing|3060 S Church Street^^Burlington^NC^272150000|3365845171||^Testing^EDI

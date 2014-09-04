@@ -1,0 +1,37 @@
+MSH|^~\&|1100|SO|WMTECH|TE030969|201406021438||ORU|0009|P|2.3
+PID|1|11391|15396940620|11391|Testpatient^Six||19860530|F|||41234 Crestview Pl.^^Santa Cruz^CA^95060-|||||||94600810^^^XI^^F^Y
+ORC|RE|53701^LAB|15396940620^LAB||||||201406020000|||1962616656^Kay^J^^^^^N
+OBR|1|53701^LAB|15396940620^LAB|322777^Renal Panel (10)^L|||201405301004|||||||201406021401||||53701||53701||201406021438|||F
+OBX|1|CE|001032^Glucose, Serum^L^2345-7^Glucose^LN||TNP|mg/dL||||N|X|20040126||201406021416|01
+NTE|1|L|No specimen received, please resubmit.
+OBX|2|CE|001040^BUN^L^3094-0^Urea nitrogen^LN||TNP|||||N|X|||201406021416|01
+NTE|1|L|Test not performed
+OBX|3|CE|001370^Creatinine, Serum^L^2160-0^Creatinine^LN||TNP|||||N|X|||201406021416|02
+NTE|1|L|Test not performed
+OBX|4|CE|001198^Sodium, Serum^L^2951-2^Sodium^LN||TNP|||||N|X|||201406021416|01
+NTE|1|L|Test not performed
+OBX|5|CE|001180^Potassium, Serum^L^2823-3^Potassium^LN||TNP|||||N|X|||201406021416|01
+NTE|1|L|Test not performed
+OBX|6|CE|001206^Chloride, Serum^L^2075-0^Chloride^LN||TNP|||||N|X|||201406021416|01
+NTE|1|L|Test not performed
+OBX|7|CE|001578^Carbon Dioxide, Total^L^2028-9^Carbon dioxide^LN||TNP|||||N|X|||201406021416|01
+NTE|1|L|Test not performed
+OBX|8|CE|001016^Calcium, Serum^L^17861-6^Calcium^LN||TNP|||||N|X|||201406021416|01
+NTE|1|L|Test not performed
+OBX|9|CE|001024^Phosphorus, Serum^L^2777-1^Phosphate^LN||TNP|||||N|X|||201406021416|01
+NTE|1|L|Test not performed
+OBX|10|CE|001081^Albumin, Serum^L^1751-7^Albumin^LN||TNP|||||N|X|||201406021416|01
+NTE|1|L|Test not performed
+ORC|RE|53701^LAB|15396940620^LAB||||||201406020000|||1962616656^Kay^J^^^^^N
+OBR|2|53701^LAB|15396940620^LAB|000810^Vitamin B12 and Folate^L|||201405301004|||||||201406021401||||53701||53701||201406021438|||F
+OBX|1|NM|001503^Vitamin B12^L^2132-9^Cobalamins^LN||774|pg/mL|211-946|||N|F|20100412||201406021417|01
+OBX|2|NM|002020^Folate (Folic Acid), Serum^L^2284-8^Folate^LN||5.6|ng/mL|>3.0|||N|F|||201406021417|01
+NTE|1|L|A serum folate concentration of less than 3.1 ng/mL is
+NTE|2|L|considered to represent clinical deficiency.
+ORC|RE|53701^LAB|15396940620^LAB||||||201406020000|||1962616656^Kay^J^^^^^N
+OBR|3|53701^LAB|15396940620^LAB|100875^Request Problem^L|||201405301004|||||||201406021401||||53701||53701||201406021438||01|F
+OBX|1|CE|100875^Request Problem^L||TNP|||||N|F|||201406021416|01
+NTE|1|L|No specimen received, please resubmit.
+NTE|2|L|      TEST:  322777  Renal Panel (10)
+ZPS|1|01|EDI Testing Lab|555 Anywhere Street^^Anywhere^NC^272150000|3365550001||MD^Pathologist^Testing^^^^MD
+ZPS|2|02|LabCorp Burlington|1447 York Court^^Burlington^NC^272153361|8007624344||MD^Hancock^William F^^^^MD

@@ -1,0 +1,36 @@
+MSH|^~\&|1100|SO|WMTECH|SO005435|201407151810||ORU|0004|P|2.3
+PID|1|7217|19322905470|7217|ORTIZ^ISRAEL||20000203|M|||26232 LOS VIVEROS APT F^^MISSION VIEJO^CA^92691-||(949)933-6958|||||04438310^^^XI^^F
+ORC|RE|58011^LAB|19322905470^LAB||||||201407130000|||1962616656^KAY^J^^^^^N
+OBR|1|58011^LAB|19322905470^LAB|008847^Urine Culture, Routine^L|||201407121243|||||||201407130122||||58011||58011||201407151810||01|F
+OBX|1|ST|008847^Urine Culture, Routine^L^630-4^Bacteria identified^LN||Final report|||A||N|F|20031013||201407151755|01
+ORC|RE|58011^LAB|19322905470^LAB||||||201407130000|||1962616656^KAY^J^^^^^N
+OBR|2|58011^LAB|19322905470^LAB|997870^Result^L|||201407121243||||G|||201407130122||||58011||58011||201407151810|||F|008847|||008847
+OBX|1|ST|997131^Result 1^L^630-4^Bacteria identified^LN||Proteus mirabilis|||A||N|F|||201407151755|01
+NTE|1|L|10,000-25,000 colony forming units per mL
+NTE|2|L|This specimen was submitted in a sterile cup which requires
+NTE|3|L|refrigerated temperatures to maintain the organisms without
+NTE|4|L|excessive growth in transport. LabCorp recommends the use of the
+NTE|5|L|urine culture transport device (available from your professional
+NTE|6|L|services representative) for clean catch urine specimens.
+OBX|2|TX|997135^Antimicrobial Susceptibility^L^23658-8^Antibiotic XXX^LN|||||||N|F|||201407151755|01
+NTE|1|L|   ***** S = Susceptible; I = Intermediate; R = Resistant *****
+NTE|2|L|                   P = Positive; N = Negative
+NTE|3|L|            MICS are expressed in micrograms per mL
+NTE|4|L|   Antibiotic                 RSLT#1    RSLT#2    RSLT#3    RSLT#4
+NTE|5|L|Amoxicillin/Clavulanic Acid    S
+NTE|6|L|Ampicillin                     R
+NTE|7|L|Cefazolin                      R
+NTE|8|L|Cefepime                       S
+NTE|9|L|Ceftriaxone                    S
+NTE|10|L|Cefuroxime                     S
+NTE|11|L|Cephalothin                    S
+NTE|12|L|Ciprofloxacin                  S
+NTE|13|L|Ertapenem                      S
+NTE|14|L|Gentamicin                     S
+NTE|15|L|Levofloxacin                   S
+NTE|16|L|Nitrofurantoin                 R
+NTE|17|L|Piperacillin                   I
+NTE|18|L|Tetracycline                   R
+NTE|19|L|Tobramycin                     S
+NTE|20|L|Trimethoprim/Sulfa             S
+ZPS|1|01|LabCorp San Diego|13112 Evening Creek Dr So  Ste 200^^San Diego^CA^921284108|8586683700||MD^Galloway^Jenny^R^^^MD

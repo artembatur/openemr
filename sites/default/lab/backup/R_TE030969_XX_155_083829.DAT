@@ -1,0 +1,63 @@
+MSH|^~\&|1100|SO|WMTECH|TE030969|201406040838||ORU|0018|P|2.3
+PID|1|11387|15596910150|11387|Testpatient^Two||19530530|F|||51234 Evergreen Dr.^^Santa Cruz^CA^95060-|||||||94600810^^^04^^F
+ORC|RE|53784^LAB|15596910150^LAB||||||201406040000|||1962616656^Kay^J^^^^^N
+OBR|1|53784^LAB|15596910150^LAB|322755^Hepatic Function Panel (7)^L|||201406020831||||||SRC:Source of the microbio logy                       |201406040820||||53784||53784||201406040838|||F
+OBX|1|NM|001073^Protein, Total, Serum^L^2885-2^Protein^LN||6.3|g/dL|6.0-8.5|||N|F|||201406040838|01
+OBX|2|CE|001081^Albumin, Serum^L^1751-7^Albumin^LN||TNP|g/dL||||N|X|19941205||201406040834|01
+NTE|1|L|Test not performed
+OBX|3|CE|001099^Bilirubin, Total^L^1975-2^Bilirubin^LN||TNP|mg/dL||||N|X|20100426||201406040834|01
+NTE|1|L|Test not performed
+OBX|4|CE|001222^Bilirubin, Direct^L^1968-7^Bilirubin.glucuronidated+Bilirubin.albumin bound^LN||TNP|mg/dL||||N|X|||201406040834|01
+NTE|1|L|Test not performed
+OBX|5|NM|001107^Alkaline Phosphatase, S^L^6768-6^Alkaline phosphatase^LN||135|IU/L|39-117|H||N|F|20131104||201406040833|01
+OBX|6|NM|001123^AST (SGOT)^L^1920-8^Aspartate aminotransferase^LN||30|IU/L|0-40|||N|F|20010125||201406040833|01
+OBX|7|NM|001545^ALT (SGPT)^L^1742-6^Alanine aminotransferase^LN||15|IU/L|0-32|||N|F|20121029||201406040833|01
+ORC|RE|53784^LAB|15596910150^LAB||||||201406040000|||1962616656^Kay^J^^^^^N
+OBR|2|53784^LAB|15596910150^LAB|010322^Prostate-Specific Ag, Serum^L|||201406020831|||||||201406040820||||53784||53784||201406040838|||F
+OBX|1|NM|010334^Prostate Specific Ag, Serum^L^2857-1^Prostate specific Ag^LN||3.2|ng/mL|Not Estab.|||N|F|||201406040833|01
+NTE|1|L|Roche ECLIA methodology.
+NTE|2|L| 
+NTE|3|L|According to the American Urological Association, Serum PSA should
+NTE|4|L|decrease and remain at undetectable levels after radical
+NTE|5|L|prostatectomy. The AUA defines biochemical recurrence as an initial
+NTE|6|L|PSA value 0.2 ng/mL or greater followed by a subsequent confirmatory
+NTE|7|L|PSA value 0.2 ng/mL or greater.
+NTE|8|L|Values obtained with different assay methods or kits cannot be used
+NTE|9|L|interchangeably. Results cannot be interpreted as absolute evidence
+NTE|10|L|of the presence or absence of malignant disease.
+ORC|RE|53784^LAB|15596910150^LAB||||||201406040000|||1962616656^Kay^J^^^^^N
+OBR|3|53784^LAB|15596910150^LAB|008847^Urine Culture, Routine^L|||201406020831|||||||201406040820|Source of the microbio|||53784||53784||201406040838||01|F
+OBX|1|ST|008847^Urine Culture, Routine^L^630-4^Bacteria identified^LN||Final report|||A||N|F|20031013||201406040834|01
+ORC|RE|53784^LAB|15596910150^LAB||||||201406040000|||1962616656^Kay^J^^^^^N
+OBR|4|53784^LAB|15596910150^LAB|997870^Result^L|||201406020831||||G|||201406040820||||53784||53784||201406040838|||F|008847|||008847
+OBX|1|ST|997131^Result 1^L^630-4^Bacteria identified^LN||Escherichia coli|||A||N|F|||201406040834|01
+NTE|1|L|Moderate growth
+OBX|2|TX|997135^Antimicrobial Susceptibility^L^23658-8^Antibiotic XXX^LN|||||||N|F|||201406040834|01
+NTE|1|L|   ***** S = Susceptible; I = Intermediate; R = Resistant *****
+NTE|2|L|                   P = Positive; N = Negative
+NTE|3|L|            MICS are expressed in micrograms per mL
+NTE|4|L|   Antibiotic                 RSLT#1    RSLT#2    RSLT#3    RSLT#4
+NTE|5|L|Amikacin                         =S
+NTE|6|L|Ampicillin                       =S
+NTE|7|L|Cefamandole                      =S
+NTE|8|L|Cefoperazone                     =S
+NTE|9|L|Cefotaxime                       =S
+NTE|10|L|Cefoxitin                        =R
+NTE|11|L|Cephalothin                      =R
+NTE|12|L|Chloramphenicol                  =R
+NTE|13|L|Gentamicin                       =R
+NTE|14|L|Mezlocillin                      =R
+NTE|15|L|Moxalactam                       =I
+NTE|16|L|Piperacillin                     =I
+NTE|17|L|Tetracycline                     =I
+NTE|18|L|Ticarcillin                      =I
+NTE|19|L|Tobramycin                       =I
+NTE|20|L|Trimeth-Sulfa                    =I
+ORC|RE|53784^LAB|15596910150^LAB||||||201406040000|||1962616656^Kay^J^^^^^N
+OBR|5|53784^LAB|15596910150^LAB|100875^Request Problem^L|||201406020831|||||||201406040820||||53784||53784||201406040838||01|F
+OBX|1|CE|100875^Request Problem^L||TNP|||||N|F|||201406040834|01
+NTE|1|L|Test not performed
+NTE|2|L|      TEST:  001081  Albumin, Serum                 Panel: 322755
+NTE|3|L|             001099  Bilirubin, Total               Panel: 322755
+NTE|4|L|             001222  Bilirubin, Direct              Panel: 322755
+ZPS|1|01|EDI Testing Lab|555 Anywhere Street^^Anywhere^NC^272150000|3365550001||MD^Pathologist^Testing^^^^MD

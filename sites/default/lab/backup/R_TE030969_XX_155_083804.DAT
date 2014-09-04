@@ -1,0 +1,12 @@
+MSH|^~\&|1100|SO|WMTECH|TE030969|201406040837||ORU|0013|P|2.3
+PID|1|11390|15396940641|11390|Testpatient^Five||19820422|M|||81657 Wydown Dr.^^Santa Cruz^CA^95060-|||||||94600810^^^XI^^F
+ORC|RE|53775^LAB|15396940641^LAB||||||201406040000|||1962616656^Kay^J^^^^^N
+OBR|1|53775^LAB|15396940641^LAB|006502^Rheumatoid Arthritis Factor^L|||201406020709||1500||||SRC:Source of the microbio logy                       |201406040823|Source of the microbio|||53775||53775||201406040837|||F
+OBX|1|NM|006171^RA Latex Turbid.^L^11572-5^Rheumatoid factor^LN||5.2|IU/mL|0.0-13.9|||N|F|20020510||201406040823|01
+ORC|RE|53775^LAB|15396940641^LAB||||||201406040000|||1962616656^Kay^J^^^^^N
+OBR|2|53775^LAB|15396940641^LAB|977900^Written Authorization^L|||201406020709||1500|||||201406040823|Source of the microbio|||53775||53775||201406040837||01|F
+OBX|1|TX|977900^Written Authorization^L|||||||N|F|||201406040823|01
+NTE|1|L|Written Authorization Received.
+NTE|2|L|Authorization received from TEST ADDON 06-04-2014
+NTE|3|L|Logged by Cheryl Greeson
+ZPS|1|01|EDI Testing Lab|555 Anywhere Street^^Anywhere^NC^272150000|3365550001||MD^Pathologist^Testing^^^^MD

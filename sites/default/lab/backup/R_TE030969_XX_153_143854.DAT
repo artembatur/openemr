@@ -1,0 +1,22 @@
+MSH|^~\&|1100|SO|WMTECH|TE030969|201406021438||ORU|0003|P|2.3
+PID|1|11399|15396940680|11399|TESTPATIENT^CORSUPER||19770928|F|||14 WELLINGTON DR.^^SANTA CRUZ^CA^95060-|||||||94600810^^^XI^^F^N
+ORC|RE|53781^LAB|15396940680^LAB||||||201406020000|||1962616656^KAY^J^^^^^N
+OBR|1|53781^LAB|15396940680^LAB|010322^Prostate-Specific Ag, Serum^L|||201406021408|||||||201406021406||||53781||53781||201406021438|||F
+OBX|1|NM|010334^Prostate Specific Ag, Serum^L^2857-1^Prostate specific Ag^LN||5.6|ng/mL|Not Estab.|||N|F|||201406021426|01
+NTE|1|L|Roche ECLIA methodology.
+NTE|2|L| 
+NTE|3|L|According to the American Urological Association, Serum PSA should
+NTE|4|L|decrease and remain at undetectable levels after radical
+NTE|5|L|prostatectomy. The AUA defines biochemical recurrence as an initial
+NTE|6|L|PSA value 0.2 ng/mL or greater followed by a subsequent confirmatory
+NTE|7|L|PSA value 0.2 ng/mL or greater.
+NTE|8|L|Values obtained with different assay methods or kits cannot be used
+NTE|9|L|interchangeably. Results cannot be interpreted as absolute evidence
+NTE|10|L|of the presence or absence of malignant disease.
+ORC|RE|53781^LAB|15396940680^LAB||||||201406020000|||1962616656^KAY^J^^^^^N
+OBR|2|53781^LAB|15396940680^LAB|001032^Glucose, Serum^L|||201406021408|||||||201406021406||||53781||53781||201406021438||01|F
+OBX|1|NM|001032^Glucose, Serum^L^2345-7^Glucose^LN||77|mg/dL|65-99|||N|F|20040126||201406021426|01
+ORC|RE|53781^LAB|15396940680^LAB||||||201406020000|||1962616656^KAY^J^^^^^N
+OBR|3|53781^LAB|15396940680^LAB|001123^AST (SGOT)^L|||201406021408|||||||201406021406||||53781||53781||201406021438||01|F
+OBX|1|NM|001123^AST (SGOT)^L^1920-8^Aspartate aminotransferase^LN||20|IU/L|0-40|||N|F|20010125||201406021426|01
+ZPS|1|01|EDI Testing Lab|555 Anywhere Street^^Anywhere^NC^272150000|3365550001||MD^Pathologist^Testing^^^^MD

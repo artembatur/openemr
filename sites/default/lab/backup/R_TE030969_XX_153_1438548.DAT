@@ -1,0 +1,67 @@
+MSH|^~\&|1100|SO|WMTECH|TE030969|201406021438||ORU|0011|P|2.3
+PID|1|11388|15396940600|11388|Testpatient^Three||19680530|M|||6312 Everly Way^^Santa Cruz^CA^95060-|||||||94600810^^^04^^F
+ORC|RE|53691^LAB|15396940600^LAB||||||201406020000|||1962616656^Kay^J^^^^^N
+OBR|1|53691^LAB|15396940600^LAB|005009^CBC With Differential/Platelet^L|||201405300957||||||SRC:Source of microbiology  spe                       |201406021401||||53691||53691||201406021438|||F
+OBX|1|NM|005025^WBC^L^6690-2^Leukocytes^LN||85.4|x10E3/uL|3.4-10.8|>||N|F|20130909||201406021411|01
+OBX|2|NM|005033^RBC^L^789-8^Erythrocytes^LN||7.45|x10E6/uL|4.14-5.80|HH||N|F|20081208||201406021411|01
+OBX|3|NM|005041^Hemoglobin^L^718-7^Hemoglobin^LN||6.5|g/dL|12.6-17.7|LL||N|F|20081208||201406021411|01
+OBX|4|NM|005058^Hematocrit^L^4544-3^Hematocrit^LN||19.5|%|37.5-51.0|L||N|F|20081208||201406021411|01
+OBX|5|NM|015065^MCV^L^787-2^Erythrocyte mean corpuscular volume^LN||65|fL|79-97|L||N|F|20081208||201406021411|01
+OBX|6|NM|015073^MCH^L^785-6^Erythrocyte mean corpuscular hemoglobin^LN||27.2|pg|26.6-33.0|||N|F|20081208||201406021411|01
+OBX|7|NM|015081^MCHC^L^786-4^Erythrocyte mean corpuscular hemoglobin concentrat^LN||33.3|g/dL|31.5-35.7|||N|F|20081208||201406021411|01
+OBX|8|NM|105007^RDW^L^788-0^Erythrocyte distribution width^LN||16.5|%|12.3-15.4|H||N|F|20081208||201406021411|01
+OBX|9|NM|015172^Platelets^L^777-3^Platelets^LN||15|x10E3/uL|155-379|<||N|F|20130909||201406021411|01
+NTE|1|L|               **Effective June 16, 2014, the reference interval**
+NTE|2|L|                 for Platelets will be changing for 13 years and
+NTE|3|L|                 older to:                                 150 - 379
+OBX|10|NM|015107^Neutrophils^L^770-8^Neutrophils/100 leukocytes^LN||80|%|40-74|H||N|F|20130909||201406021411|01
+OBX|11|NM|015123^Lymphs^L^736-9^Lymphocytes/100 leukocytes^LN||7|%|14-46|L||N|F|20130909||201406021411|01
+OBX|12|NM|015131^Monocytes^L^5905-5^Monocytes/100 leukocytes^LN||8|%|4-12|||N|F|20130909||201406021411|01
+OBX|13|NM|015149^Eos^L^713-8^Eosinophils/100 leukocytes^LN||3|%|0-5|||N|F|20130909||201406021411|01
+OBX|14|NM|015156^Basos^L^706-2^Basophils/100 leukocytes^LN||2|%|0-3|||N|F|20010402||201406021411|01
+OBX|15|NM|015909^Neutrophils (Absolute)^L^751-8^Neutrophils^LN||68.3|x10E3/uL|1.4-7.0|H||N|F|20130909||201406021411|01
+OBX|16|NM|015917^Lymphs (Absolute)^L^731-0^Lymphocytes^LN||6.0|x10E3/uL|0.7-3.1|H||N|F|20130909||201406021411|01
+OBX|17|NM|015925^Monocytes(Absolute)^L^742-7^Monocytes^LN||6.8|x10E3/uL|0.1-0.9|H||N|F|20130909||201406021411|01
+OBX|18|NM|015933^Eos (Absolute)^L^711-2^Eosinophils^LN||2.6|x10E3/uL|0.0-0.4|H||N|F|20130909||201406021411|01
+OBX|19|NM|015941^Baso (Absolute)^L^704-7^Basophils^LN||1.7|x10E3/uL|0.0-0.2|H||N|F|20081208||201406021411|01
+OBX|20|ST|015180^Hematology Comments:^L^18314-5^Morphology^LN||4+ Anisocytosis|||||N|F|||201406021411|01
+ORC|RE|53691^LAB|15396940600^LAB||||||201406020000|||1962616656^Kay^J^^^^^N
+OBR|2|53691^LAB|15396940600^LAB|008847^Urine Culture, Routine^L|||201405300957|||||||201406021401|Source of microbiology|||53691||53691||201406021438||01|F
+OBX|1|ST|008847^Urine Culture, Routine^L^630-4^Bacteria identified^LN||Final report|||A||N|F|20031013||201406021412|01
+ORC|RE|53691^LAB|15396940600^LAB||||||201406020000|||1962616656^Kay^J^^^^^N
+OBR|3|53691^LAB|15396940600^LAB|997870^Result^L|||201405300957||||G|||201406021401||||53691||53691||201406021438|||F|008847|||008847
+OBX|1|ST|997131^Result 1^L^630-4^Bacteria identified^LN||Klebsiella pneumoniae|||A||N|F|||201406021412|01
+NTE|1|L|Light growth
+OBX|2|ST|997132^Result 2^L^630-4^Bacteria identified^LN||Escherichia coli|||A||N|F|||201406021412|01
+NTE|1|L|Light growth
+OBX|3|TX|997135^Antimicrobial Susceptibility^L^23658-8^Antibiotic XXX^LN|||||||N|F|||201406021412|01
+NTE|1|L|   ***** S = Susceptible; I = Intermediate; R = Resistant *****
+NTE|2|L|                   P = Positive; N = Negative
+NTE|3|L|            MICS are expressed in micrograms per mL
+NTE|4|L|   Antibiotic                 RSLT#1    RSLT#2    RSLT#3    RSLT#4
+NTE|5|L|Amikacin                         =S        =R
+NTE|6|L|Ampicillin                       =S        =R
+NTE|7|L|Cefamandole                      =S        =R
+NTE|8|L|Cefoperazone                     =S        =R
+NTE|9|L|Cefotaxime                       =S        =S
+NTE|10|L|Cefoxitin                        =S        =S
+NTE|11|L|Cephalothin                      =S        =S
+NTE|12|L|Chloramphenicol                  =S        =S
+NTE|13|L|Gentamicin                       =R        =R
+NTE|14|L|Mezlocillin                      =R        =R
+NTE|15|L|Moxalactam                       =R        =R
+NTE|16|L|Piperacillin                     =R        =R
+NTE|17|L|Tetracycline                     =R        =R
+NTE|18|L|Ticarcillin                      =R        =I
+NTE|19|L|Tobramycin                       =R        =I
+NTE|20|L|Trimeth-Sulfa                    =R        =I
+ORC|RE|53691^LAB|15396940600^LAB||||||201406020000|||1962616656^Kay^J^^^^^N
+OBR|4|53691^LAB|15396940600^LAB|271313^No Test Indicated For Frozen^L|||201405300957|||||||201406021401||||53691||53691||201406021438||01|F
+OBX|1|CE|271313^No Test Indicated For Frozen^L||TNP|||||N|X|||201406021411|01
+NTE|1|L|Test not indicated.
+NTE|2|L|for frozen serum.
+NTE|3|L|A frozen specimen was received with no test indicated. If testing is
+NTE|4|L|required on this specimen, please contact the LabCorp Client Inquiry/
+NTE|5|L|Technical Services Department to obtain a Request for Written
+NTE|6|L|Authorization Form.
+ZPS|1|01|EDI Testing Lab|555 Anywhere Street^^Anywhere^NC^272150000|3365550001||MD^Pathologist^Testing^^^^MD
