@@ -26,10 +26,7 @@ define('EXT_COL_CODE','code');
 define('EXT_COL_DESCRIPTION','description');
 define('EXT_TABLE_NAME','table');
 define('EXT_STATUS_CLAUSE','status_clause');
-function define_external_table(&$results, $index, $table_name,$col_code, $col_description,$status_clause)
-{
-    $results[$index]=array(EXT_TABLE_NAME=>$table_name,EXT_COL_CODE=>$col_code,EXT_COL_DESCRIPTION=>$col_description,EXT_STATUS_CLAUSE=>$status_clause);
-}
+
 define_external_table($code_external_tables2,1,'icd10_dx_order_code','formatted_dx_code','long_desc',' active=1 ');
 define_external_table($code_external_tables2,4,'icd9_dx_code','formatted_dx_code','long_desc',' active=1 ');
 define_external_table($code_external_tables2,2,'sct_concepts','ConceptId','FullySpecifiedName',' ConceptStatus=0 and FullySpecifiedName LIKE \'%(disorder)\'');
