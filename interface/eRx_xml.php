@@ -1,29 +1,27 @@
 <?php
-// +-----------------------------------------------------------------------------+
-// Copyright (C) 2011 ZMG LLC <sam@zhservices.com>
-//
-//
-// This program is free software; you can redistribute it and/or
-// modify it under the terms of the GNU General Public License
-// as published by the Free Software Foundation; either version 2
-// of the License, or (at your option) any later version.
-//
-//
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-//
-// A copy of the GNU General Public License is included along with this program:
-// openemr/interface/login/GnuGPL.html
-// For more information write to the Free Software
-// Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-//
-// Author:   Eldho Chacko <eldho@zhservices.com>
-//           Vinish K <vinish@zhservices.com>
-//
-// +------------------------------------------------------------------------------+
+
+/**
+ * interface/eRx_xml.php Functions for interacting with NewCrop communications.
+ *
+ * Copyright (C) 2011 ZMG LLC <sam@zhservices.com>
+ *
+ * LICENSE: This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by the Free
+ * Software Foundation; either version 3 of the License, or (at your option) any
+ * later version.  This program is distributed in the hope that it will be
+ * useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General
+ * Public License for more details.  You should have received a copy of the GNU
+ * General Public License along with this program.
+ * If not, see <http://opensource.org/licenses/gpl-license.php>.
+ *
+ * @package    OpenEMR
+ * @subpackage NewCrop
+ * @author     Eldho Chacko <eldho@zhservices.com>
+ * @author     Vinish K <vinish@zhservices.com>
+ * @link       http://www.open-emr.org
+ */
+
 function getErxPath()
 {
     //if($GLOBALS['erx_source']==1)
@@ -209,7 +207,7 @@ function account($doc,$r)
 	die;
     }
     $b = $doc->createElement( "Account" );
-    $b->setAttribute('ID','1');
+    $b->setAttribute('ID', $GLOBALS['erx_account_id']);
     $erxSiteID['name']=stripSpecialCharacterFacility($erxSiteID['name']);
     $erxSiteID['name']=trimData($erxSiteID['name'],35);
     $msg = validation(xl('Account Name'),$erxSiteID['name'],$msg);
@@ -866,19 +864,34 @@ function PatientFreeformAllergy($doc,$r,$pid)
 	return $allergyId;
 }
 
-function PatientFreeformHealthplans($doc,$r,$pid)
-{
-    $res=sqlStatement("SELECT `name`,`type` FROM insurance_companies AS ic, insurance_data AS id
-    WHERE ic.id=id.provider AND id.pid=?",array($pid));
-    while($row=sqlFetchArray($res))    
-    {    
-        $b = $doc->createElement( "PatientFreeformHealthplans" );
-            $allergyName = $doc->createElement( "healthplanName" );
-                $allergyName->appendChild(
-                    $doc->createTextNode( stripSpecialCharacter(trimData($row['name'],35)) )
-                );
-            $b->appendChild( $allergyName );
-        $r->appendChild( $b );
+function PatientFreeformHealthplans($doc, $r, $pid) {
+    $resource = sqlStatement('SELECT
+            `ins`.`name`
+        FROM (
+            SELECT
+                `id`.`type`,
+                `ic`.`name`
+            FROM `insurance_data` AS `id`
+                LEFT JOIN `insurance_companies` AS `ic` ON `ic`.`id` = `id`.`provider`
+            WHERE `id`.`pid` = ?
+                AND `id`.`subscriber_relationship` = \'self\'
+                AND `id`.`provider` > 0
+            ORDER BY `id`.`date` DESC
+        ) AS `ins`
+        GROUP BY `ins`.`type`;',
+        array($pid)
+    );
+
+    while($row = sqlFetchArray($resource)) {
+        $healthplanName = $doc->createElement('healthplanName');
+        $healthplanName->appendChild($doc->createTextNode(
+            stripSpecialCharacter(trimData($row['name'], 35))
+        ));
+
+        $patientFreeformHealthplans = $doc->createElement('PatientFreeformHealthplans');
+        $patientFreeformHealthplans->appendChild($healthplanName);
+
+        $r->appendChild($patientFreeformHealthplans);
     }
 }
 
