@@ -1371,28 +1371,18 @@ if (!empty($reg)) {
 <?php } ?>
       
 <?php
-
-// LABORATORY START
-if ($GLOBALS['lab_quest_enable'] || $GLOBALS['lab_corp_enable']) { ?>
-      <li><a class="collapsed_lv2"><span><?php xl('Laboratory','e') ?></span></a>
+// QUEST START
+if ($GLOBALS['lab_quest_enable']) { ?>
+      <li><a class="collapsed_lv2"><span><?php xl('Quest Lab','e') ?></span></a>
         <ul>
-          <?php genMiscLink('RTop','lab','0',xl('Lab Orders'),'reports/myreports/labcorp_orders.php'); ?>
-          <?php genMiscLink('RTop','lab','0',xl('Lab Results'),'reports/myreports/labcorp_results.php'); ?>
-<?php if ($GLOBALS['lab_quest_enable']) { ?>
-          <?php if (acl_check('admin', 'users'   )) genMiscLink('RTop','lab','0',xl('Quest Batch'),'reports/myreports/quest_batch.php'); ?>
-          <?php if (acl_check('admin', 'users'   )) genMiscLink('RTop','lab','0',xl('Quest Update'),'reports/myreports/quest_update.php'); ?>
-          <?php genMiscLink('RTop','lab','0',xl('Quest Orphans'),'reports/myreports/quest_orphans.php'); ?>
-<?php }
-if ($GLOBALS['lab_corp_enable']) { ?>
-          <?php if (acl_check('admin', 'users'   )) genMiscLink('RTop','lab','0',xl('LabCorp Batch'),'reports/myreports/labcorp_batch.php'); ?>
-          <?php genMiscLink('RTop','lab','0',xl('LabCorp Orphans'),'reports/myreports/labcorp_orphans.php'); ?>
-<?php } ?>
-</ul>
+          <?php genMiscLink('RTop','lab','0',xl('Quest Lab Report'),'reports/myreports/lab_forms.php'); ?>
+          <?php genMiscLink('RTop','lab','0',xl('Orphan Lab Results'),'reports/myreports/lab_results.php'); ?>
+          <?php if (acl_check('admin', 'users'   )) genMiscLink('RTop','lab','0',xl('Quest Batch Process'),'reports/myreports/lab_batch.php'); ?>
+          <?php if (acl_check('admin', 'users'   )) genMiscLink('RTop','lab','0',xl('Quest CDC Update'),'reports/myreports/lab_update.php'); ?>
+        </ul>
       </li>
 <?php }
-// LABORATORY END ?>
-
-
+// QUEST END ?>
 <?php if (!empty($GLOBALS['code_types']['IPPF'])) { ?>
       <li><a class="collapsed_lv2"><span><?php xl('Statistics','e') ?></span></a>
         <ul>

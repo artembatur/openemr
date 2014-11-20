@@ -391,25 +391,10 @@ if ($result != "") {
 
     $body = $iter['body'];
     if (preg_match('/^\d\d\d\d-\d\d-\d\d \d\d\:\d\d /', $body)) {
-      // CRISWELL - fix result links
-    	if ($iter['title'] == 'Lab Results' || $iter['title'] == 'LabCorp Results' || $iter['title'] == 'Quest Results' || $iter['title'] == 'Quest' || $iter['title'] == 'LabCorp') {
-      		$body = nl2br(oeFormatPatientNote($body));
-    	}
-    	else {
-	      $body = nl2br(htmlspecialchars( oeFormatPatientNote($body), ENT_NOQUOTES));
-    	}
-    	// CRISWELL - end        
+      $body = nl2br(htmlspecialchars( oeFormatPatientNote($body), ENT_NOQUOTES));
     } else {
       $body = htmlspecialchars( oeFormatSDFT(strtotime($iter['date'])).date(' H:i', strtotime($iter['date'])), ENT_NOQUOTES) .
         ' (' . htmlspecialchars( $iter['user'], ENT_NOQUOTES) . ') ' . nl2br(htmlspecialchars( oeFormatPatientNote($body), ENT_NOQUOTES));
-        // CRISWELL - fix result links
-    	if ($iter['title'] == 'Lab Results' || $iter['title'] == 'LabCorp Results' || $iter['title'] == 'Quest Results' || $iter['title'] == 'Quest' || $iter['title'] == 'LabCorp') {
-      		$body .= nl2br(oeFormatPatientNote($body));
-    	}
-    	else {
-	      $body .= nl2br(htmlspecialchars( oeFormatPatientNote($body), ENT_NOQUOTES));
-    	}
-    	// CRISWELL - end
     }
     $body = preg_replace('/(\sto\s)-patient-(\))/','${1}'.$patientname.'${2}',$body);
     if ( ($iter{"activity"}) && ($iter['message_status'] != "Done") ) {

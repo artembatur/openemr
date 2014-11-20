@@ -221,9 +221,7 @@ echo "
  if ($reply_to) {
   $prow = sqlQuery("SELECT lname, fname " .
    "FROM patient_data WHERE pid = ?", array($reply_to) );
-  $patientname = $prow['lname'] . ", " . $prow['fname'];  
-  // ADDED TO REPLACE QUEST ORPHAN PATIENT - 2014-09-30 CRISWELL (Williams Medical Technologies)
-  if ($prow['lname'] == '#QUESTLABS#') $patientname = '** UNKNOWN **';            
+  $patientname = $prow['lname'] . ", " . $prow['fname'];
  }
    if ($patientname == '') {
        $patientname = xl('Click to select');
@@ -324,14 +322,7 @@ if ($noteid) {
 
 if ($noteid) {
     $body = preg_replace('/(:\d{2}\s\()'.$result['pid'].'(\sto\s)/','${1}'.$patientname.'${2}',$body);
-    // MODIFIED TO PRESERVE LINKS - 2014-09-30 CRISWELL (Williams Medical Technologies)
-    if ($title == 'LabCorp Results' || $title == 'Quest Results' || $title == 'Lab Results' || $title == 'LabCorp' || $title == 'Quest') { 
-   		$body = nl2br($body);
-    }
-    else {
-    	$body = nl2br(htmlspecialchars( $body, ENT_NOQUOTES));
-    }
-    // END MODIFICATION
+    $body = nl2br(htmlspecialchars( $body, ENT_NOQUOTES));
     echo "<div class='text' style='background-color:white; color: gray; border:1px solid #999; padding: 5px; width: 640px;'>".$body."</div>";
 }
 
@@ -523,8 +514,6 @@ else {
             } else {
                 $patient = "* Patient must be set manually *";
             }
-            // ADDED TO REPLACE QUEST ORPHAN PATIENT - 2014-09-30 CRISWELL (Williams Medical Technologies)
-            if ($myrow['patient_data_lname'] == '#QUESTLABS#') $patient = '** UNKNOWN PATIENT **';
             $count++;
             echo "
             <tr id=\"row$count\" style=\"background:white\" height=\"24\">

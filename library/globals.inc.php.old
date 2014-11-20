@@ -1520,6 +1520,20 @@ $GLOBALS_METADATA = array(
       xl('Contact Medical Information Integration, LLC at http://mi-squared.com or ZH Healthcare at http://zhservices.com for subscribing the eRx service')
     ),
     
+    'erx_soap_ttl_allergies' => array(
+      xl('NewCrop eRx SOAP Request Time-To-Live for Allergies'),
+      'num',
+      '21600',
+      xl('Time-To-Live for Allergies SOAP Request in seconds')
+    ),
+
+    'erx_soap_ttl_medications' => array(
+      xl('NewCrop eRx SOAP Request Time-To-Live for Medications'),
+      'num',
+      '21600',
+      xl('Time-To-Live for Medications SOAP Request in seconds')
+    ),
+
     'partner_name_production' => array(
       xl('NewCrop eRx Partner Name'),
       'text',                           // data type
@@ -1541,6 +1555,13 @@ $GLOBALS_METADATA = array(
       xl('Contact Medical Information Integration, LLC at http://mi-squared.com or ZH Healthcare at http://zhservices.com for subscribing the eRx service')
     ),
     
+    'erx_account_id' => array(
+      xl('NewCrop eRx Account Id'),
+      'text',                           // data type
+      '1',
+      xl('Contact Medical Information Integration, LLC at http://mi-squared.com or ZH Healthcare at http://zhservices.com for subscribing the eRx service')
+    ),
+
     'erx_upload_active' => array(
       xl('Only upload active prescriptions'),
       'bool',                           // data type
@@ -1756,159 +1777,6 @@ $GLOBALS_METADATA = array(
       '30',
       xl('Rx Bottom Margin (px)')
     ),
-  ),
-  
-// Lab Interface Tab
-  'Labs' => array(
-		
-	'lab_quest_enable' => array(
-		xl('Quest Interface Enable'),
-		'bool',                           // data type
-		'0',
-		xl('Enable OpenEMR Quest Diagnostic Service Interface.')
-	),
-		
-	'lab_quest_psc' => array(
-		xl('Quest Specimen Draws Enable'),
-		'bool',                           // data type
-		'0',
-		xl('Enable Support for Quest Clinic Specimen Draws (non-PSC HOLD).')
-	),
-		
-	'lab_quest_status' => array(
-		xl('Quest Lab Interface'),
-		array(
-			'T' => xl('Validation'),
-			'P' => xl('Production'),
-			'D' => xl('Training'),
-		),
-		'0',                              // default
-		xl('Interface Control for OpenEMR Quest Diagnostic Service.')
-	),
-		
-	'lab_quest_hubname' => array(
-		xl('Quest Lab Hub Name'),
-		'text',                           // data type
-		'',
-		xl('Hub Name for OpenEMR Quest Diagnostic Service.')
-	),
-		
-	'lab_quest_facilityid' => array(
-		xl('Quest Lab Facility ID'),
-		'text',                           // data type
-		'',
-		xl('Facility ID for OpenEMR Quest Diagnostic Service.')
-	),
-		
-	'lab_quest_catid' => array(
-		xl('Quest Document Category ID'),
-		'text',                           // data type
-		'',
-		xl('Document Category ID for OpenEMR Quest Diagnostic Service.')
-	),
-		
-	'lab_quest_username' => array(
-		xl('Quest Service Username'),
-		'text',                           // data type
-		'',
-		xl('Username for OpenEMR Quest Diagnostic Service.')
-	),
-		
-	'lab_quest_password' => array(
-		xl('Quest Service Password'),
-		'text',                           // data type
-		'',
-		xl('Password for OpenEMR Quest Diagnostic Service.')
-	),
-		
-	// LabCorp	
-	'lab_corp_enable' => array(
-		xl('LabCorp Interface Enable'),
-		'bool',                           // data type
-		'0',
-		xl('Enable OpenEMR LabCorp Interface Service.')
-	),
-		
-	'lab_corp_psc' => array(
-		xl('LabCorp Specimen Draws Enable'),
-		'bool',                           // data type
-		'0',
-		xl('Enable Support for LabCorp Clinic Specimen Draws (non-PSC HOLD).')
-	),
-		
-	'lab_corp_status' => array(
-		xl('LabCorp Interface'),
-		array(
-			'T' => xl('Validation'),
-			'P' => xl('Production'),
-			'D' => xl('Training'),
-		),
-		'0',                              // default
-		xl('Interface Control for OpenEMR LabCorp Service.')
-	),
-		
-	'lab_corp_clientid' => array(
-		xl('LabCorp Sending Facility ID'),
-		'text',                           // data type
-		'',
-		xl('Sending Facility ID for OpenEMR LabCorp Service.')
-	),
-		
-  	'lab_corp_facilityid' => array(
-		xl('LabCorp Receiving Facility ID'),
-		'text',                           // data type
-		'',
-		xl('Receiving Facility ID for OpenEMR LabCorp Service.')
-	),
-		
-	'lab_corp_catid' => array(
-		xl('LabCorp Document Category ID'),
-		'text',                           // data type
-		'',
-		xl('Document Category ID for OpenEMR LabCorp Service.')
-	),
-		
-	'lab_corp_username' => array(
-		xl('LabCorp Service Username'),
-		'text',                           // data type
-		'',
-		xl('Username for OpenEMR LabCorp Service.')
-	),
-		
-	'lab_corp_password' => array(
-		xl('LabCorp Service Password'),
-		'text',                           // data type
-		'',
-		xl('Password for OpenEMR LabCorp Service.')
-	),
-		
-  	'lab_exchange_enable' => array(
-		xl('Enable Lab Exchange'),
-		'bool',                           // data type
-		'0',
-		xl('Enable the OpenEMR Support LLC Lab Exchange Service.')
-	),
-		
-	'lab_exchange_siteid' => array(
-		xl('Lab Exchange Site ID'),
-		'text',                           // data type
-		'3',
-		xl('Site ID for the OpenEMR Support LLC Lab Exchange Service.')
-	),
-		
-	'lab_exchange_token' => array(
-		xl('Lab Exchange Token ID'),
-		'text',                           // data type
-		'12345',
-		xl('Token ID for the OpenEMR Support LLC Lab Exchange Service.')
-	),
-		
-	'lab_exchange_endpoint' => array(
-		xl('Lab Exchange Site Address'),
-		'text',                           // data type
-		'https://openemrsupport.com:29443/len/api',
-		xl('Https link for the OpenEMR Support LLC Lab Exchange Service.')
-	),
-  ),
+  ),    
 );
 ?>
