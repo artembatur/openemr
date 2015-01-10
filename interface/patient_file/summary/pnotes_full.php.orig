@@ -391,16 +391,7 @@ if ($result != "") {
 
     $body = $iter['body'];
     if (preg_match('/^\d\d\d\d-\d\d-\d\d \d\d\:\d\d /', $body)) {
-// LABLINK -- modified the following lines to retain link functionality
-      //$body = nl2br(htmlspecialchars( oeFormatPatientNote($body), ENT_NOQUOTES));
-    	if ($iter['title'] == 'Lab Results' || $iter['title'] == 'LabCorp Results' || $iter['title'] == 'Quest Results') {
-      		$body = nl2br(oeFormatPatientNote($body));
-    	}
-    	else {
-	      $body = nl2br(htmlspecialchars( oeFormatPatientNote($body), ENT_NOQUOTES));
-    	}
-// LABLINK -- end modifications
-
+      $body = nl2br(htmlspecialchars( oeFormatPatientNote($body), ENT_NOQUOTES));
     } else {
       $body = htmlspecialchars( oeFormatSDFT(strtotime($iter['date'])).date(' H:i', strtotime($iter['date'])), ENT_NOQUOTES) .
         ' (' . htmlspecialchars( $iter['user'], ENT_NOQUOTES) . ') ' . nl2br(htmlspecialchars( oeFormatPatientNote($body), ENT_NOQUOTES));

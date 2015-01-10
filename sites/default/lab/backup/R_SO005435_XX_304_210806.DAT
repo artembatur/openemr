@@ -1,0 +1,11 @@
+MSH|^~\&|1100|SO|WMTECH|SO005435|201410312108||ORU|0069|P|2.3
+PID|1|11719|30461500900|11719|NAVARRO^BABY GIRL||20141026|F|||23304 ORANGE AVE APT 9^^LAKE FOREST^CA^92630-||(949)330-3843|||||04438310^^^CA^^F^N
+ORC|RE|72434^LAB|30461500900^LAB||||||201410310000|||1962616656^KAY^J^^^^^N
+OBR|1|72434^LAB|30461500900^LAB|015602^Bilirubin, Total, Neonatal^L|||201410311330|||||||201410311703||||60058027600||72434||201410312108||01|F
+OBX|1|NM|015602^Bilirubin, Total, Neonatal^L^1975-2^Bilirubin^LN||11.6|mg/dL||||N|F|20100426||201410312030|01
+NTE|1|L|                             Newborns, term and near term:
+NTE|2|L|                               24 hours old:               0.0 -  8.0
+NTE|3|L|                               48 hours old:               0.0 - 13.2
+NTE|4|L|                               72 hours old:               0.0 - 15.6
+NTE|5|L|                               96 hours to 1 month old:    0.0 - 16.6
+ZPS|1|01|LabCorp Costa Mesa|1640 Newport Blvd Ste 330^^Costa Mesa^CA^926273786|9495744020||MD^Yetur^Praveena^^^^MD

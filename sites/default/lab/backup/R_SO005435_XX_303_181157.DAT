@@ -1,0 +1,14 @@
+MSH|^~\&|1100|SO|WMTECH|SO005435|201410301811||ORU|0068|P|2.3
+PID|1|11719|30361500530|11719|NAVARRO^BABY GIRL||20141026|F|||23304 ORANGE AVE APT 9^^LAKE FOREST^CA^92630-||(949)330-3843|||||04438310^^^CA^^F^N
+NTE|1|L|Report faxed and recv'd per Corina @ 1420 by ip.
+ORC|RE|72214^LAB|30361500530^LAB||||||201410300000|||1962616656^KAY^J^^^^^N
+OBR|1|72214^LAB|30361500530^LAB|205500^Bilirubin Fraction, Neonatal^L|||201410301124|||||||201410301328||||60058027556||72214||201410301811|||F
+OBX|1|NM|015602^Bilirubin, Total, Neonatal^L^1975-2^Bilirubin^LN||12.7|mg/dL||||N|F|20100426||201410301657|01
+NTE|1|L|                             Newborns, term and near term:
+NTE|2|L|                               24 hours old:               0.0 -  8.0
+NTE|3|L|                               48 hours old:               0.0 - 13.2
+NTE|4|L|                               72 hours old:               0.0 - 15.6
+NTE|5|L|                               96 hours to 1 month old:    0.0 - 16.6
+OBX|2|NM|115600^Bilirubin, Direct, Neonatal^L^1968-7^Bilirubin.glucuronidated+Bilirubin.albumin bound^LN||0.44|mg/dL|0.00-0.60|||N|F|20080922||201410301657|01
+OBX|3|NM|115618^Bili, Indirect, Neo^L^1971-1^Bilirubin.non-glucuronidated^LN||12.3|mg/dL||||N|F|||201410301657|01
+ZPS|1|01|LabCorp Costa Mesa|1640 Newport Blvd Ste 330^^Costa Mesa^CA^926273786|9495744020||MD^Yetur^Praveena^^^^MD

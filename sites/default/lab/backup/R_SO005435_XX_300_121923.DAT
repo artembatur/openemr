@@ -1,0 +1,54 @@
+MSH|^~\&|1100|SO|WMTECH|SO005435|201410271219||ORU|0064|P|2.3
+PID|1|10839|29725328610|10839|LUCANO^SOPHIE^I||20131002|F|||24746 VILLA SAN RAFAEL^^ALISO VIEJO^CA^92656-|||||||04438310^^^XI^^F
+ORC|RE|71486^LAB|29725328610^LAB||||||201410250000|||1962616656^Kay^J^^^^^N
+OBR|1|71486^LAB|29725328610^LAB|008649^Aerobic Bacterial Culture^L|||201410241659||||||SRC:groin folds            |201410250110|groin folds|||71486||71486||201410271219||01|F
+OBX|1|ST|008649^Aerobic Bacterial Culture^L^634-6^Bacteria identified^LN||Final report|||A||N|F|||201410271153|01
+ORC|RE|71486^LAB|29725328610^LAB||||||201410250000|||1962616656^Kay^J^^^^^N
+OBR|2|71486^LAB|29725328610^LAB|997874^Result^L|||201410241659||||G|||201410250110||||71486||71486||201410271219|||F|008649|||008649
+OBX|1|ST|997876^Result 1^L^6463-4^Bacteria identified^LN||Staphylococcus aureus|||A||N|F|||201410271153|01
+NTE|1|L|Moderate growth
+NTE|2|L|Based on resistance to penicillin and susceptibility to oxacillin
+NTE|3|L|this isolate would be susceptible to:
+NTE|4|L|* Penicillinase-stable penicillins; such as:
+NTE|5|L|    Cloxacillin
+NTE|6|L|    Dicloxacillin
+NTE|7|L|    Nafcillin
+NTE|8|L|* Beta-lactam/beta-lactamase inhibitor combinations; such as:
+NTE|9|L|    Amoxicillin-clavulanic acid
+NTE|10|L|    Ampicillin-sulbactam
+NTE|11|L|* Antistaphylococcal cephems; such as:
+NTE|12|L|    Cefaclor
+NTE|13|L|    Cefuroxime
+NTE|14|L|* Antistaphylococcal carbapenems; such as:
+NTE|15|L|    Imipenem
+NTE|16|L|    Meropenem
+OBX|2|TX|997878^Result 2^L^6463-4^Bacteria identified^LN|||||A||N|F|||201410271153|01
+NTE|1|L|Beta hemolytic Streptococcus, group G
+NTE|2|L|Heavy growth
+NTE|3|L|Penicillin and ampicillin are drugs of choice for treatment of
+NTE|4|L|beta-hemolytic streptococcal infections. Susceptibility testing of
+NTE|5|L|penicillins and other beta-lactam agents approved by the FDA for
+NTE|6|L|treatment of beta-hemolytic streptococcal infections need not be
+NTE|7|L|performed routinely because nonsusceptible isolates are extremely
+NTE|8|L|rare in any beta-hemolytic streptococcus and have not been reported
+NTE|9|L|for Streptococcus pyogenes (group A). (CLSI 2011)
+OBX|3|TX|997884^Antimicrobial Susceptibility^L^23658-8^Antibiotic XXX^LN|||||||N|F|||201410271153|01
+NTE|1|L|   ***** S = Susceptible; I = Intermediate; R = Resistant *****
+NTE|2|L|                   P = Positive; N = Negative
+NTE|3|L|            MICS are expressed in micrograms per mL
+NTE|4|L|   Antibiotic                 RSLT#1    RSLT#2    RSLT#3    RSLT#4
+NTE|5|L|Ciprofloxacin                  S
+NTE|6|L|Clindamycin                    S
+NTE|7|L|Erythromycin                   S
+NTE|8|L|Gentamicin                     S
+NTE|9|L|Levofloxacin                   S
+NTE|10|L|Linezolid                      S
+NTE|11|L|Moxifloxacin                   S
+NTE|12|L|Oxacillin                      S
+NTE|13|L|Penicillin                     R
+NTE|14|L|Quinupristin/Dalfopristin      S
+NTE|15|L|Rifampin                       S
+NTE|16|L|Tetracycline                   S
+NTE|17|L|Trimethoprim/Sulfa             S
+NTE|18|L|Vancomycin                     S
+ZPS|1|01|LabCorp San Diego|13112 Evening Creek Dr So  Ste 200^^San Diego^CA^921284108|8586683700||MD^Galloway^Jenny^R^^^MD

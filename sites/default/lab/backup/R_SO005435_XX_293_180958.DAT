@@ -1,0 +1,42 @@
+MSH|^~\&|1100|SO|WMTECH|SO005435|201410201809||ORU|0053|P|2.3
+PID|1|11244|29025359560|11244|GRETHER^BENJAMIN||20120710|M|||24 REGGAE COURT^^LAGUNA NIGUEL^CA^92677-|||||||04438310^^^XI^^F
+ORC|RE|70424^LAB|29025359560^LAB||||||201410180000|||1962616656^Kay^J^^^^^N
+OBR|1|70424^LAB|29025359560^LAB|003038^Urinalysis, Routine^L|||201410161524|||||||201410180810||||70424||70424||201410201809|||F
+OBX|1|NM|013060^Specific Gravity^L^2965-2^Specific gravity^LN||1.025||1.005-1.030|||N|F|19960813||201410191009|01
+OBX|2|NM|013078^pH^L^5803-2^pH^LN||6.5||5.0-7.5|||N|F|19960813||201410191009|01
+OBX|3|ST|013045^Urine-Color^L^5778-6^Color^LN||Yellow||Yellow|||N|F|||201410191009|01
+OBX|4|ST|013052^Appearance^L^5767-9^Appearance^LN||Turbid||Clear|A||N|F|||201410191009|01
+OBX|5|ST|013185^WBC Esterase^L^5799-2^Leukocyte esterase^LN||Negative||Negative|||N|F|||201410191009|01
+OBX|6|ST|013094^Protein^L^20454-5^Protein^LN||Negative||Negative/Trace|||N|F|19960813||201410191009|01
+OBX|7|ST|013086^Glucose^L^2349-9^Glucose^LN||Negative||Negative|||N|F|||201410191009|01
+OBX|8|ST|013110^Ketones^L^2514-8^Ketones^LN||Negative||Negative|||N|F|||201410191009|01
+OBX|9|ST|013102^Occult Blood^L^5794-3^Hemoglobin^LN||Negative||Negative|||N|F|||201410191009|01
+OBX|10|ST|013104^Bilirubin^L^5770-3^Bilirubin^LN||Negative||Negative|||N|F|||201410191009|01
+OBX|11|NM|013105^Urobilinogen,Semi-Qn^L^20405-7^Urobilinogen^LN||0.2|mg/dL|0.0-1.9|||N|F|20000731||201410191009|01
+OBX|12|ST|013106^Nitrite, Urine^L^5802-4^Nitrite^LN||Negative||Negative|||N|F|||201410191009|01
+OBX|13|TX|012237^Microscopic Examination^L^12235-8^Microscopic observation^LN|||||||N|F|||201410191009|01
+NTE|1|L|Microscopic follows if indicated.
+ORC|RE|70424^LAB|29025359560^LAB||||||201410180000|||1962616656^Kay^J^^^^^N
+OBR|2|70424^LAB|29025359560^LAB|008847^Urine Culture, Routine^L|||201410161524|||||||201410180810||||70424||70424||201410201809||01|F
+OBX|1|ST|008847^Urine Culture, Routine^L^630-4^Bacteria identified^LN||Final report|||A||N|F|20031013||201410201727|01
+ORC|RE|70424^LAB|29025359560^LAB||||||201410180000|||1962616656^Kay^J^^^^^N
+OBR|3|70424^LAB|29025359560^LAB|997870^Result^L|||201410161524||||G|||201410180810||||70424||70424||201410201809|||F|008847|||008847
+OBX|1|ST|997131^Result 1^L^630-4^Bacteria identified^LN||Enterococcus faecalis|||A||N|F|||201410201727|01
+NTE|1|L|Greater than 100,000 colony forming units per mL
+NTE|2|L|This specimen was submitted in a sterile cup which requires
+NTE|3|L|refrigerated temperatures to maintain the organisms without
+NTE|4|L|excessive growth in transport. LabCorp recommends the use of the
+NTE|5|L|urine culture transport device (available from your professional
+NTE|6|L|services representative) for clean catch urine specimens.
+OBX|2|TX|997135^Antimicrobial Susceptibility^L^23658-8^Antibiotic XXX^LN|||||||N|F|||201410201727|01
+NTE|1|L|   ***** S = Susceptible; I = Intermediate; R = Resistant *****
+NTE|2|L|                   P = Positive; N = Negative
+NTE|3|L|            MICS are expressed in micrograms per mL
+NTE|4|L|   Antibiotic                 RSLT#1    RSLT#2    RSLT#3    RSLT#4
+NTE|5|L|Ciprofloxacin                  S
+NTE|6|L|Levofloxacin                   S
+NTE|7|L|Nitrofurantoin                 S
+NTE|8|L|Penicillin                     S
+NTE|9|L|Tetracycline                   S
+NTE|10|L|Vancomycin                     S
+ZPS|1|01|LabCorp San Diego|13112 Evening Creek Dr So  Ste 200^^San Diego^CA^921284108|8586683700||MD^Galloway^Jenny^R^^^MD

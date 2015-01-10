@@ -1,0 +1,12 @@
+MSH|^~\&|1100|SO|WMTECH|SO005435|201410222007||ORU|0054|P|2.3
+PID|1|5486MJ00|29425329180|7115|NAVA^LUCIO^D||19991002|M|||31562 CALLE LA PURISIMA^^SAN JUAN CAPISTR^CA^92675-||(949)248-8594|||||04438310^^^XI^^F
+ORC|RE|70913^LAB|29425329180^LAB||||||201410220000|||1982766085^Perdomo^Y^^^^^N
+OBR|1|70913^LAB|29425329180^LAB|183194^Chlamydia/GC Amplification^L|||201410211559||||||CLEAN CATCH                |201410220010||||70913||70913||201410222007|||F
+OBX|1|ST|188078^Chlamydia trachomatis, NAA^L^43304-5^Chlamydia trachomatis rRNA^LN||Negative||Negative|||N|F|||201410221919|01
+OBX|2|ST|188086^Neisseria gonorrhoeae, NAA^L^43305-2^Neisseria gonorrhoeae rRNA^LN||Negative||Negative|||N|F|||201410221919|01
+OBX|3|TX|188601^Please note:^L|||||||N|F|||201410220310|01
+NTE|1|L|Acceptable specimens for this test are male urethral swab,
+NTE|2|L|endocervical swab and liquid based pap specimens, vaginal swabs in
+NTE|3|L|APTIMA transports and first void urine. See online Directory of
+NTE|4|L|Services for test number for rectal and pharyngeal specimens.
+ZPS|1|01|LabCorp San Diego|13112 Evening Creek Dr So  Ste 200^^San Diego^CA^921284108|8586683700||MD^Galloway^Jenny^R^^^MD

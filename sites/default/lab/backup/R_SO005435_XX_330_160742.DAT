@@ -1,0 +1,58 @@
+MSH|^~\&|1100|SO|WMTECH|SO005435|201411261607||ORU|0104|P|2.3
+PID|1||33061500280||OCAMPO^DELANIE||20140514|F|||16 VIA AMISTOSA APT G^^RANCHO SANTA MAR^CA^92688-||(949)812-1214|||||04438310^^^XI^^F^N
+ORC|RE|60059230219^LAB|33061500280^LAB||||||201411260000|||1982766085^PERDOMO^Y^^^^^N
+OBR|1|60059230219^LAB|33061500280^LAB|005009^CBC With Differential/Platelet^L|||201411260816||||||SPLIT REQ                  |201411261113||||60059230219||60059230219||201411261607|||F
+OBX|1|CE|005025^WBC^L^6690-2^Leukocytes^LN||TNP|||||N|X|||201411261519|01
+NTE|1|L|Test not performed
+OBX|2|CE|005033^RBC^L^789-8^Erythrocytes^LN||TNP|||||N|X|||201411261521|01
+NTE|1|L|Test not performed
+OBX|3|CE|005041^Hemoglobin^L^718-7^Hemoglobin^LN||TNP|||||N|X|||201411261521|01
+NTE|1|L|Test not performed
+OBX|4|CE|005058^Hematocrit^L^4544-3^Hematocrit^LN||TNP|||||N|X|||201411261521|01
+NTE|1|L|Test not performed
+OBX|5|CE|015172^Platelets^L^777-3^Platelets^LN||TNP|||||N|X|||201411261521|01
+NTE|1|L|Test not performed
+OBX|6|CE|015107^Neutrophils^L^770-8^Neutrophils/100 leukocytes^LN||TNP|||||N|X|||201411261521|01
+NTE|1|L|Test not performed
+OBX|7|CE|015123^Lymphs^L^736-9^Lymphocytes/100 leukocytes^LN||TNP|||||N|X|||201411261521|01
+NTE|1|L|Test not performed
+OBX|8|CE|015131^Monocytes^L^5905-5^Monocytes/100 leukocytes^LN||TNP|||||N|X|||201411261521|01
+NTE|1|L|Test not performed
+OBX|9|CE|015149^Eos^L^713-8^Eosinophils/100 leukocytes^LN||TNP|||||N|X|||201411261521|01
+NTE|1|L|Test not performed
+OBX|10|CE|015917^Lymphs (Absolute)^L^731-0^Lymphocytes^LN||TNP|||||N|X|||201411261521|01
+NTE|1|L|Test not performed
+OBX|11|CE|015933^Eos (Absolute)^L^711-2^Eosinophils^LN||TNP|||||N|X|||201411261521|01
+NTE|1|L|Test not performed
+OBX|12|CE|015941^Baso (Absolute)^L^704-7^Basophils^LN||TNP|||||N|X|||201411261521|01
+NTE|1|L|Test not performed
+OBX|13|CE|015180^Hematology Comments:^L^18314-5^Morphology^LN||QNS|||||N|F|||201411261517|01
+NTE|1|L|Quantity was not sufficient for analysis.
+ORC|RE|60059230219^LAB|33061500280^LAB||||||201411260000|||1982766085^PERDOMO^Y^^^^^N
+OBR|2|60059230219^LAB|33061500280^LAB|003038^Urinalysis, Routine^L|||201411260816|||||||201411261113||||60059230219||60059230219||201411261607|||F
+OBX|1|NM|013060^Specific Gravity^L^2965-2^Specific gravity^LN||1.010||1.005-1.030|||N|F|19960813||201411261516|01
+OBX|2|NM|013078^pH^L^5803-2^pH^LN||6.5||5.0-7.5|||N|F|19960813||201411261516|01
+OBX|3|ST|013045^Urine-Color^L^5778-6^Color^LN||Yellow||Yellow|||N|F|||201411261516|01
+OBX|4|ST|013052^Appearance^L^5767-9^Appearance^LN||Cloudy||Clear|A||N|F|||201411261516|01
+OBX|5|ST|013185^WBC Esterase^L^5799-2^Leukocyte esterase^LN||3+||Negative|A||N|F|||201411261516|01
+OBX|6|ST|013094^Protein^L^20454-5^Protein^LN||1+||Negative/Trace|A||N|F|19960813||201411261516|01
+OBX|7|ST|013086^Glucose^L^2349-9^Glucose^LN||Negative||Negative|||N|F|||201411261516|01
+OBX|8|ST|013110^Ketones^L^2514-8^Ketones^LN||Negative||Negative|||N|F|||201411261516|01
+OBX|9|ST|013102^Occult Blood^L^5794-3^Hemoglobin^LN||2+||Negative|A||N|F|||201411261516|01
+OBX|10|ST|013104^Bilirubin^L^5770-3^Bilirubin^LN||Negative||Negative|||N|F|||201411261516|01
+OBX|11|NM|013105^Urobilinogen,Semi-Qn^L^20405-7^Urobilinogen^LN||0.2|mg/dL|0.0-1.9|||N|F|20000731||201411261516|01
+OBX|12|ST|013106^Nitrite, Urine^L^5802-4^Nitrite^LN||Positive||Negative|A||N|F|||201411261516|01
+OBX|13|ST|012237^Microscopic Examination^L^12235-8^Microscopic observation^LN||See below:|||||N|F|||201411261516|01
+ORC|RE|60059230219^LAB|33061500280^LAB||||||201411260000|||1982766085^PERDOMO^Y^^^^^N
+OBR|3|60059230219^LAB|33061500280^LAB|333328^Microscopic Examination^L|||201411260816||||G|||201411261113||||60059230219||60059230219||201411261607|||F|012237|||003038
+OBX|1|ST|013128^WBC^L^5821-4^Leukocytes^LN||>30|/hpf|0 -  5|A||N|F|19960313||201411261516|01
+OBX|2|ST|013136^RBC^L^13945-1^Erythrocytes^LN||3-10|/hpf|0 -  2|A||N|F|19960313||201411261516|01
+OBX|3|ST|013148^Epithelial Cells (non renal)^L^5787-7^Epithelial cells^LN||0-10|/hpf|0 - 10|||N|F|||201411261516|01
+OBX|4|ST|013149^Epithelial Cells (renal)^L^26052-1^Epithelial cells.renal^LN||0-10|/hpf|None seen|A||N|F|||201411261517|01
+OBX|5|ST|013145^Casts^L^24124-0^Casts^LN||None seen|/lpf|None seen|||N|F|||201411261517|01
+OBX|6|ST|013146^Crystals^L^5783-6^Crystals.unidentified^LN||None seen||N/A|||N|F|||201411261517|01
+OBX|7|ST|333351^Mucus Threads^L^8247-9^Mucus^LN||None seen||Not Estab.|||N|F|20081117||201411261517|01
+OBX|8|ST|333344^Bacteria^L^5769-5^Bacteria^LN||Many||None seen/Few|A||N|F|19960813||201411261517|01
+OBX|9|ST|333419^Yeast^L^5822-2^Yeast^LN||None seen||None seen|||N|F|20010730||201411261517|01
+OBX|10|ST|013151^Trichomonas^L^5813-1^Trichomonas vaginalis^LN||None seen||None seen|||N|F|||201411261517|01
+ZPS|1|01|LabCorp Costa Mesa|1640 Newport Blvd Ste 330^^Costa Mesa^CA^926273786|9495744020||MD^Yetur^Praveena^^^^MD

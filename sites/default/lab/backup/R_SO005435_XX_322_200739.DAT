@@ -1,0 +1,13 @@
+MSH|^~\&|1100|SO|WMTECH|SO005435|201411182007||ORU|0088|P|2.3
+PID|1||32261500520||MARTINEZ^BABY GIRL||20141112|F||||||||||04438310^^^00^^F
+ORC|RE|60058028366^LAB|32261500520^LAB||||||201411180000|||1962616656^KAY^J^^^^^N
+OBR|1|60058028366^LAB|32261500520^LAB|205500^Bilirubin Fraction, Neonatal^L|||201411181300|||||||201411181513||||60058028366||60058028366||201411182007|||F
+OBX|1|NM|015602^Bilirubin, Total, Neonatal^L^1975-2^Bilirubin^LN||13.1|mg/dL||||N|F|20100426||201411181919|01
+NTE|1|L|                             Newborns, term and near term:
+NTE|2|L|                               24 hours old:               0.0 -  8.0
+NTE|3|L|                               48 hours old:               0.0 - 13.2
+NTE|4|L|                               72 hours old:               0.0 - 15.6
+NTE|5|L|                               96 hours to 1 month old:    0.0 - 16.6
+OBX|2|NM|115600^Bilirubin, Direct, Neonatal^L^1968-7^Bilirubin.glucuronidated+Bilirubin.albumin bound^LN||0.42|mg/dL|0.00-0.60|||N|F|20080922||201411181919|01
+OBX|3|NM|115618^Bili, Indirect, Neo^L^1971-1^Bilirubin.non-glucuronidated^LN||12.7|mg/dL||||N|F|||201411181919|01
+ZPS|1|01|LabCorp Costa Mesa|1640 Newport Blvd Ste 330^^Costa Mesa^CA^926273786|9495744020||MD^Yetur^Praveena^^^^MD

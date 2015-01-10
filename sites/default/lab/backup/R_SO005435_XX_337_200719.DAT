@@ -1,0 +1,19 @@
+MSH|^~\&|1100|SO|WMTECH|SO005435|201412032007||ORU|0118|P|2.3
+PID|1||33622957050||CANTERA^ALEXANDER||19950618|M||||||||||04438310^^^03^^F
+ORC|RE|AA504438310^LAB|33622957050^LAB||||||201412030000|||1111111111^^^^^^^N
+OBR|1|AA504438310^LAB|33622957050^LAB|183194^Chlamydia/GC Amplification^L|||201412020000|||||||201412030202||||AA504438310||AA504438310||201412032007|||F
+OBX|1|ST|188078^Chlamydia trachomatis, NAA^L^43304-5^Chlamydia trachomatis rRNA^LN||Negative||Negative|||N|F|||201412031921|01
+OBX|2|ST|188086^Neisseria gonorrhoeae, NAA^L^43305-2^Neisseria gonorrhoeae rRNA^LN||Negative||Negative|||N|F|||201412031921|01
+OBX|3|TX|188601^Please note:^L|||||||N|F|||201412030502|01
+NTE|1|L|Acceptable specimens for this test are male urethral swab,
+NTE|2|L|endocervical swab and liquid based pap specimens, vaginal swabs in
+NTE|3|L|APTIMA transports and first void urine. See online Directory of
+NTE|4|L|Services for test number for rectal and pharyngeal specimens.
+ORC|RE|AA504438310^LAB|33622957050^LAB||||||201412030000|||1111111111^^^^^^^N
+OBR|2|AA504438310^LAB|33622957050^LAB|199999^Please note^L|||201412020000|||||||201412030202||||AA504438310||AA504438310||201412032007||01|F
+OBX|1|TX|199999^Please note^L|||||||N|F|||201412030502|01
+NTE|1|L|The date and/or time of collection was not indicated on the
+NTE|2|L|requisition as required by state and federal law.  The date of
+NTE|3|L|receipt of the specimen was used as the collection date if not
+NTE|4|L|supplied.
+ZPS|1|01|LabCorp San Diego|13112 Evening Creek Dr So  Ste 200^^San Diego^CA^921284108|8586683700||MD^Galloway^Jenny^R^^^MD

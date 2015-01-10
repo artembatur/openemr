@@ -1,0 +1,70 @@
+\interface\forms\labcorp_order\*					new
+\interface\forms\labcorp_order\common.php			new
+\interface\forms\labcorp_order\info.txt			new
+\interface\forms\labcorp_order\new.php				new
+\interface\forms\labcorp_order\process.php			new
+\interface\forms\labcorp_order\report.php			new
+\interface\forms\labcorp_order\save.php			new
+\interface\forms\labcorp_order\style_wmt.css		new
+\interface\forms\labcorp_order\table.sql			new
+\interface\forms\labcorp_order\update.php			new
+\interface\forms\labcorp_order\view.php			new
+	
+\interface\forms\labcorp_result\*				new
+\interface\forms\labcorp_result\common.php			new
+\interface\forms\labcorp_result\info.txt			new
+\interface\forms\labcorp_result\labcorp_batch.php		new
+\interface\forms\labcorp_result\link_process.php		new
+\interface\forms\labcorp_result\link_result.php		new
+\interface\forms\labcorp_result\link_search.php		new
+\interface\forms\labcorp_result\link_select.php		new
+\interface\forms\labcorp_result\new.php			new
+\interface\forms\labcorp_result\print.php			new
+\interface\forms\labcorp_result\report.php			new
+\interface\forms\labcorp_result\save.php			new
+\interface\forms\labcorp_result\table.sql			new
+\interface\forms\labcorp_result\update.php			new
+\interface\forms\labcorp_result\view.php			new
+	
+\interface\reports\myreports\*					new
+\interface\reports\myreports\lab_forms.php			new
+\interface\reports\myreports\lab_orders.php			new
+\interface\reports\myreports\lab_results.php		new
+\interface\reports\myreports\labcorp_batch.php		new
+\interface\reports\myreports\labcorp_orphans.php		new
+	
+\library\labcorp\*							new
+\library\labcorp\LabCorpAjax.php					new
+\library\labcorp\LabCorpModelHL7v2.php				new
+\library\labcorp\LabCorpObservation.php			new
+\library\labcorp\LabCorpOrderClient.php			new
+\library\labcorp\LabCorpParserHL7v2.php			new
+\library\labcorp\LabCorpRequest.php				new
+\library\labcorp\LabCorpResultClient.php			new
+\library\labcorp\LabCorpWebClient.php				new
+\library\labcorp\LabCorpWebService.php				new
+\library\labcorp\SoapAuthClient.php				new
+\library\labcorp\emrService.wsdl.xml				new
+\library\labcorp\production.wsdl.xml				new
+\library\labcorp\testing.wsdl.xml				new
+\library\labcorp\cdc\labcorp_cdc.sql.gz			new
+	
+\library\labcorp\phpseclib\*					import
+\library\tcpdf\*								import
+	
+\sites\default\lab							define
+\sites\default\lab\backup						define
+	
+\library\wmt\fill-090.png						required
+\library\wmt\fill-270.png						required
+\library\wmt\wmt.class.php						required
+\library\wmt\wmt.forms.php						required
+\library\wmt\wmt.include.php					required
+\library\wmt\wmt.report.php						required
+	
+\library\globals.inc.php						merge
+\library\classes\InsuranceCompany.class.php			merge
+\interface\main\finder\dynamic_finder_ajax.php		merge
+\interface\main\finder\patient_select.php			merge
+\interface\main\left_nav.php					merge
+\interface\main\messages\messages.php				merge

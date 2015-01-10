@@ -34,7 +34,7 @@ require_once("{$GLOBALS['srcdir']}/classes/Document.class.php");
 // must have phpseclib in path
 $current_path = get_include_path();
 if (strpos($current_path, 'phpseclib') === false)
-	set_include_path($current_path . PATH_SEPARATOR . "{$GLOBALS['srcdir']}/labcorp/phpseclib");
+	set_include_path($current_path . PATH_SEPARATOR . "{$GLOBALS['srcdir']}/phpseclib");
 
 // include necessary libraries
 include('Net/SSH2.php');

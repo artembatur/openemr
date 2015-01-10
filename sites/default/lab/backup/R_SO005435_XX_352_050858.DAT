@@ -1,0 +1,36 @@
+MSH|^~\&|1100|SO|WMTECH|SO005435|201412180508||ORU|0120|P|2.3
+PID|1||35154488170||YOKOYAMA^LIAM^D||20120905|M|||10401 GARDEN GROVE BLVD #4^^Garden Grove^CA^92843-||(714)306-1995|||||04438310^^^XI^^P^N
+ORC|RE|60059052764^LAB|35154488170^LAB||||||201412170000|||1962616656^KAY^J^^^^^N
+OBR|1|60059052764^LAB|35154488170^LAB|977709^CBC/Diff Ambiguous Default^L|||201412171204||||||RC:1,HS:2,TP:V,PP:I,CT:    |201412171532||||60059052764||60059052764||201412180508|||F
+OBX|1|NM|005025^WBC^L^6690-2^Leukocytes^LN||8.5|x10E3/uL|4.3-12.4|||N|F|20141201||201412180433|01
+OBX|2|NM|005033^RBC^L^789-8^Erythrocytes^LN||4.35|x10E6/uL|3.96-5.30|||N|F|20141201||201412180433|01
+OBX|3|NM|005041^Hemoglobin^L^718-7^Hemoglobin^LN||11.7|g/dL|10.9-14.8|||N|F|20141202||201412180433|01
+OBX|4|NM|005058^Hematocrit^L^4544-3^Hematocrit^LN||35.7|%|32.4-43.3|||N|F|20141203||201412180433|01
+OBX|5|NM|015065^MCV^L^787-2^Erythrocyte mean corpuscular volume^LN||82|fL|75-89|||N|F|20141205||201412180433|01
+OBX|6|NM|015073^MCH^L^785-6^Erythrocyte mean corpuscular hemoglobin^LN||26.9|pg|24.6-30.7|||N|F|20141205||201412180433|01
+OBX|7|NM|015081^MCHC^L^786-4^Erythrocyte mean corpuscular hemoglobin concentrat^LN||32.8|g/dL|31.7-36.0|||N|F|20141211||201412180433|01
+OBX|8|NM|105007^RDW^L^788-0^Erythrocyte distribution width^LN||14.6|%|12.3-15.8|||N|F|20141211||201412180433|01
+OBX|9|NM|015172^Platelets^L^777-3^Platelets^LN||318|x10E3/uL|190-459|||N|F|20140813||201412180433|01
+OBX|10|NM|015107^Neutrophils^L^770-8^Neutrophils/100 leukocytes^LN||41|%||||N|F|20130909||201412180433|01
+OBX|11|NM|015123^Lymphs^L^736-9^Lymphocytes/100 leukocytes^LN||53|%||||N|F|20130909||201412180433|01
+OBX|12|NM|015131^Monocytes^L^5905-5^Monocytes/100 leukocytes^LN||5|%||||N|F|20130909||201412180433|01
+OBX|13|NM|015149^Eos^L^713-8^Eosinophils/100 leukocytes^LN||1|%||||N|F|20130909||201412180433|01
+OBX|14|NM|015156^Basos^L^706-2^Basophils/100 leukocytes^LN||0|%||||N|F|20010402||201412180433|01
+OBX|15|NM|015909^Neutrophils (Absolute)^L^751-8^Neutrophils^LN||3.5|x10E3/uL|0.9-5.4|||N|F|20141211||201412180433|01
+OBX|16|NM|015917^Lymphs (Absolute)^L^731-0^Lymphocytes^LN||4.5|x10E3/uL|1.6-5.9|||N|F|20141211||201412180433|01
+OBX|17|NM|015925^Monocytes(Absolute)^L^742-7^Monocytes^LN||0.5|x10E3/uL|0.2-1.0|||N|F|20141211||201412180433|01
+OBX|18|NM|015933^Eos (Absolute)^L^711-2^Eosinophils^LN||0.1|x10E3/uL|0.0-0.3|||N|F|20141211||201412180433|01
+OBX|19|NM|015941^Baso (Absolute)^L^704-7^Basophils^LN||0.0|x10E3/uL|0.0-0.3|||N|F|20141211||201412180433|01
+OBX|20|NM|015108^Immature Granulocytes^L^38518-7^Granulocytes.immature/100 leukocytes^LN||0|%||||N|F|20110523||201412180433|01
+OBX|21|NM|015911^Immature Grans (Abs)^L^51584-1^Granulocytes.immature^LN||0.0|x10E3/uL|0.0-0.1|||N|F|20141211||201412180433|01
+NTE|1|L|A hand-written panel/profile was received from your office. In
+NTE|2|L|accordance with the LabCorp Ambiguous Test Code Policy dated July
+NTE|3|L|2003, we have assigned CBC with Differential/Platelet, Test Code
+NTE|4|L|#005009 to this request. If this is not the testing you wished to
+NTE|5|L|receive on this specimen, please contact the LabCorp Client Inquiry/
+NTE|6|L|Technical Services Department to clarify the test order. We
+NTE|7|L|appreciate your business.
+ORC|RE|60059052764^LAB|35154488170^LAB||||||201412170000|||1962616656^KAY^J^^^^^N
+OBR|2|60059052764^LAB|35154488170^LAB|717009^Lead, Blood (Pediatric)^L|||201412171204|||||||201412171532||||60059052764||60059052764||201412180508|||P
+OBX|1|TX|717034^Lead, Blood (Pediatric)^L^5671-3^Lead^LN||WILL FOLLOW|||||N|P|20140224||201412180000|01
+ZPS|1|01|LabCorp San Diego|13112 Evening Creek Dr So  Ste 200^^San Diego^CA^921284108|8586683700||MD^Galloway^Jenny^R^^^MD

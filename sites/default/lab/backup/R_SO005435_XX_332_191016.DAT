@@ -1,0 +1,31 @@
+MSH|^~\&|1100|SO|WMTECH|SO005435|201411281910||ORU|0107|P|2.3
+PID|1||33054430050||OCAMPO^DELANIE||20140514|F|||16 VIA AMISTOSA APT G^^Rancho Santa Mar^CA^92688-||(949)812-1214|||||04438310^^^XI^^F^N
+ORC|RE|60059230220^LAB|33054430050^LAB||||||201411260000|||1982766085^PERDOMO^Y^^^^^N
+OBR|1|60059230220^LAB|33054430050^LAB|008847^Urine Culture, Routine^L|||201411260853||||||SPLIT REQ                  SRC:UR                     |201411261422|UR|||60059230220||60059230220||201411281910||01|F
+OBX|1|ST|008847^Urine Culture, Routine^L^630-4^Bacteria identified^LN||Final report|||A||N|F|20031013||201411281855|01
+ORC|RE|60059230220^LAB|33054430050^LAB||||||201411260000|||1982766085^PERDOMO^Y^^^^^N
+OBR|2|60059230220^LAB|33054430050^LAB|997870^Result^L|||201411260853||||G|||201411261422||||60059230220||60059230220||201411281910|||F|008847|||008847
+OBX|1|ST|997131^Result 1^L^630-4^Bacteria identified^LN||Escherichia coli|||A||N|F|||201411281855|01
+NTE|1|L|Greater than 100,000 colony forming units per mL
+OBX|2|TX|997135^Antimicrobial Susceptibility^L^23658-8^Antibiotic XXX^LN|||||||N|F|||201411281855|01
+NTE|1|L|   ***** S = Susceptible; I = Intermediate; R = Resistant *****
+NTE|2|L|                   P = Positive; N = Negative
+NTE|3|L|            MICS are expressed in micrograms per mL
+NTE|4|L|   Antibiotic                 RSLT#1    RSLT#2    RSLT#3    RSLT#4
+NTE|5|L|Amoxicillin/Clavulanic Acid    I
+NTE|6|L|Ampicillin                     R
+NTE|7|L|Cefepime                       S
+NTE|8|L|Ceftriaxone                    S
+NTE|9|L|Cefuroxime                     S
+NTE|10|L|Cephalothin                    R
+NTE|11|L|Ciprofloxacin                  S
+NTE|12|L|Ertapenem                      S
+NTE|13|L|Gentamicin                     S
+NTE|14|L|Imipenem                       S
+NTE|15|L|Levofloxacin                   S
+NTE|16|L|Nitrofurantoin                 S
+NTE|17|L|Piperacillin                   R
+NTE|18|L|Tetracycline                   S
+NTE|19|L|Tobramycin                     S
+NTE|20|L|Trimethoprim/Sulfa             R
+ZPS|1|01|LabCorp San Diego|13112 Evening Creek Dr So  Ste 200^^San Diego^CA^921284108|8586683700||MD^Galloway^Jenny^R^^^MD

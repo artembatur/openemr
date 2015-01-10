@@ -30,7 +30,6 @@
 //   Dutch                          // xl('Dutch')
 //   English (Indian)               // xl('English (Indian)')
 //   English (Standard)             // xl('English (Standard)')
-//   Estonian                       // xl('Estonian')
 //   French                         // xl('French (Standard)')
 //   French                         // xl('French (Canadian)')
 //   German                         // xl('German')
@@ -39,9 +38,7 @@
 //   Hindi                          // xl('Hindi')
 //   Hungarian                      // xl('Hungarian')
 //   Italian                        // xl('Italian')
-//   Lithuanian                     // xl('Lithuanian')
 //   Norwegian                      // xl('Norwegian')
-//   Persian                        // xl('Persian')
 //   Polish                         // xl('Polish')
 //   Portuguese (Brazilian)         // xl('Portuguese (Brazilian)')
 //   Portuguese (European)          // xl('Portuguese (European)')
@@ -91,7 +88,6 @@ $USER_SPECIFIC_GLOBALS = array('default_top_pane',
                                'gbl_pt_list_page_size',
                                'gbl_pt_list_new_window',
                                'units_of_measurement',
-                               'us_weight_format',
                                'date_display_format',
                                'time_display_format',
                                'event_color',
@@ -217,14 +213,7 @@ $GLOBALS_METADATA = array(
       '1',                              // default = true
       xl('Enable Fees In Left Menu')
     ),
-    // EDI history  2012-09-13 
-    'enable_edihistory_in_left_menu' => array(
-      xl('Enable EDI History In Left Menu'),
-      'bool',                           // data type
-      '1',                              // default = true
-      xl('EDI History (under Fees) for storing and interpreting EDI claim response files')
-    ),
-    //
+
     'online_support_link' => array(
       xl('Online Support Link'),
       'text',                           // data type
@@ -264,16 +253,6 @@ $GLOBALS_METADATA = array(
       'bool',                           // data type
       '0',                              // default = false
       xl('Default state of New Window checkbox in the patient list.')
-    ),
-
-    'gbl_vitals_options' => array(
-      xl('Vitals Form Options'),
-      array(
-        '0' => xl('Standard'),
-        '1' => xl('Omit circumferences'),
-      ),
-      '0',                              // default
-      xl('Special treatment for the Vitals form')
     ),
 
   ),
@@ -363,17 +342,7 @@ $GLOBALS_METADATA = array(
       '1',                              // default = Both/US
       xl('Applies to the Vitals form and Growth Chart')
     ),
-    
-    'us_weight_format' => array(
-        xl('Display Format for US Weights'),
-        array(
-            '1'=>xl('Show pounds as decimal value'),
-            '2'=>xl('Show pounds and ounces')
-        ),
-        '1',
-        xl('Applies to Vitals form')
-    )
-      ,
+
     'disable_deprecated_metrics_form' => array(
       xl('Disable Old Metric Vitals Form'),
       'bool',                           // data type
@@ -448,20 +417,7 @@ $GLOBALS_METADATA = array(
       '$',                              // default
       xl('Code or symbol to indicate currency')
     ),
-    'age_display_format'=>array(xl('Age Display Format'),
-        array(
-            '0'=>xl('Years or months'),
-            '1'=>xl('Years, months and days')
-            ),
-            '0',
-            xl('Format for age display')
-    ),
-    'age_display_limit' => array(
-      xl('Age in Years for Display Format Change'),
-      'num',
-      '3',
-      xl('If YMD is selected for age display, switch to just Years when patients older than this value in years')
-    ),      
+
   ),
 
   // Features Tab
@@ -631,13 +587,6 @@ $GLOBALS_METADATA = array(
       '0',                              // default = false
       xl('This will force the Billing Widget in the Patient Summary screen to always be open.')
     ),
-      
-    'num_past_appointments_to_show' => array(
-      xl('Past Appointment Display Widget'),
-      'num',                           // data type
-      '0',                             // default = false
-      xl('A positive number will show that many past appointments on a Widget in the Patient Summary screen.')
-    ),      
 
     'activate_ccr_ccd_report' => array(
       xl('Activate CCR/CCD Reporting'),
@@ -658,39 +607,6 @@ $GLOBALS_METADATA = array(
       'bool',                           // data type
       '0',                              // default = true
       xl('This will use the custom immunizations list rather than the standard CVX immunization list.')
-    ),
-    
-      'cms_1500' => array(
-      xl('CMS 1500 Paper Form Format'),
-      array(
-        '0' => xl('08/05'),
-        '1' => xl('02/12'),
-      ),
-      '0',                              // default
-      xl('This specifies which revision of the form the billing module should generate')
-    ),
-     
-      'cms_1500_box_31_format' => array(
-      xl('CMS 1500: Box 31 Format'),
-      array(
-        '0' => xl('Signature on File'),
-        '1' => xl('Firstname Lastname'),
-        '2' => xl('None'),
-      ),
-      '0',                              // default
-      xl('This specifies whether to include date in Box 31.')
-    ),
-
-      
-     'cms_1500_box_31_date' => array(
-      xl('CMS 1500: Date in Box 31 (Signature)'),
-      array(
-        '0' => xl('None'),
-        '1' => xl('Date of Service'),
-        '2' => xl('Today'),
-      ),
-      '0',                              // default
-      xl('This specifies whether to include date in Box 31.')
     ),
 
   ),
@@ -845,13 +761,7 @@ $GLOBALS_METADATA = array(
       '0',                              // default
       xl('Means none of last three passwords are allowed when changing a password.')
     ),
-    'password_compatibility' => array(
-      xl('Permit unsalted passwords'),
-      'bool',                           // data type
-      '1',                              // default
-      xl('After migration from the old password mechanisms where passwords are stored in the users table without salt is complete, this flag should be set to false so that only authentication by the new method is possible')
-    ),
-      
+
     'password_expiration_days' => array(
       xl('Default Password Expiration Days'),
       'num',                            // data type
@@ -1431,13 +1341,6 @@ $GLOBALS_METADATA = array(
       xl('Enable Offsite Patient Portal.')
     ),
 
-    'portal_offsite_providerid' => array(
-      xl('Offsite Patient Portal Provider ID'),
-      'text',                           // data type
-      '',
-      xl('Offsite Patient Portal Provider ID(Put Blank If not Registered).')
-    ),    
-
     'portal_offsite_username' => array(
       xl('Offsite Patient Portal Username'),
       'text',                           // data type
@@ -1455,13 +1358,13 @@ $GLOBALS_METADATA = array(
     'portal_offsite_address' => array(
       xl('Offsite Patient Portal Site Address'),
       'text',                           // data type
-      'https://ssh.mydocsportal.com/provider.php',
+      'https://mydocsportal.com/provider.php',
       xl('Offsite Https link for the Patient Portal.')
     ),
     'portal_offsite_address_patient_link' => array(
       xl('Offsite Patient Portal Site Address (Patient Link)'),
       'text',                           // data type
-      'https://ssh.mydocsportal.com',
+      'https://mydocsportal.com',
       xl('Offsite Https link for the Patient Portal.(Patient Link)')
     ),
 
@@ -1470,98 +1373,56 @@ $GLOBALS_METADATA = array(
   // Connectors Tab
   //
   'Connectors' => array(
-
-    'lab_exchange_enable' => array(
-      xl('Enable Lab Exchange'),
-      'bool',                           // data type
-      '0',
-      xl('Enable the Medical Information Integration, LLC Lab Exchange Service.')
-    ),
-
-    'lab_exchange_siteid' => array(
-      xl('Lab Exchange Site ID'),
-      'text',                           // data type
-      '3',
-      xl('Site ID for the Medical Information Integration, LLC Lab Exchange Service.')
-    ),
-
-    'lab_exchange_token' => array(
-      xl('Lab Exchange Token ID'),
-      'text',                           // data type
-      '12345',
-      xl('Token ID for the Medical Information Integration, LLC Lab Exchange Service.')
-    ),
-
-    'lab_exchange_endpoint' => array(
-      xl('Lab Exchange Site Address'),
-      'text',                           // data type
-      'https://len.mi-squared.com:29443/len/api',
-      xl('Contact Medical Information Integration, LLC at http://mi-squared.com for Lab Exchange Service.')
-    ),
     
     'erx_enable' => array(
-      xl('Enable NewCrop eRx Service'),
+      xl('Enable eDoctor eRx Service'),
       'bool',                           // data type
       '0',
-      xl('Enable NewCrop eRx Service')
+      xl('Enable ZMG, LLC eRx service')
     ),    
     
+    'erx_id' => array(
+      xl('eDoctor eRx ID'),
+      'text',                           // data type
+      'vendor',
+      xl('eDoctor eRx Identification')
+    ),
+    
     'erx_path_production' => array(
-      xl('NewCrop eRx Site Address'),
+      xl('eDoctor eRx Site Address'),
       'text',                           // data type
       'https://secure.newcropaccounts.com/InterfaceV7/RxEntry.aspx',
-      xl('Contact Medical Information Integration, LLC at http://mi-squared.com or ZH Healthcare at http://zhservices.com for subscribing the eRx service')
+      xl('Contact eDoctor, Inc. (contact@edoctorinc.com) for subscribing the eRx service')
     ),
     
     'erx_path_soap_production' => array(
-      xl('NewCrop eRx Web Service Address'),
+      xl('eDoctor eRx Web Service Address'),
       'text',                           // data type
       'https://secure.newcropaccounts.com/v7/WebServices/Update1.asmx?WSDL;https://secure.newcropaccounts.com/v7/WebServices/Patient.asmx?WSDL',
-      xl('Contact Medical Information Integration, LLC at http://mi-squared.com or ZH Healthcare at http://zhservices.com for subscribing the eRx service')
+      xl('Contact eDoctor,Inc. (contact@edoctorinc.com) for subscribing the eRx service')
     ),
     
-    'erx_soap_ttl_allergies' => array(
-      xl('NewCrop eRx SOAP Request Time-To-Live for Allergies'),
-      'num',
-      '21600',
-      xl('Time-To-Live for Allergies SOAP Request in seconds')
-    ),
-
-    'erx_soap_ttl_medications' => array(
-      xl('NewCrop eRx SOAP Request Time-To-Live for Medications'),
-      'num',
-      '21600',
-      xl('Time-To-Live for Medications SOAP Request in seconds')
-    ),
-
     'partner_name_production' => array(
       xl('NewCrop eRx Partner Name'),
       'text',                           // data type
       '',
-      xl('Contact Medical Information Integration, LLC at http://mi-squared.com or ZH Healthcare at http://zhservices.com for subscribing the eRx service')
+      xl('Contact ZMG, LLC (zmghealth@gmail.com) for subscribing the eRx service')
     ),
     
     'erx_name_production' => array(
       xl('NewCrop eRx Name'),
       'text',                           // data type
       '',
-      xl('Contact Medical Information Integration, LLC at http://mi-squared.com or ZH Healthcare at http://zhservices.com for subscribing the eRx service')
+      xl('Contact ZMG, LLC (zmghealth@gmail.com) for subscribing the eRx service')
     ),
     
     'erx_password_production' => array(
       xl('NewCrop eRx Password'),
       'pass',                           // data type
       '',
-      xl('Contact Medical Information Integration, LLC at http://mi-squared.com or ZH Healthcare at http://zhservices.com for subscribing the eRx service')
+      xl('Contact ZMG, LLC (zmghealth@gmail.com) for subscribing the eRx service')
     ),
     
-    'erx_account_id' => array(
-      xl('NewCrop eRx Account Id'),
-      'text',                           // data type
-      '1',
-      xl('Contact Medical Information Integration, LLC at http://mi-squared.com or ZH Healthcare at http://zhservices.com for subscribing the eRx service')
-    ),
-
     'erx_upload_active' => array(
       xl('Only upload active prescriptions'),
       'bool',                           // data type
@@ -1601,63 +1462,6 @@ $GLOBALS_METADATA = array(
         '',
         xl('Default Patient Country'),
     ),
-
-    'phimail_enable' => array(
-      xl('Enable phiMail Direct Messaging Service'),
-      'bool',                           // data type
-      '0',
-      xl('Enable phiMail Direct Messaging Service')
-    ),
-
-    'phimail_server_address' => array(
-      xl('phiMail Server Address'),
-      'text',                           // data type
-      'https://phimail.example.com:32541',
-      xl('Contact EMR Direct to subscribe to the phiMail Direct messaging service')
-    ),
-
-    'phimail_username' => array(
-      xl('phiMail Username'),
-      'text',                           // data type
-      '',
-      xl('Contact EMR Direct to subscribe to the phiMail Direct messaging service')
-    ),
-
-    'phimail_password' => array(
-      xl('phiMail Password'),
-      'pass',                           // data type
-      '',
-      xl('Contact EMR Direct to subscribe to the phiMail Direct messaging service')
-    ),
-
-    'phimail_notify' => array(
-      xl('phiMail notification user'),
-      'text',                           // data type
-      'admin',
-      xl('This user will receive notification of new incoming Direct messages')
-    ),
-
-    'phimail_interval' => array(
-      xl('phiMail Message Check Interval (minutes)'),
-      'num',                           // data type
-      '5',
-      xl('Interval between message checks (set to zero for manual checks only)')
-    ),
-
-    'phimail_ccd_enable' => array(
-      xl('phiMail Allow CCD Send'),
-      'bool',                           // data type
-      '0',
-      xl('phiMail Allow CCD Send')
-    ),
-
-    'phimail_ccr_enable' => array(
-      xl('phiMail Allow CCR Send'),
-      'bool',                           // data type
-      '0',
-      xl('phiMail Allow CCR Send')
-    )
-
   ),
   
   'Rx' => array(
@@ -1777,9 +1581,9 @@ $GLOBALS_METADATA = array(
       '30',
       xl('Rx Bottom Margin (px)')
     ),
-  ),    
+  ),  
 
-// LABLINK -- following code added for labs tab
+  // Lab Interface Tab
   'Labs' => array(
 		
 	'lab_quest_enable' => array(
@@ -1799,9 +1603,9 @@ $GLOBALS_METADATA = array(
 	'lab_quest_status' => array(
 		xl('Quest Lab Interface'),
 		array(
-			'T' => xl('Validation'),
+			'T' => xl('Training'),
 			'P' => xl('Production'),
-			'D' => xl('Training'),
+			'D' => xl('Development'),
 		),
 		'0',                              // default
 		xl('Interface Control for OpenEMR Quest Diagnostic Service.')
@@ -1810,14 +1614,14 @@ $GLOBALS_METADATA = array(
 	'lab_quest_hubname' => array(
 		xl('Quest Lab Hub Name'),
 		'text',                           // data type
-		'',
+		'SLHUB',
 		xl('Hub Name for OpenEMR Quest Diagnostic Service.')
 	),
 		
 	'lab_quest_facilityid' => array(
 		xl('Quest Lab Facility ID'),
 		'text',                           // data type
-		'',
+		'STL',
 		xl('Facility ID for OpenEMR Quest Diagnostic Service.')
 	),
 		
@@ -1860,21 +1664,28 @@ $GLOBALS_METADATA = array(
 	'lab_corp_status' => array(
 		xl('LabCorp Interface'),
 		array(
-			'T' => xl('Validation'),
+			'T' => xl('Training'),
 			'P' => xl('Production'),
-			'D' => xl('Training'),
+			'D' => xl('Development'),
 		),
 		'0',                              // default
 		xl('Interface Control for OpenEMR LabCorp Service.')
 	),
-/* MOVED TO LabCorp_Site_Identifier LIST		
+		
 	'lab_corp_clientid' => array(
-		xl('LabCorp Sending Facility ID'),
+		xl('LabCorp Client Account ID'),
 		'text',                           // data type
 		'',
-		xl('Sending Facility ID for OpenEMR LabCorp Service.')
+		xl('Client Account ID for OpenEMR LabCorp Service.')
 	),
-*/
+		
+	'lab_corp_client' => array(
+		xl('LabCorp Client Account Name'),
+		'text',                           // data type
+		'',
+		xl('Client Account Name for OpenEMR LabCorp Service.')
+	),
+		
   	'lab_corp_facilityid' => array(
 		xl('LabCorp Receiving Facility ID'),
 		'text',                           // data type
@@ -1902,9 +1713,34 @@ $GLOBALS_METADATA = array(
 		'',
 		xl('Password for OpenEMR LabCorp Service.')
 	),
+		
+  	'lab_exchange_enable' => array(
+		xl('Enable Lab Exchange'),
+		'bool',                           // data type
+		'0',
+		xl('Enable the OpenEMR Support LLC Lab Exchange Service.')
+	),
+		
+	'lab_exchange_siteid' => array(
+		xl('Lab Exchange Site ID'),
+		'text',                           // data type
+		'3',
+		xl('Site ID for the OpenEMR Support LLC Lab Exchange Service.')
+	),
+		
+	'lab_exchange_token' => array(
+		xl('Lab Exchange Token ID'),
+		'text',                           // data type
+		'12345',
+		xl('Token ID for the OpenEMR Support LLC Lab Exchange Service.')
+	),
+		
+	'lab_exchange_endpoint' => array(
+		xl('Lab Exchange Site Address'),
+		'text',                           // data type
+		'https://openemrsupport.com:29443/len/api',
+		xl('Https link for the OpenEMR Support LLC Lab Exchange Service.')
+	),
   ),
-// LABLINK -- end
-
-
 );
 ?>

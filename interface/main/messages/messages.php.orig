@@ -322,15 +322,7 @@ if ($noteid) {
 
 if ($noteid) {
     $body = preg_replace('/(:\d{2}\s\()'.$result['pid'].'(\sto\s)/','${1}'.$patientname.'${2}',$body);
-// LABLINK -- modified following lines to preserve message link functionality
-    //$body = nl2br(htmlspecialchars( $body, ENT_NOQUOTES));
-    if ($title == 'Lab Results' || $title == 'LabCorp' || $title == 'Quest') {
-        $body = nl2br($body);
-    }
-    else {
-        $body = nl2br(htmlspecialchars( $body, ENT_NOQUOTES));
-    }
-// LABLINK -- end modification
+    $body = nl2br(htmlspecialchars( $body, ENT_NOQUOTES));
     echo "<div class='text' style='background-color:white; color: gray; border:1px solid #999; padding: 5px; width: 640px;'>".$body."</div>";
 }
 

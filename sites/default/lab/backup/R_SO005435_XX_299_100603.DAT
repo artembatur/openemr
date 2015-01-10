@@ -1,0 +1,20 @@
+MSH|^~\&|1100|SO|WMTECH|SO005435|201410261005||ORU|0063|P|2.3
+PID|1|10839|29725328610|10839|LUCANO^SOPHIE^I||20131002|F|||24746 VILLA SAN RAFAEL^^ALISO VIEJO^CA^92656-|||||||04438310^^^XI^^P
+ORC|RE|71486^LAB|29725328610^LAB||||||201410250000|||1962616656^Kay^J^^^^^N
+OBR|1|71486^LAB|29725328610^LAB|008649^Aerobic Bacterial Culture^L|||201410241659||||||SRC:groin folds            |201410250110|groin folds|||71486||71486||201410261005||01|P
+OBX|1|ST|008649^Aerobic Bacterial Culture^L^634-6^Bacteria identified^LN||Preliminary report|||A||N|P||||01
+ORC|RE|71486^LAB|29725328610^LAB||||||201410250000|||1962616656^Kay^J^^^^^N
+OBR|2|71486^LAB|29725328610^LAB|997874^Result^L|||201410241659||||G|||201410250110||||71486||71486||201410261005|||P|008649|||008649
+OBX|1|ST|997876^Result 1^L^6463-4^Bacteria identified^LN||Staphylococcus aureus|||A||N|P|||201410260929|01
+NTE|1|L|Moderate growth
+OBX|2|TX|997878^Result 2^L^6463-4^Bacteria identified^LN|||||A||N|P|||201410260929|01
+NTE|1|L|Beta hemolytic Streptococcus, group G
+NTE|2|L|Heavy growth
+NTE|3|L|Penicillin and ampicillin are drugs of choice for treatment of
+NTE|4|L|beta-hemolytic streptococcal infections. Susceptibility testing of
+NTE|5|L|penicillins and other beta-lactam agents approved by the FDA for
+NTE|6|L|treatment of beta-hemolytic streptococcal infections need not be
+NTE|7|L|performed routinely because nonsusceptible isolates are extremely
+NTE|8|L|rare in any beta-hemolytic streptococcus and have not been reported
+NTE|9|L|for Streptococcus pyogenes (group A). (CLSI 2011)
+ZPS|1|01|LabCorp San Diego|13112 Evening Creek Dr So  Ste 200^^San Diego^CA^921284108|8586683700||MD^Galloway^Jenny^R^^^MD
