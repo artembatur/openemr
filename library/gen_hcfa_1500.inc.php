@@ -638,7 +638,8 @@ function gen_hcfa_1500_page($pid, $encounter, &$log, &$claim) {
    {
       put_hcfa(60, 1, 14, $claim->providerFirstName()." ".$claim->providerLastName());
   
-      put_hcfa(60, 15,22, date("m/d/y") );
+     // Removed date since administrator can select date in Adminstration->Globals->features-> 
+     // put_hcfa(60, 15,22, date("m/d/y") );
    }
           
   //
