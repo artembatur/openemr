@@ -42,7 +42,7 @@ function appointment_info(DOMDocument $DOM, DOMElement $parent,$pid)
 
 function stature_info(DOMDocument $DOM, DOMElement $parent,$pid)
 {
-    $sqlVitals = "SELECT height,weight,BMI FROM form_vitals WHERE pid=? ORDER BY date desc LIMIT 1";
+    $sqlVitals = "SELECT height,weight,BMI, head_circ, date FROM form_vitals WHERE pid=? ORDER BY date desc LIMIT 1";
     $vitals_data = sqlQuery($sqlVitals,array($pid));
     if($vitals_data['weight']!=0) 
     {
@@ -51,13 +51,74 @@ function stature_info(DOMDocument $DOM, DOMElement $parent,$pid)
     }
     if($vitals_data['height']!=0) 
         $parent->appendChild(create_row($DOM,"Height",$vitals_data['height']." in"));
-    if($vitals_data['BMI']!=0) 
-    $parent->appendChild(create_row($DOM,"BMI",$vitals_data['BMI']));
-
+    if($vitals_data['BMI']!=0)     
+        $parent->appendChild(create_row($DOM,"BMI",$vitals_data['BMI']));
+    
+    //CUSTOM CHANGE START
+    //Head Circumference START
+    //Custom changes for Dr. Kay.  ADD: head_cirumference, lead.
+    //This is the function that prints head_cirm to the screen
+    if($vitals_data['head_circum']!=0.00){
+        //if the last encounter a head circumference was taken, print it to the screen with the date it was taken
+        $outputString = floatval($vitals_data['head_circum'])." measured on ".$vitals_data['date'];
+        $parent->appendChild(create_row($DOM, "Head Circum", $outputString));
+    }else {        
+        //else, search for the last time the head circum was taken, print the date and measurement
+        $sqlLast_head_circ = "SELECT head_circ, date FROM form_vitals WHERE pid=? AND head_circ != 0.00 ORDER BY date desc";
+        $sqlLast_head_circData = sqlQuery($sqlLast_head_circ, array($pid));
+        $vitals_data['head_circum'] = $sqlLast_head_circData['head_circ'];
+        if ($vitals_data['head_circum']!=0){
+        $outputString = floatval($sqlLast_head_circData['head_circ'])." measured on ".$sqlLast_head_circData['date'];
+        } else $outputString = "No measurement recorded";
+        $parent->appendChild(create_row($DOM, "Head Circum", $outputString));        
+    }
+    //Head Circumference END
+    
+    
+    //Lead Start
+    //Get last lead result, ordered by date desc
+    $sqlLead = "Select * from forms JOIN lbf_data on forms.form_id=lbf_data.form_id WHERE pid=? ".
+                "AND form_name LIKE '%lead%' ".
+                "AND field_id LIKE '%lead%' ".
+                "ORDER BY date DESC ".
+                "LIMIT 1;";
+    
+    // 'sql_data['field_value'] holds the lead field value
+    // 'sql data['field_id'] needs to have value of lead
+    $sqlLead_data = sqlQuery($sqlLead, array($pid)); 
+    if($sqlLead_data!=0){
+        $outputString = $sqlLead_data['field_value']." Taken on ".$sqlLead_data['date'];
+        $vitals_data['lead_value'] = $sqlLead_data['field_value'];
+    }
+        else $outputString ="No available measurements";     
+    $parent->appendChild(create_row($DOM, "Lead Measurement: ", $outputString));
+    //Lead End  
+    
+   
+    //Vaccination START
+    //Prints Vaccinations to the PM160 Screen 
+    $sqlVaccine = "SELECT administered_date, patient_id, code_text_short ".
+                    "FROM codes ".
+                    "INNER JOIN immunizations ON codes.code = Cast( immunizations.cvx_code AS char ) ".
+                    "WHERE immunizations.patient_id = ? ".
+                    "ORDER BY immunizations.administered_date ";
+   
+    $sqlVaccineData = sqlStatement($sqlVaccine, array($pid));
+    while ($row = sqlFetchArray($sqlVaccineData))                
+        {
+          $outputString = $row['administered_date']." ".$row['code_text_short'];
+          $parent->appendChild(create_row($DOM, "Immunization: ", $outputString));
+        }    
+    //Vaccination Ends  
+        
+        
+    
      if($vitals_data!==false)
      {
          if($vitals_data['length']!=0) $patient_info['length']=$vitals_data['height']." in";
          if($vitals_data['BMI']!=0) $patient_info['bmi']=$vitals_data['BMI'];
+         if($vitals_data['head_circum']!=0) $patient_info['head_circum']=$vitals_data['head_circum'];
+         if($vitals_data['lead_value']!= 0) $patient_info['lead_value']=$vitals_data['lead_value'];
      }
 }
 ?>
