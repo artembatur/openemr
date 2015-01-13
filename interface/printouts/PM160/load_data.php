@@ -95,7 +95,7 @@ function stature_info(DOMDocument $DOM, DOMElement $parent,$pid)
     //Lead End  
     
    
-    //Vaccination START
+    //Vaccination START***
     //Prints Vaccinations to the PM160 Screen 
     $sqlVaccine = "SELECT administered_date, patient_id, code_text_short ".
                     "FROM codes ".
@@ -111,14 +111,72 @@ function stature_info(DOMDocument $DOM, DOMElement $parent,$pid)
         }    
     //Vaccination Ends  
         
-        
+    //Tobacco START***
+    //Prints tobacco passive/active uses to PM160 screen
+    $sqlTobacco = "SELECT fm.date, fm.encounter, fm.form_name, fm.form_id, fm.pid, lbf.form_id, lbf.field_id, lbf.field_value, deleted ".
+                    "FROM forms AS fm ".
+                    "JOIN lbf_data as lbf on fm.form_id = lbf.form_id ".
+                    "where fm.pid =? ".
+                    "AND fm.form_name LIKE '%Antic%' ".
+                    "AND deleted = 0 AND(( lbf.field_id like 'TobaccoCounselRefer%' OR lbf.field_id = 'PatientTobacco' OR lbf.field_id = 'PassiveSmoke' )) ";
     
+    $sqlTobaccoData = sqlStatement($sqlTobacco, array($pid));
+     while ($row = sqlFetchArray($sqlTobaccoData))                
+        {
+          if($row['field_id']==='PassiveSmoke'){  
+            $vitals_data['PassiveSmoke'] = $row['field_value'];
+            $outputString = $row['date']." ".$row['field_value'];
+            $parent->appendChild(create_row($DOM, "Exposed to 2nd Hand Smoke: ", $outputString));            
+          }          
+          if($row['field_id']==='PatientTobacco'){
+            $vitals_data['PatientTobacco'] = $row['field_value'];
+            $outputString = $row['date']." ".$row['field_value'];
+            $parent->appendChild(create_row($DOM, "Patient Uses Tobacco?: ", $outputString)); 
+          }            
+          if($row['field_id']==='TobaccoCounselRefer'){
+            $vitals_data['TobaccoCounselRefer'] = $row['field_value'];
+            $outputStringTCR = $row['date']." ".$row['field_value'];
+            $parent->appendChild(create_row($DOM, "Counseled on Tobacco?: ", $outputStringTCR)); 
+          }  
+        }             
+    //Tobacco END
+        
+        
+    //Dentist START***    
+        $sqlDentist = "SELECT fm.date, fm.encounter, fm.form_name, fm.form_id, fm.pid, lbf.form_id, lbf.field_id, lbf.field_value, deleted ".
+                    "FROM forms AS fm ".
+                    "JOIN lbf_data as lbf on fm.form_id = lbf.form_id ".
+                    "where fm.pid =? ".
+                    "AND fm.form_name LIKE '%Antic%' ".
+                    "AND deleted = 0 AND lbf.field_id = 'anticipDental' " .
+                    "Limit 1";
+    
+        $sqlDentistdata = sqlStatement($sqlDentist, array($pid));
+        while ($row = sqlFetchArray($sqlDentistdata)) {
+             if($row['field_value']){
+              $parent->appendChild(create_row($DOM, "Dental Referral on: ", $row['date']));          
+                 
+             }
+                    
+        
+        
+        }
+    
+        
+        
+        
+    //Dentist END
+        
+        
+        
+        
      if($vitals_data!==false)
      {
          if($vitals_data['length']!=0) $patient_info['length']=$vitals_data['height']." in";
          if($vitals_data['BMI']!=0) $patient_info['bmi']=$vitals_data['BMI'];
          if($vitals_data['head_circum']!=0) $patient_info['head_circum']=$vitals_data['head_circum'];
          if($vitals_data['lead_value']!= 0) $patient_info['lead_value']=$vitals_data['lead_value'];
+         
      }
 }
 ?>
