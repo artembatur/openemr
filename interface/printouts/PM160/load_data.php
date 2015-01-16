@@ -55,8 +55,9 @@ function stature_info(DOMDocument $DOM, DOMElement $parent,$pid)
         $parent->appendChild(create_row($DOM,"BMI",$vitals_data['BMI']));
     
     //CUSTOM CHANGE START
-    //Head Circumference START
-    //Custom changes for Dr. Kay.  ADD: head_cirumference, lead.
+    
+    //
+    //Head Circumference START    
     //This is the function that prints head_cirm to the screen
     if($vitals_data['head_circum']!=0.00){
         //if the last encounter a head circumference was taken, print it to the screen with the date it was taken
@@ -154,28 +155,25 @@ function stature_info(DOMDocument $DOM, DOMElement $parent,$pid)
         $sqlDentistdata = sqlStatement($sqlDentist, array($pid));
         while ($row = sqlFetchArray($sqlDentistdata)) {
              if($row['field_value']){
+              $vitals_data['DentistReferred']=$row['field_value'];
               $parent->appendChild(create_row($DOM, "Dental Referral on: ", $row['date']));          
                  
-             }
-                    
+             }           
         
         
-        }
-    
-        
-        
-        
+        }        
     //Dentist END
-        
-        
-        
-        
+    //https://ww3.iehp.org/en/providers/forms/pm160-forms/~/media/Provider%20Services/Forms/PM160%20Forms/PM160_form.pdf    
+          
      if($vitals_data!==false)
      {
-         if($vitals_data['length']!=0) $patient_info['length']=$vitals_data['height']." in";
+         if($vitals_data['height']!=0) $patient_info['height']=$vitals_data['height']." in";
          if($vitals_data['BMI']!=0) $patient_info['bmi']=$vitals_data['BMI'];
          if($vitals_data['head_circum']!=0) $patient_info['head_circum']=$vitals_data['head_circum'];
          if($vitals_data['lead_value']!= 0) $patient_info['lead_value']=$vitals_data['lead_value'];
+         if($vitals_data['PassiveSmoke']!=0)$patient_info['PassiveSmoke']=$vitals_data['PassiveSmoke'];
+         if($vitals_data['PatientTobacco']!=0)$patient_info['PatientTobacco']=$vitals_data['PatientTobacco'];
+         if($vitals_data['TobaccoCounselRefer']!=0)$patient_info['TobaccoConselRefer']= $vitals_data['TobaccoCounselRefer'];
          
      }
 }
