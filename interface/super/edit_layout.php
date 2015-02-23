@@ -42,6 +42,7 @@ $datatypes = array(
   "13" => xl("Squads"),
   "14" => xl("Organizations"),
   "15" => xl("Billing codes"),
+  "20" => xl("Checkbox list w/Master"), 
   "21" => xl("Checkbox list"),
   "22" => xl("Textbox list"),
   "23" => xl("Exam results"),
@@ -403,11 +404,11 @@ function writeFieldLine($linedata) {
     echo "  </td>";
 
     echo "  <td align='center' class='optcell'>";
-    if ($linedata['data_type'] == 2 || $linedata['data_type'] == 3 ||
+    if ($linedata['data_type'] == 2 || $linedata['data_type'] == 3 || 
       $linedata['data_type'] == 21 || $linedata['data_type'] == 22 ||
       $linedata['data_type'] == 23 || $linedata['data_type'] == 25 ||
       $linedata['data_type'] == 27 || $linedata['data_type'] == 28 ||
-      $linedata['data_type'] == 32)
+      $linedata['data_type'] == 32 || $linedata['data_type'] == 20)
     {
       // Show the width field
       echo "<input type='text' name='fld[$fld_line_no][lengthWidth]' value='" .
@@ -438,7 +439,7 @@ function writeFieldLine($linedata) {
     echo "</td>\n";
 
     echo "  <td align='center' class='optcell'>";
-    if ($linedata['data_type'] ==  1 || $linedata['data_type'] == 21 ||
+    if ($linedata['data_type'] ==  1 || $linedata['data_type'] == 21 ||$linedata['data_type'] == 20 ||
       $linedata['data_type'] == 22 || $linedata['data_type'] == 23 ||
       $linedata['data_type'] == 25 || $linedata['data_type'] == 26 ||
       $linedata['data_type'] == 27 || $linedata['data_type'] == 32 ||

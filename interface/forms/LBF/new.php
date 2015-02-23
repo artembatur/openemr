@@ -93,8 +93,8 @@ if ($_POST['bn_save']) {
     "edit_options != 'H' " .
     "ORDER BY group_name, seq", array($formname) );
   while ($frow = sqlFetchArray($fres)) {
-    $field_id  = $frow['field_id'];
-    $value = get_layout_form_value($frow);
+    $field_id  = $frow['field_id']; //This is the group name
+    $value = get_layout_form_value($frow); //This is the name of individual entry
     $sql_bind_array = array();
     if ($formid) { // existing form
       if ($value === '') {
@@ -163,6 +163,7 @@ div.section {
 </style>
 
 <style type="text/css">@import url(../../../library/dynarch_calendar.css);</style>
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 
 <link rel="stylesheet" type="text/css" href="<?php echo $GLOBALS['webroot'] ?>/library/js/fancybox/jquery.fancybox-1.2.6.css" media="screen" />
 <script type="text/javascript" src="<?php echo $GLOBALS['webroot'] ?>/library/dialog.js"></script>
@@ -289,7 +290,6 @@ function sel_related() {
 
     $graphable  = strpos($edit_options, 'G') !== FALSE;
     if ($graphable) $form_is_graphable = true;
-
     $currvalue  = '';
 
     if ($frow['edit_options'] == 'H') {
@@ -412,7 +412,7 @@ function sel_related() {
     ++$item_count;
 
     // Skip current-value fields for the display-only case.
-    if (empty($is_lbf)) {
+        if (empty($is_lbf)) {
       if ($frow['edit_options'] == 'H')
         echo generate_display_field($frow, $currvalue);
       else
