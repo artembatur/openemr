@@ -77,8 +77,8 @@
     $patient_info["Physician"]="X";
 
     $patient_info['provider-name']="James L. Kay, D.O., FAAP";
-    $patient_info['provider-address']="27800 Medical Center Road, Suite 300";
-    $patient_info['provider-city-zip']="Mission Viejo, CA 92691";
+    $patient_info['provider-address']="24432 Muirlands Blvd., Suite 111";
+    $patient_info['provider-city-zip']="Lake Forest, CA 92630-3939";
     $patient_info['provider-id']="1558646620";
     
     $patient_info['provider-phone']="949-364-2229";

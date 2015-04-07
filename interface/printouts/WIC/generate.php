@@ -70,8 +70,8 @@
         
     }
     $patient_info['office-address-1']="Santiago Pediatrics";
-    $patient_info['office-address-2']="27800 Medical Center Road, Suite 300";
-    $patient_info['office-address-3']="Mission Viejo, CA 92691";
+    $patient_info['office-address-2']="24432 Muirlands Blvd., Suite 111";
+    $patient_info['office-address-3']="Lake Forest, CA 92630-3939";
     
     $patient_info['phone']="Phone: 949-364-2229; Fax 949-364-1104";
     
