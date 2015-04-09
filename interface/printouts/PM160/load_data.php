@@ -117,9 +117,9 @@ function stature_info(DOMDocument $DOM, DOMElement $parent,$pid)
     $sqlTobacco = "SELECT fm.date, fm.encounter, fm.form_name, fm.form_id, fm.pid, lbf.form_id, lbf.field_id, lbf.field_value, deleted ".
                     "FROM forms AS fm ".
                     "JOIN lbf_data as lbf on fm.form_id = lbf.form_id ".
-                    "where fm.pid =? ".
-                    "AND fm.form_name LIKE '%Antic%' ".
-                    "AND deleted = 0 AND(( lbf.field_id like 'TobaccoCounselRefer%' OR lbf.field_id = 'PatientTobacco' OR lbf.field_id = 'PassiveSmoke' )) ";
+                    "where fm.pid =? ".                    
+                    "AND deleted = 0 AND(( lbf.field_id like 'TobaccoCounselRefer%' OR lbf.field_id = 'PatientTobacco' OR lbf.field_id = 'PassiveSmoke' )) " .
+                    "Group by lbf.field_id Order by fm.date DESC";
     
     $sqlTobaccoData = sqlStatement($sqlTobacco, array($pid));
      while ($row = sqlFetchArray($sqlTobaccoData))                
