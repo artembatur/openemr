@@ -116,27 +116,33 @@ function stature_info(DOMDocument $DOM, DOMElement $parent,$pid)
     $sqlTobacco = "SELECT fm.date, fm.encounter, fm.form_name, fm.form_id, fm.pid, lbf.form_id, lbf.field_id, lbf.field_value, deleted ".
                     "FROM forms AS fm ".
                     "JOIN lbf_data as lbf on fm.form_id = lbf.form_id ".
-                    "where fm.pid =? ".
-                    "AND fm.form_name LIKE '%Antic%' ".
-                    "AND deleted = 0 AND(( lbf.field_id like 'TobaccoCounselRefer%' OR lbf.field_id = 'PatientTobacco' OR lbf.field_id = 'PassiveSmoke' )) ";
+                    "where fm.pid =? ".                   
+                    "AND deleted = 0 AND(( lbf.field_id like 'TobaccoCounselRefer%' OR lbf.field_id = 'PatientTobacco' OR lbf.field_id = 'PassiveSmoke' )) " .
+                    "Order by Date Desc";
     
     $sqlTobaccoData = sqlStatement($sqlTobacco, array($pid));
+    $passiveFlag = 0;
+    $patientTFlag =0;
+    $tobaccoCoFlag = 0;
      while ($row = sqlFetchArray($sqlTobaccoData))                
         {
-          if($row['field_id']==='PassiveSmoke'){  
+          if($row['field_id']==='PassiveSmoke' && $passiveFlag === 0){  
             $vitals_data['PassiveSmoke'] = $row['field_value'];
             $outputString = $row['date']." ".$row['field_value'];
-            $parent->appendChild(create_row($DOM, "Exposed to 2nd Hand Smoke: ", $outputString));            
+            $parent->appendChild(create_row($DOM, "Exposed to 2nd Hand Smoke: ", $outputString));
+            $passiveFlag = 1;
           }          
-          if($row['field_id']==='PatientTobacco'){
+          if($row['field_id']==='PatientTobacco' && $patientTFlag === 0){
             $vitals_data['PatientTobacco'] = $row['field_value'];
             $outputString = $row['date']." ".$row['field_value'];
-            $parent->appendChild(create_row($DOM, "Patient Uses Tobacco?: ", $outputString)); 
+            $parent->appendChild(create_row($DOM, "Patient Uses Tobacco?: ", $outputString));
+            $patientTFlag = 1;
           }            
-          if($row['field_id']==='TobaccoCounselRefer'){
+          if($row['field_id']==='TobaccoCounselRefer' && $tobaccoCoFlag === 0){
             $vitals_data['TobaccoCounselRefer'] = $row['field_value'];
             $outputStringTCR = $row['date']." ".$row['field_value'];
-            $parent->appendChild(create_row($DOM, "Counseled on Tobacco?: ", $outputStringTCR)); 
+            $parent->appendChild(create_row($DOM, "Counseled on Tobacco?: ", $outputStringTCR));
+            $tobaccoCoFlag = 1;
           }  
         }             
     //Tobacco END
