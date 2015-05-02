@@ -341,7 +341,7 @@ if (is_numeric($pid)) {
         echo "</div></td></tr>";
 		$divnos=$divnos+1;
     }
-    echo "</table>";
+        echo "</table>";
 }
 ?>
 

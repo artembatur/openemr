@@ -60,6 +60,11 @@ function note_report( $pid, $encounter, $cols, $id) {
                     print "</script>";
                 }
 	    }
+            else if($key == 'Message'){
+                $value = preg_replace('/\v+|\\\[rn]/',"<br>",$value);
+                print "<td><span class=bold>" . xlt($key) . ": </span><span class=text>" . "<br>". $value . "</span></td>";
+                
+            }
 	    else {
 	        print "<td><span class=bold>" . xlt($key) . ": </span><span class=text>" . text($value) . "</span></td>";	
 	    }
