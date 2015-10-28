@@ -814,11 +814,11 @@ if (!function_exists("makeOrderDocument")) {
 ?>
 <table nobr="true" style="width:100%;border:1px solid black;border-collapse:collapse">
 	<tr>
-		<td colspan="6" style="font-size:.8em;font-weight:bold;border:1px solid black">&nbsp;DIAGNOSIS CODES:</td>
+		<td colspan="8" style="font-size:.8em;font-weight:bold;border:1px solid black">&nbsp;DIAGNOSIS CODES:</td>
 	</tr>
 	<tr>
 <?php 
-	for ($d = 0; $d < 6; $d++) {
+	for ($d = 0; $d < 8; $d++) {
 		$key = "dx".$d."_code";
 		$dx_code = $order_data->$key;
 ?>
@@ -827,7 +827,7 @@ if (!function_exists("makeOrderDocument")) {
 	} // end for loop
 	if ($order_data->dx8_code) { // are there more than 8 codes?
 		echo "</tr><tr>\n";
-		for ($d = 6; $d < 12; $d++) {
+		for ($d = 8; $d < 16; $d++) {
 			$key = "dx".$d."_code";
 			$dx_code = ($d < 10) ? $order_data->$key : ""; // openemr only stores 10 dx codes
 ?>
@@ -838,8 +838,8 @@ if (!function_exists("makeOrderDocument")) {
 ?>
 	</tr>
 	<tr>
-		<td colspan="3" style="font-weight:bold;border:1px solid black">&nbsp;Bill Type:&nbsp;&nbsp;<span style="font-weight:normal"><?php if ($order_data->request_billing) echo ListLook($order_data->request_billing,'LabCorp_Billing') ?></span></td>
-		<td colspan="3" style="font-weight:bold;border:1px solid black">
+		<td colspan="4" style="font-weight:bold;border:1px solid black">&nbsp;Bill Type:&nbsp;&nbsp;<span style="font-weight:normal"><?php if ($order_data->request_billing) echo ListLook($order_data->request_billing,'LabCorp_Billing') ?></span></td>
+		<td colspan="4" style="font-weight:bold;border:1px solid black">
 			&nbsp;LCA Ins Code:&nbsp;&nbsp;
 			<span style="font-weight:normal">
 <?php 

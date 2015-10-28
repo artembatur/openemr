@@ -42,31 +42,13 @@ $type = $_REQUEST['type'];
 
 if ($type == 'icd9') {
 	$code = strtoupper($_REQUEST['code']);
-	$words = explode(' ', $code);
 
-	if ($GLOBALS['wmt_lab_icd10']) {  // doing ICD10 for everything
-		$xcode = str_replace('.', '', $code);
-		$query = "SELECT CONCAT('ICD10:',formatted_dx_code) AS code, short_desc, long_desc FROM icd10_dx_order_code ";
-		$query .= "WHERE active = 1 AND valid_for_coding = 1 AND (formatted_dx_code LIKE '".$code."%' ";
-		if (!is_numeric($code) && !empty($words)) {
-			$long = "";
-			foreach ($words AS $word) {
-				if ($long) $long .= " AND ";				
-				$long .= "long_desc LIKE '%".$word."%' ";
-			}
-			$query .= "OR ($long) ";
-		}
-		$query .= ") OR (dx_code IN (SELECT dx_icd10_target FROM icd10_gem_dx_9_10 WHERE dx_icd9_source LIKE '".$xcode."%') ) ";
-		$query .= "ORDER BY dx_code";
-		$result = sqlStatement($query);
-	} else { // old ICD9 still in use
-		$query = "SELECT formatted_dx_code AS code, short_desc, long_desc FROM icd9_dx_code ";
-		$query .= "WHERE formatted_dx_code LIKE '".$code."%' AND active = 1 ";
-		if (!is_numeric($code)) $query .= "OR short_desc LIKE '%".$code."%' ";
-		$query .= "ORDER BY dx_code";
-		$result = sqlStatement($query);
-	}
-	
+	$query = "SELECT formatted_dx_code AS code, short_desc, long_desc FROM icd9_dx_code ";
+	$query .= "WHERE formatted_dx_code LIKE '".$code."%' ";
+	if (!is_numeric($code)) $query .= "OR short_desc LIKE '%".$code."%' ";
+	$query .= "ORDER BY dx_code";
+	$result = sqlStatement($query);
+
 	$count = 1;
 	$data = array();
 	while ($record = sqlFetchArray($result)) {

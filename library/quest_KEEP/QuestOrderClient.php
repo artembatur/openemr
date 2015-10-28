@@ -136,10 +136,7 @@ if (!class_exists("QuestOrderClient")) {
 			// diagnosis segments
 			$dx_count = 1;
 			foreach ($order->diagnosis as $dx_data) {
-				list($dx_type,$dx_code) = explode(':', $dx_data->diagnosis_code);
-				if (empty($dx_type)) $dx_type = 'I9';
-				if (empty($dx_code)) $dx_code = $dx_data->diagnosis_code;
-				$orderMessage .= "DG1|$dx_count|ICD|$dx_code^^$dx_type|\r";
+				$orderMessage .= "DG1|$dx_count|ICD|$dx_data->diagnosis_code|$dx_data->diagnosis_text|\r";
 				$dx_count++;
 			}
 				

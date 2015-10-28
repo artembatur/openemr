@@ -36,20 +36,11 @@ require_once("{$GLOBALS['srcdir']}/wmt/wmt.include.php");
 // grab inportant stuff
 $id = '';
 if ($viewmode) $id = $_GET['id'];
-//$pid = ($pid)? $pid : $_SESSION['pid'];
-//$encounter = ($encounter)? $encounter : $_SESSION['encounter'];
-if (! $pid) die ("Missing patient identifier!!");
-if (! $encounter) die ("Missing current encounter identifier!!");
+$pid = ($pid)? $pid : $_SESSION['pid'];
+$encounter = ($encounter)? $encounter : $_SESSION['encounter'];
 
 $form_name = 'quest_order';
 $form_title = 'Quest Lab Order';
-
-$form_table = 'form_quest_order';
-$item_name = 'quest_order_item';
-$item_table = 'form_quest_order_item';
-$aoe_name = 'quest_order_aoe';
-$aoe_table = 'form_quest_order_aoe';
-
 $save_url = $rootdir.'/forms/'.$form_name.'/save.php';
 $validate_url = $rootdir.'/forms/'.$form_name.'/validate.php';
 $submit_url = $rootdir.'/forms/'.$form_name.'/submit.php';
@@ -120,19 +111,11 @@ if ($form_data->id) {
 }
 
 // retrieve diagnosis quick list
-if ($GLOBALS['wmt_lab_icd10']) {
-	$query = "SELECT title, notes, CONCAT('ICD10:',formatted_dx_code) AS code, short_desc, long_desc FROM list_options l ";
-	$query .= "JOIN icd10_dx_order_code c ON c.formatted_dx_code = l.option_id AND c.active = 1 ";
-	$query .= "WHERE l.list_id LIKE 'Lab\_ICD10%' ";
-	$query .= "ORDER BY l.title, l.seq";
-	$result = sqlStatement($query);
-} else {
-	$query = "SELECT title, notes, formatted_dx_code AS code, short_desc, long_desc FROM list_options l ";
-	$query .= "JOIN icd9_dx_code c ON c.formatted_dx_code = l.option_id AND c.active = 1 ";
-	$query .= "WHERE l.list_id LIKE 'Quest\_Diagnosis%' ";
-	$query .= "ORDER BY l.title, l.seq";
-	$result = sqlStatement($query);
-}
+$query = "SELECT title, notes, formatted_dx_code AS code, short_desc, long_desc FROM list_options l ";
+$query .= "JOIN icd9_dx_code c ON c.formatted_dx_code = l.option_id ";
+$query .= "WHERE l.list_id LIKE 'Quest_Diagnosis%' ";
+$query .= "ORDER BY l.title, l.seq";
+$result = sqlStatement($query);
 
 $dlist = array();
 while ($data = sqlFetchArray($result)) {
@@ -251,7 +234,7 @@ function getLabelers($thisField) {
 				$('.aoe').each(function() {
 					if (!$(this).val()) notice = "\n- All order questions must be answered."; 
 				});
-				if ($('.code').length < 1) notice += "\n- At least one diagnosis code required.";
+//				if ($('.code').length < 1) notice += "\n- At least one diagnosis code required.";
 				if ($('.test').length < 1) notice += "\n- At least one profile / test code required.";
 				if ($('#request_provider').val() == '_blank') notice += "\n- An ordering physician is required.";
 
@@ -360,8 +343,7 @@ function getLabelers($thisField) {
 					success: function(data) {
 				    	$.each(data, function(key, val) {
 					    	id = val.code.replace('.','_');
-					    	code = val.code.replace('ICD10:','');
-				    		output += "<tr><td style='white-space:nowrap;width:60px'><input class='wmtCheck' type='checkbox' name='check_"+id+"' code='"+val.code+"' desc='"+val.long_desc+"'/> <b>"+code+"</b> - </td><td style='padding-top:3px'>"+val.short_desc+"<br/></td>\n";
+				    		output += "<tr><td style='white-space:nowrap'><nowrap><input class='wmtCheck' type='checkbox' name='check_"+id+"' code='"+val.code+"' desc='"+val.long_desc+"'/> <b>"+val.code+"</b> - </nowrap></td><td style='width:auto;text-align:left'>"+val.short_desc+"<br/></td>\n";
 						});
 					},
 					async:   false
@@ -394,9 +376,6 @@ function getLabelers($thisField) {
 				$('#codeEmptyRow').remove();
 
 				id = code.replace('.','_');
-				id = id.replace('ICD9:','');
-				id = id.replace('ICD10:','');
-
 				if ($('#code_'+id).length) {
 					alert("Code "+code+" has already been added.");
 					return false;
@@ -974,7 +953,7 @@ function getLabelers($thisField) {
 									<tr>
 										<td class="wmtLabBody">
 											<div id="dc_tabs">
-												<div class="wmtLabMenu" style="width:auto">
+												<div class="wmtLabMenu">
 													<ul style="margin:0;padding:0">
 <?php 
 $title = 'Search';
@@ -993,7 +972,7 @@ foreach ($dlist as $data) {
 												
 <?php 
 $title = 'Search';
-echo "<div class='wmtQuick' id='dc_Search' style='display:none;margin-left:0'><table width='100%'><tr><td style='text-align:center;padding-top:30px'><h3>Select profile at left or<br/>search using search box at top.</h3></tr></td>\n";
+echo "<div class='wmtQuick' id='dc_Search' style='display:none'><table width='100%'><tr><td style='text-align:center;padding-top:30px'><h3>Select panel at left or<br/>search using search box at top.</h3></tr></td>\n";
 foreach ($dlist as $data) {
 	if ($data['title'] != $title) {
 		if ($title) echo "</table></div>\n"; // end previous section
@@ -1002,10 +981,8 @@ foreach ($dlist as $data) {
 		echo "<div class='wmtQuick' id='dc_".$link."' style='display:none'><table>\n";
 	}
 	$text = ($data['notes']) ? $data['notes'] : $data['short_desc'];
-	$code = str_replace('ICD9:', '', $data['code']);
-	$code = str_replace('ICD10:', '', $code);
-	$id = str_replace('.', '_', $code);
-	echo "<tr><td style='white-space:nowrap'><nowrap><input class='wmtCheck' type='checkbox' id='check_".$id."' code='".$data['code']."' desc='".htmlspecialchars($text)."' > <b>".$code."</b></input> - </nowrap></td><td style='padding-top:0'>".$text."</td></tr>\n";
+	$id = str_replace('.', '_', $data['code']);
+	echo "<tr><td style='white-space:nowrap'><nowrap><input class='wmtCheck' type='checkbox' id='check_".$id."' code='".$data['code']."' desc='".htmlspecialchars($text)."' > <b>".$data['code']."</b></input> - </nowrap></td><td style='padding-top:0'>".$text."</td></tr>\n";
 }
 if ($title) echo "</table></div>\n"; // end if at least one section
 ?>
@@ -1103,7 +1080,7 @@ if ($title) echo "</table></div>\n"; // end if at least one section
 									<table id="codeTable" width="100%" border="0" cellspacing="0" cellpadding="2">
 										<tr>
 											<th class="wmtHeader" style="width:60px">Action</th>
-											<th class="wmtHeader" style="width:150px">Diagnosis</th>
+											<th class="wmtHeader" style="width:80px">ICD9 Code</th>
 											<th class="wmtHeader">Description</th>
 										</tr>
 
@@ -1112,25 +1089,15 @@ if ($title) echo "</table></div>\n"; // end if at least one section
 $newRow = '';
 for ($d = 0; $d < 10; $d++) {
 	$codekey = "dx".$d."_code";
-	$dx_code = $form_data->$codekey;
 	$textkey = "dx".$d."_text";
-	$dx_text = $form_data->$textkey;
-	
-	if (empty($dx_code)) continue;
-
-	if (strpos($dx_code,":") !== false)	
-		list($dx_type,$dx_code) = explode(":", $dx_code);
-
-	if (!$dx_type) $dx_type = 'ICD9';
- 
-	$id = str_replace('.', '_', $dx_code);
-	$dx_code = $dx_type.":".$dx_code;
+	if (!$form_data->$codekey) continue;
+	$id = str_replace('.', '_', $form_data->$codekey);
 	
 	// add new row
 	$newRow .= "<tr id='code_".$id."'>";
 	$newRow .= "<td><input type='button' class='wmtButton' value='remove' style='width:60px' onclick=\"removeCodeRow('code_".$id."')\" /></td>\n";
-	$newRow .= "<td class='wmtLabel'><input name='dx_code[]' class='wmtFullInput code' style='font-weight:bold' readonly value='".$dx_code."'/>\n";
-	$newRow .= "</td><td class='wmtLabel'><input name='dx_text[]' class='wmtFullInput name' readonly value='".$dx_text."'/>\n";
+	$newRow .= "<td class='wmtLabel'><input name='dx_code[]' class='wmtFullInput code' style='font-weight:bold' readonly value='".$form_data->$codekey."'/>\n";
+	$newRow .= "</td><td class='wmtLabel'><input name='dx_text[]' class='wmtFullInput name' readonly value='".$form_data->$textkey."'/>\n";
 	$newRow .= "</td></tr>\n";
 }
 
@@ -1164,7 +1131,7 @@ else {
 						<tr>
 							<td>
 								<fieldset>
-									<legend>Order Requisition - <?php echo $ordnum ?></legend>
+									<legend>Order Requesition - <?php echo $ordnum ?></legend>
 									<input type="hidden" name="order0_number" value="<?php echo $ordnum ?>" />
 
 									<table id="sample0_table" border="0" cellspacing="0" cellpadding="2">
@@ -1241,7 +1208,7 @@ else {
 											<th class="wmtHeader" style="width:300px">Order Entry Questions</td>
 										</tr>
 <?php 
-// load the existing requisition codes
+// load the existing requestion codes
 $newRow = '';
 foreach ($test_list as $test) {
 	if (!$test['test_code']) continue;
@@ -1330,7 +1297,7 @@ else { // create empty row
 									<table style="width:100%;margin-top:15px">
 										<tr>
 											<td>
-												<label class="wmtLabel">Lab Notes / Comments:  <small style='font-weight:normal;padding-left:20px'>[ Sent to lab but not printed on requisition ]</small></label>
+												<label class="wmtLabel">Lab Notes / Comments:  <small style='font-weight:normal;padding-left:20px'>[ Sent to lab but not printed on requesition ]</small></label>
 												<textarea id="order0_notes" name="order0_notes" rows="2" class="wmtFullInput"><?php echo htmlspecialchars($form_data->order0_notes) ?></textarea>	
 											</td>
 										</tr>
@@ -1425,7 +1392,7 @@ else { // create empty row
 								<table style="width:100%">
 									<tr>
 										<td class="wmtLabel" colspan="3">
-											Clinic Notes:  <small style='font-weight:normal;padding-left:20px'>[ Not sent to lab or printed on requisition ]</small>
+											Clinic Notes:  <small style='font-weight:normal;padding-left:20px'>[ Not sent to lab or printed on requesition ]</small>
 											<textarea name="request_notes" id="request_notes" class="wmtFullInput" rows="4"><?php echo htmlspecialchars($form_data->request_notes) ?></textarea>
 										</td>
 									</tr>

@@ -1781,13 +1781,7 @@ $GLOBALS_METADATA = array(
 
 // LABLINK -- following code added for labs tab
   'Labs' => array(
-  		'wmt_lab_icd10' => array(
-  				xl('Enable Lab ICD-10 Support'),
-  				'bool',                           // data type
-  				'0',
-  				xl('Enable Support for ICD-10 Diagnosis Codes.')
-  		),
-  		
+		
 	'lab_quest_enable' => array(
 		xl('Quest Interface Enable'),
 		'bool',                           // data type

@@ -240,10 +240,7 @@ if (!class_exists("LabCorpOrderClient")) {
 			// diagnosis segments
 			$dx_count = 1;
 			foreach ($request->diagnosis as $dx_data) {
-				list($dx_type,$dx_code) = explode(':', $dx_data->diagnosis_code);
-				if (empty($dx_type)) $dx_type = 'I9';
-				if (empty($dx_code)) $dx_code = $dx_data->diagnosis_code;
-				$orderMessage .= "DG1|$dx_count|ICD|$dx_code^^$dx_type|\r";
+				$orderMessage .= "DG1|$dx_count|I9|$dx_data->diagnosis_code^^I9|\r";
 				$dx_count++;
 			}
 				
