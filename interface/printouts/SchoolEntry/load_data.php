@@ -20,7 +20,7 @@ function process_tb_data(&$patient_info,&$tb_data)
 
 function process_physical(&$patient_info,$pid)
 {
-    $select="SELECT DATE_FORMAT(form_encounter.date,'%m/%d/%Y') as date FROM billing,form_encounter  where code_type='ICD9' and code='V20.2'"
+    $select="SELECT DATE_FORMAT(form_encounter.date,'%m/%d/%Y') as date FROM billing,form_encounter  where ((code_type='ICD9' and code='V20.2') or (code_type = 'ICD10' and code = 'Z00.129'))"
             ." AND billing.pid=? AND form_encounter.pid=?"
             ." AND billing.encounter=form_encounter.encounter"
             ." ORDER by form_encounter.date desc "
