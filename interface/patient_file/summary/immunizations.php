@@ -40,7 +40,9 @@ if (isset($_GET['mode'])) {
 					  amount_administered_unit = ?,
 					  expiration_date = if(?,?,NULL),
 					  route = ?,
-					  administration_site = ? ";
+					  administration_site = ?,
+                      historical = ?,
+                      vfc = ?";
 	$sqlBindArray = array(
 	             trim($_GET['id']),
 		     trim($_GET['administered_date']), trim($_GET['administered_date']),
@@ -60,7 +62,9 @@ if (isset($_GET['mode'])) {
 			 trim($_GET['form_drug_units']),
 			 trim($_GET['immuniz_exp_date']), trim($_GET['immuniz_exp_date']),
 			 trim($_GET['immuniz_route']),
-			 trim($_GET['immuniz_admin_ste'])			 
+			 trim($_GET['immuniz_admin_ste']),
+             trim($_GET['historical']),
+             trim($_GET['vfc'])
 		     );
         sqlStatement($sql,$sqlBindArray);
         $administered_date=date('Y-m-d H:i');
@@ -112,6 +116,9 @@ if (isset($_GET['mode'])) {
         $manufacturer = $result['manufacturer'];
         $lot_number = $result['lot_number'];
         $administered_by_id = ($result['administered_by_id'] ? $result['administered_by_id'] : 0);
+        $historical = $result['historical'];
+        $vfc = $result['vfc'];
+
 
 		$administered_by = "";
 		if (!$result['administered_by'] && !$row['administered_by_id']) { 
@@ -227,6 +234,8 @@ var mypcc = '<?php echo htmlspecialchars( $GLOBALS['phone_country_code'], ENT_QU
 	  ?> 
 
       <?php if (!($useCVX)) { ?>
+
+
         <tr>
           <td align="right">
             <span class=text>
@@ -365,10 +374,39 @@ var mypcc = '<?php echo htmlspecialchars( $GLOBALS['phone_country_code'], ENT_QU
         <tr>
           <td align="right" class='text'><?php echo htmlspecialchars( xl('Administration Site'), ENT_NOQUOTES); ?></td>
           <td>
-		  	<?php echo generate_select_list('immuniz_admin_ste', 'proc_body_site', $immuniz_admin_ste, 'Select Administration Site', ' ');?>
+		  	<?php echo generate_select_list('immuniz_admin_ste', 'Imm_Administrative_Site__CAIR', $immuniz_admin_ste, 'Select Administration Site', ' ');?>
 		  </td>
         </tr>
         <tr>
+
+          <tr>
+              <td align="right" class='text'><?php echo htmlspecialchars( xl('VFC Eligibility'), ENT_NOQUOTES); ?></td>
+              <td>
+                  <select name = 'vfc'>
+                      <option value="V01">V01: not VFC eligible (Private Pay/Insurance) </option>
+                      <option value="V02" selected="selected">V02: VFC eligible – Medi-Cal/Medi-Cal Managed Care</option>
+                      <option value="V03">V03: VFC eligible - Uninsured</option>
+                      <option value="V04">V04: VFC eligible - American Indian/Alaskan Native </option>
+                      <option value="V05">V05: VFC eligible - Underinsured</option>
+                      <option value="V07">V06: Public vaccine - State- specific eligibility [317 Special Funds] </option>
+                      <option value="CAA01">CAA01: State General Fund Vaccines</option>
+
+                  </select
+              </td>
+          </tr>
+          <tr>
+              <td align = "right">
+                  <span class=text><?php echo htmlspecialchars( xl('Historical?'), ENT_NOQUOTES); ?></span>
+              </td>
+              <td>
+                  <input type="checkbox" name="historical" value="01">
+              </td>
+
+          </tr>
+
+          <?php $_GET['historical'] === '01' ? $_GET['historical'] = '01' : $_GET['historical'] = '00' ?>
+
+          <tr>
           <td align="right" class='text'>
               <?php echo htmlspecialchars( xl('Notes'), ENT_NOQUOTES); ?>          </td>
           <td>
@@ -412,6 +450,7 @@ var mypcc = '<?php echo htmlspecialchars( $GLOBALS['phone_country_code'], ENT_QU
 	<th><?php echo htmlspecialchars( xl('Route'), ENT_NOQUOTES); ?></th>
 	<th><?php echo htmlspecialchars( xl('Administered Site'), ENT_NOQUOTES); ?></th>
     <th><?php echo htmlspecialchars( xl('Notes'), ENT_NOQUOTES); ?></th>
+    <th><?php echo htmlspecialchars( xl('VFC Eligibility'), ENT_NOQUOTES); ?></th>
     <th><?php echo htmlspecialchars( xl('Error'), ENT_NOQUOTES); ?></th>
 	<th>&nbsp;</th>
     </tr>
@@ -471,6 +510,7 @@ var mypcc = '<?php echo htmlspecialchars( $GLOBALS['phone_country_code'], ENT_QU
                         else {
                                echo "<td>&nbsp</td>";
                         }
+
             echo "<td>" . $del_tag_open . htmlspecialchars( $row["manufacturer"], ENT_NOQUOTES) . $del_tag_close . "</td>";
             echo "<td>" . $del_tag_open . htmlspecialchars( $row["lot_number"], ENT_NOQUOTES) . $del_tag_close . "</td>";
             echo "<td>" . $del_tag_open . htmlspecialchars( $row["administered_by"], ENT_NOQUOTES) . $del_tag_close . "</td>";
@@ -478,6 +518,7 @@ var mypcc = '<?php echo htmlspecialchars( $GLOBALS['phone_country_code'], ENT_QU
 			echo "<td>" . $del_tag_open . generate_display_field(array('data_type'=>'1','list_id'=>'drug_route'), $row['route']) . $del_tag_close . "</td>";			
 			echo "<td>" . $del_tag_open . generate_display_field(array('data_type'=>'1','list_id'=>'proc_body_site'), $row['administration_site']) . $del_tag_close . "</td>";
 			echo "<td>" . $del_tag_open . htmlspecialchars( $row["note"], ENT_NOQUOTES) . $del_tag_close . "</td>";
+            echo "<td>" . $del_tag_open . htmlspecialchars( $row["vfc"], ENT_NOQUOTES) . $del_tag_close . "</td>";
 			
 			if ($isError) {
 				$checkbox = "checked";

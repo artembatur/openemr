@@ -441,6 +441,21 @@ ALTER TABLE `immunizations`
   ADD COLUMN `added_erroneously` tinyint(1) NOT NULL DEFAULT '0';
 #EndIf
 
+#IfMissingColumn immunizations historical
+ALTER TABLE `immunizations`
+ADD COLUMN `historical` tinyint(2) NOT NULL DEFAULT '00';
+#EndIf
+
+#IfMissingColumn immunizations vfc
+ALTER TABLE `immunizations`
+ADD COLUMN `vfc` varchar(100) not null DEFAULT 'V01';
+#EndIf
+
+#IfMissingColumn immunizations submitted
+ALTER TABLE `immunizations`
+ADD COLUMN `submitted` varchar(1) not null DEFAULT '0' COMMENT '0 = not submitted, 1 = submitted and passed, F = submitted and failed';
+#EndIf
+
 #IfMissingColumn documents path_depth
 ALTER TABLE `documents` ADD COLUMN `path_depth` TINYINT DEFAULT '1' COMMENT 'Depth of path to use in url to find document. Not applicable for CouchDB.';
 #Endif

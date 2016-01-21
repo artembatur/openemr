@@ -11,6 +11,21 @@
 require_once("../globals.php");
 require_once("$srcdir/patient.inc");
 require_once("$srcdir/formatting.inc.php");
+require_once("$webserver_root/library/globals.inc.php");
+require_once($webserver_root.'/library/CAIRsoap.php');
+
+$IMM = array('username' => $IMM_sendingfacility,
+    'password' => $IMM_password,
+    'facility' => $IZ_portal_sending_facility_ID,
+    'wsdl_url' => $wsdl_url,
+    'certs' => array('local_cert' => $webserver_root.'/'.$IMM_certs,
+        'passphrase' => $IMM_certs_passphrase,
+        'cache_wsdl' => WSDL_CACHE_NONE));
+
+//Initalize variables for counting good records
+
+$success = 0;
+$failures = 0;
 
 if(isset($_POST['form_from_date'])) {
   $from_date = $_POST['form_from_date'] !== "" ? 
@@ -98,14 +113,15 @@ function format_ethnicity($ethnicity) {
       "DATE_FORMAT(i.vis_date,'%Y%m%d') as immunizationdate, ".
       "DATE_FORMAT(i.administered_date,'%Y%m%d') as administered_date, ".
       "i.lot_number as lot_number, ".
-      "i.manufacturer as manufacturer, ".
+      "i.manufacturer as manufacturer, i.vfc, i.historical, ".
        "concat(p.fname, '^', p.lname) as patientname, ";
   } else {
     $query .= "concat(p.fname, ' ',p.mname,' ', p.lname) as patientname, ".
       "i.vis_date as immunizationdate, "  ;
   }
   $query .=
-  "i.id as immunizationid, c.code_text_short as immunizationtitle ".
+  "i.id as immunizationid, c.code_text_short as immunizationtitle, ".
+  "i.route, i.administration_site as site ".
   "from immunizations i, patient_data p, codes c ".
   "left join code_types ct on c.code_type = ct.ct_id ".
   "where ".
@@ -133,39 +149,70 @@ function format_ethnicity($ethnicity) {
   
 
 $D="\r";
-$nowdate = date('Ymd');
+$nowdate = date('Ymdhms');
 $now = date('YmdGi');
 $now1 = date('Y-m-d G:i');
 $filename = "imm_reg_". $now . ".hl7";
 
 // GENERATE HL7 FILE
+// Initalize variables.
+
+//These can be removed once globals is set up.
+
+
+
 if ($_POST['form_get_hl7']==='true') {
 	$content = ''; 
 
   $res = sqlStatement($query);
+  
+  /*
+   * This is the beginning of the HL7 message. The following fields that are 
+   * completed and verified will be noted with OK.  
+   * Others will be noted as UNVERIFIED and listed here.
+   * 
+   * MSH = OK
+   * 
+   * To do: Verify the following fields:
+   * 
+   */
 
   while ($r = sqlFetchArray($res)) {
-    $content .= "MSH|^~\&|OPENEMR|30SANTIAGOP||CAIRLO|$nowdate||".
-      "VXU^V04^VXU_V04|OEMR110316102457117|P|2.5.1" .
-      "$D" ;
+    $content = '';
+    $content .= "MSH|".     //1. Field Seperator R OK
+                "^~\&|".    //2. Encoding Characters R OK
+                "OPENEMR|". //3. Sending App optional OK
+                $IMM_sendingfacility."|". //4. Sending facility OK
+                "|".        //5. receiving application Ignored  OK
+                $IMM_receivingfacility."|". //6. Receiving Facility OK
+                $nowdate."|". //7. date/time message OK
+                "|".       //8. Security - ignored OK
+                $IMM_messageType."|". // 9. message type - Required OK
+                date('Ymdhms').$r['patientid'].preg_replace("/[^A-Za-z0-9 ]/", '', $r['immunizationtitle'])."|".  //  OK 10. Message control ID (must be unique for a given day) Required
+                $IMM_processID."|". //11. Processing ID (either P_roduction T_raining D_debugging
+                $IMM_hl7versionID . //12 Version ID (2.5.1 as of current) OK
+                $D;
+    
     if ($r['sex']==='Male') $r['sex'] = 'M';
     if ($r['sex']==='Female') $r['sex'] = 'F';
+    if ($r['sex'] != 'M' && $r['sex'] != 'F') $r['sex'] = 'U';
     if ($r['status']==='married') $r['status'] = 'M';
     if ($r['status']==='single') $r['status'] = 'S';
     if ($r['status']==='divorced') $r['status'] = 'D';
     if ($r['status']==='widowed') $r['status'] = 'W';
     if ($r['status']==='separated') $r['status'] = 'A';
     if ($r['status']==='domestic partner') $r['status'] = 'P';
+    
     $content .= "PID|" . // [[ 3.72 ]]
         "|" . // 1. Set id
         "|" . // 2. (B)Patient id
-        $r['patientid']. "^^^MPI&2.16.840.1.113883.19.3.2.1&ISO^MR" . "|". // 3. (R) Patient indentifier list. TODO: Hard-coded the OID from NIST test. 
+        $r['patientid']. "^^^^" . "|". // 3. (R) Patient indentifier list. OK
         "|" . // 4. (B) Alternate PID
-        $r['patientname']."|" . // 5.R. Name
-        "|" . // 6. Mather Maiden Name
-        $r['DOB']."|" . // 7. Date, time of birth
-        $r['sex']."|" . // 8. Sex
-        "|" . // 9.B Patient Alias
+        $r['patientname']."|" . // 5.R. Name OK
+        "|" . // 6. Mather Maiden Name OK
+        $r['DOB']."|" . // 7. Date, time of birth OK
+        $r['sex']."|" . // 8. Sex OK
+        "|" . // 9.B Patient Alias OK
         "2106-3^" . $r['race']. "^HL70005" . "|" . // 10. Race // Ram change
         $r['address'] . "^^M" . "|" . // 11. Address. Default to address type  Mailing Address(M)
         "|" . // 12. county code
@@ -196,23 +243,53 @@ if ($_POST['form_get_hl7']==='true') {
         "|" . // 37. Breed Code
         "|" . // 38. Production Class Code
         ""  . // 39. Tribal Citizenship
-        "$D" ;
+        $D;
+    
+    //PD1
+    if (!isset($r['data_sharing']))
+        $r['data_sharing'] = "N";
+    
+    if (!isset($r['data_sharing_date']))
+        $r['data_sharing_date'] = '';
+    
+    $content .= "PD1|".
+            "|". // 1. living dependency
+            "|". // 2. living arrangment
+            "^^^^^^^^^".$IMM_CAIR_ID."|". // 3. Patient primary facility (R)
+            "|". // 4. Primary care provider (can be empty)
+            "|". // 5. Student Indicator
+            "|". // 6. Handicap
+            "|". // 7. Living Will
+            "|". // 8. Organ Donor
+            "|". // 9. Seperate bill
+            "|". // 10. Duplicate Patient
+            "^^^|". // 11. Publicity Code (may be empty)
+            $r['data_sharing']."|". // 12. Protection Indicator (R)
+            $r['data_sharing_date']. // 13. Protection Indicator effective date
+            $D ;
+            
+            
     $content .= "ORC" . // ORC mandatory for RXA
         "|" . 
         "RE" .
-        "$D" ;
+        $D;
+        
+    
+    if (!isset($r['historical']) || $r['historical'] != '01' )
+        $r['historical'] = '00';
+    
     $content .= "RXA|" . 
         "0|" . // 1. Give Sub-ID Counter
         "1|" . // 2. Administrattion Sub-ID Counter
     	$r['administered_date']."|" . // 3. Date/Time Start of Administration
     	$r['administered_date']."|" . // 4. Date/Time End of Administration
         format_cvx_code($r['code']). "^" . $r['immunizationtitle'] . "^" . "CVX" ."|" . // 5. Administration Code(CVX)
-        "999|" . // 6. Administered Amount. TODO: Immunization amt currently not captured in database, default to 999(not recorded)
-        "|" . // 7. Administered Units
+        "999|" . // 6. Administered Amount. TODO: Immunization amt currently not captured in database, default to 999(not recorded)**********************
+        "mL|" . // 7. Administered Units
         "|" . // 8. Administered Dosage Form
-        "|" . // 9. Administration Notes
+        $r['historical']."^^NIP001|" . // 9. Administration Notes (determines if from an historical record or new immunization)
         "|" . // 10. Administering Provider
-        "|" . // 11. Administered-at Location
+        "^^^".$IMM_CAIR_ID."|" . // 11. Administered-at Location
         "|" . // 12. Administered Per (Time Unit)
         "|" . // 13. Administered Strength
         "|" . // 14. Administered Strength Units
@@ -224,16 +301,79 @@ if ($_POST['form_get_hl7']==='true') {
         "|" . // 20.Completion Status
         "A" . // 21.Action Code - RXA
         "$D" ;
+
+
+      $content .= "RXR|" .
+          $r['route']."^^HL70162^^^" . "|" .     //1. Route, required but may be empty
+          $r['site']."^^HL70163^^^" . "|" .                 //2. Site.  required, but may be empty
+          "|" .                 //3. administration device - ignored
+          "|" .                 //4. administration method - ignored
+          "|" .                 //5. routing instruction - ignored
+          "$D";
+
+
+      $content .= "OBX|" .
+      "1|".              // 1. Set ID - OBX (required)
+      "CE|".            // 2. Value Type (required)
+      "64994-7^^LN^^^|".              //3. Observation Identifier Required if RXA-9 value is '00'(required)
+      "|".              //4. Observation Sub-Id (required)
+      $r['vfc']."^^|".              //5. Observation Value (required)
+      "|".              //6. Units (ignored)
+      "|".              //7 Reference Ranges (ignored)
+      "|".              //8 Abnormal flags (ignored)
+      "|".              //9 Probability (ignored)
+      "|".              //10 Nature of Abnormal test (ignored)
+      "F|".              //11 Observsation Result Status (Required)
+      "|".              //12 eff date of ref range values (ignored)
+      "|".              //13 User defined access Checks (ignored)
+      "|".              //14 Date/Time of the Observation (required, but may be empty)
+      "|||||||".        //15-21 ignored.
+      "$D";
+
+
+
+
+      $cairSOAP = new CAIRsoap();
+      $cairSOAP->setFromGlobals($IMM)
+          ->initializeSoapClient();
+
+      $cairResponse = $cairSOAP->submitSingleMessage($content);
+
+      $response = explode("|", $cairResponse->return);
+      $capture = $response[14];
+
+
+
+      if (strpos($capture, "message received") !== false)
+      {
+            $success++;
+            $uquery = "Update immunizations set submitted = 1";
+            $uquery .= " Where id = ".$r['immunizationid'];
+
+
+      } else {
+
+            $failures++;
+            $uquery = "Update immunizations set submitted = 'F' ";
+            $uquery .= " Where id = ".$r['immunizationid'];
+
+      }
+
+         sqlQuery($uquery);
+
         
 }
 
-  // send the header here
-  header('Content-type: text/plain');
-  header('Content-Disposition: attachment; filename=' . $filename );
+    //Display to the user the summary
+    //Display to the user the list of errorenous sent immunizations
+    //
 
-  // put the content in the file
-  echo($content);
-  exit;
+  
+
+  
+
+
+
 }
 ?>
 
@@ -358,7 +498,7 @@ onsubmit='return top.restoreSession()'>
       <tr>
         <td>
           <div style='margin-left:15px'>
-            <a href='#' class='css_button' 
+            <a href='#' class='css_button'
             onclick='
             $("#form_refresh").attr("value","true"); 
             $("#form_get_hl7").attr("value","false"); 
@@ -366,7 +506,7 @@ onsubmit='return top.restoreSession()'>
             '>
             <span>
               <?php xl('Refresh','e'); ?>
-            </spain>
+            </span>
             </a>
             <?php if ($_POST['form_refresh']) { ?>
               <a href='#' class='css_button' onclick='window.print()'>
@@ -447,11 +587,17 @@ onsubmit='return top.restoreSession()'>
 </tbody>
 </table>
 </div> <!-- end of results -->
-<?php } else { ?>
-<div class='text'>
-  <?php echo xl('Click Refresh to view all results, or please input search criteria above to view specific results.', 'e' ); ?>
-</div>
-<?php } ?>
+<?php } else if ($_POST['form_get_hl7']){
+
+     echo " You have successfuly entered in $success immunizations.  "; ?> <br> <?php
+     echo " There were $failures submissions that have failed. ";
+        if ($failures > 0) echo "Please check your email account that CAIR communicates with you to get the reason. ";
+
+    }else{ ?>
+        <div class='text'>
+          <?php echo xl('Click Refresh to view all results, or please input search criteria above to view specific results.', 'e' ); ?>
+        </div>
+        <?php } ?>
 </form>
 
 <script language='JavaScript'>
