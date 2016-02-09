@@ -206,7 +206,7 @@ if ($_POST['form_get_hl7']==='true') {
     $content .= "PID|" . // [[ 3.72 ]]
         "|" . // 1. Set id
         "|" . // 2. (B)Patient id
-        $r['patientid']. "^^^^" . "|". // 3. (R) Patient indentifier list. OK
+        $r['patientid']. "^^^^PI" . "|". // 3. (R) Patient indentifier list. OK
         "|" . // 4. (B) Alternate PID
         $r['patientname']."|" . // 5.R. Name OK
         "|" . // 6. Mather Maiden Name OK
