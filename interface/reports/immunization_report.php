@@ -121,7 +121,7 @@ function format_ethnicity($ethnicity) {
   }
   $query .=
   "i.id as immunizationid, c.code_text_short as immunizationtitle, ".
-  "i.route, i.administration_site as site ".
+  "i.route as route, i.administration_site as site ".
   "from immunizations i, patient_data p, codes c ".
   "left join code_types ct on c.code_type = ct.ct_id ".
   "where ".
@@ -545,6 +545,7 @@ onsubmit='return top.restoreSession()'>
   <th> <?php xl('Immunization Code','e'); ?> </th>
   <th> <?php xl('Immunization Title','e'); ?> </th>
   <th> <?php xl('Immunization Date','e'); ?> </th>
+  <th> <?php xl('Administration Site','e'); ?> </th>
  </thead>
  <tbody>
 <?php
@@ -570,6 +571,15 @@ onsubmit='return top.restoreSession()'>
   </td>
   <td>
    <?php echo htmlspecialchars($row['immunizationdate']) ?>
+  </td>
+  <td>
+  <?php
+        $route = htmlspecialchars($row['route']);
+
+        if (strlen($route) > 2 || strlen($route) < 2 )
+            echo '<div style="background-color:red">'. $route. '</div>';
+            else echo $route;
+  ?>
   </td>
  </tr>
 <?php
