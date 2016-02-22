@@ -114,9 +114,9 @@ function format_ethnicity($ethnicity) {
       "DATE_FORMAT(i.administered_date,'%Y%m%d') as administered_date, ".
       "i.lot_number as lot_number, ".
       "i.manufacturer as manufacturer, i.vfc, i.historical, ".
-       "concat(p.fname, '^', p.lname) as patientname, ";
+       "concat(p.lname, '^', p.fname) as patientname, ";
   } else {
-    $query .= "concat(p.fname, ' ',p.mname,' ', p.lname) as patientname, ".
+    $query .= "concat(p.lname, ' ',p.mname,' ', p.fname) as patientname, ".
       "i.vis_date as immunizationdate, "  ;
   }
   $query .=
