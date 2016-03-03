@@ -368,7 +368,7 @@ var mypcc = '<?php echo htmlspecialchars( $GLOBALS['phone_country_code'], ENT_QU
         <tr>
           <td align="right" class='text'><?php echo htmlspecialchars( xl('Route'), ENT_NOQUOTES); ?></td>
           <td>
-		  	<?php echo generate_select_list('immuniz_route', 'drug_route', $immuniz_route, 'Select Route', '');?>		  
+		  	<?php echo generate_select_list('immuniz_route', 'drug_routes', $immuniz_route, 'Select Route', '');?>
 		  </td>
         </tr>
         <tr>
