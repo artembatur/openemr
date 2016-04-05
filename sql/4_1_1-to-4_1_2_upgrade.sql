@@ -541,3 +541,7 @@ CREATE TABLE `appointment_encounter` (
 ) ENGINE=MyISAM;
 #EndIf
 
+#IfMissingColumn immunizations_schedules_codes drug_route
+ALTER TABLE `immunizations_schedules_codes` Add Column `drug_route` VARCHAR(2) default 'TD'
+#Endif
+

@@ -65,6 +65,8 @@ function update_immunization_info(code_info)
 
 function choose_imm_entry_base(data,callback)
 {
+
+    $("#immuniz_route").val(data.drug_route);
     $("#cvx_code").val(data.cvx_code);
     $("input[name='manufacturer']").val(data.manufacturer);
     $.post(ajax_code_info,
