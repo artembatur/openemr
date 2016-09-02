@@ -572,7 +572,7 @@ INSERT INTO `immunizations_schedules` (`id`, `description`, `age`, `age_max`, `f
 #EndIf
 
 
-#ifnottable immunizations_schedules_codes
+#IfNotTable immunizations_schedules_codes
 CREATE TABLE IF NOT EXISTS `immunizations_schedules_codes` (
   `id` int(11) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
@@ -614,7 +614,7 @@ INSERT INTO `immunizations_schedules_codes` (`id`, `description`, `manufacturer`
 (21, 'Gardasil 9', NULL, '165', 'CPT4:90651', 'ICD9:V08.9', NULL, ' Generic: Human Papillomavirus 9-valent Vacci', 'IM');
 #EndIf
 
-#ifnotTableimmunizations_schedules_options
+#IfNotTable immunizations_schedules_options
 
 CREATE TABLE IF NOT EXISTS `immunizations_schedules_options` (
   `id` int(11) NOT NULL,
