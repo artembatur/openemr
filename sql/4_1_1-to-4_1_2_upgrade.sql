@@ -541,7 +541,148 @@ CREATE TABLE `appointment_encounter` (
 ) ENGINE=MyISAM;
 #EndIf
 
-#IfMissingColumn immunizations_schedules_codes drug_route
-ALTER TABLE `immunizations_schedules_codes` Add Column `drug_route` VARCHAR(2) default 'TD'
-#Endif
+#IfNotTable immunizations_schedules
+CREATE TABLE IF NOT EXISTS `immunizations_schedules` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `description` varchar(255) DEFAULT NULL,
+  `age` int(11) NOT NULL,
+  `age_max` int(11) DEFAULT NULL,
+  `frequency` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
 
+--
+-- Dumping data for table `immunizations_schedules`
+--
+
+INSERT INTO `immunizations_schedules` (`id`, `description`, `age`, `age_max`, `frequency`) VALUES
+(1, 'Newborn', 0, NULL, NULL),
+(2, '2 Months', 2, NULL, NULL),
+(3, '4 Months', 4, NULL, NULL),
+(4, '6 Months', 6, NULL, NULL),
+(5, '9 Months', 9, NULL, NULL),
+(6, '12 Months', 12, NULL, NULL),
+(7, '15 Months', 15, NULL, NULL),
+(8, '18 Months', 18, NULL, NULL),
+(9, '4 Years', 48, NULL, NULL),
+(10, '11 Years', 132, NULL, NULL),
+(11, '15 Years', 160, NULL, NULL),
+(12, 'Influenza', 36, 216, 'annual'),
+(13, '3 Years', 36, NULL, NULL);
+#EndIf
+
+
+#ifnottable immunizations_schedules_codes
+CREATE TABLE IF NOT EXISTS `immunizations_schedules_codes` (
+  `id` int(11) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `manufacturer` varchar(45) DEFAULT NULL,
+  `cvx_code` varchar(45) DEFAULT NULL,
+  `proc_codes` varchar(45) DEFAULT NULL,
+  `justify_codes` varchar(45) DEFAULT NULL,
+  `default_site` varchar(45) DEFAULT NULL,
+  `comments` varchar(45) DEFAULT NULL,
+  `drug_route` varchar(2) DEFAULT 'TD',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `immunizations_schedules_codes`
+--
+
+INSERT INTO `immunizations_schedules_codes` (`id`, `description`, `manufacturer`, `cvx_code`, `proc_codes`, `justify_codes`, `default_site`, `comments`, `drug_route`) VALUES
+(1, 'Hepatitis B', NULL, '8', 'CPT4:90744', 'ICD9:V05.9', 'RT', 'Newborn', 'IM'),
+(2, 'Pentacel', 'PMC', '120', 'CPT4:90698', 'ICD9:V06.3;ICD9:V03.81', 'RT', NULL, 'IM'),
+(3, 'Hepatitis B', NULL, '8', 'CPT4:90744', 'ICD9:V05.3', 'RT', NULL, 'IM'),
+(4, 'Prevnar 13', 'WAL', '133', 'CPT4:90670', 'ICD9:V03.82', 'LT', NULL, 'IM'),
+(5, 'Rotateq', 'MSD', '116', 'CPT4:90680', 'ICD9:V04.89', 'PO', NULL, 'PO'),
+(6, 'DTaP', NULL, '20', 'CPT4:90700', 'ICD9:V06.1', 'RT', NULL, 'IM'),
+(7, 'IPV', 'PMC', '10', 'CPT4:90713', 'ICD9:V04.0', 'RT', '(IPOL?)', 'TD'),
+(8, 'Influenza(Preservative Free)', 'PMC', '140', 'CPT4:90655', 'ICD9:V04.81', 'LT', '(Fluzone?)(6 months)', 'IM'),
+(9, 'HIB', NULL, '47', 'CPT4:90645', 'ICD9:V03.81', 'LT', '(HibTiter?/Wyeth)(LT 9 Mo)', 'IM'),
+(10, 'MMR', NULL, '03', 'CPT4:90707', 'ICD9:V06.4', 'RA', '(Merck?)', 'IM'),
+(11, 'Varicella', NULL, '21', 'CPT4:90716', 'ICD9:V05.4', 'LA', '(Merck?/Varivax?)', 'IM'),
+(12, 'Hepatitis A', NULL, '83', 'CPT4:90633', 'ICD9:V05.9', 'RT', 'RT 12 Months', 'IM'),
+(13, 'HIB', NULL, '47', 'CPT4:90645', 'ICD9:V03.81', 'RT', '(RT 15 months)', 'IM'),
+(14, 'Hepatitis A', NULL, '83', 'CPT4:90633', 'ICD9:V05.9', 'RD', 'RD 18 Months', 'IM'),
+(15, 'Kinrix', 'SKB', '130', 'CPT4:90696', 'ICD9:V06.3', 'RT', NULL, 'IM'),
+(16, 'Menactra', 'PMC', '114', 'CPT4:90734', 'ICD9:V03.89', 'RD', NULL, 'IM'),
+(17, 'Adacel-TDaP', 'PMC', '115', 'CPT4:90715', 'ICD9:V06.1', 'LD', NULL, 'IM'),
+(18, 'Gardasil', 'MSD', '62', 'CPT4:90649', 'ICD9:V05.8', 'RD', NULL, 'IM'),
+(19, 'Influenza', NULL, '141', 'CPT4:90658', 'ICD9:V04.81', 'RD', 'Annual Influenza Age 3-18', 'IM'),
+(20, 'FluMist', 'MED', '149', 'CPT4:90660', 'ICD9:V04.81', 'NS', 'FluMist Age 3-18', 'IM'),
+(21, 'Gardasil 9', NULL, '165', 'CPT4:90651', 'ICD9:V08.9', NULL, ' Generic: Human Papillomavirus 9-valent Vacci', 'IM');
+#EndIf
+
+#ifnotTableimmunizations_schedules_options
+
+CREATE TABLE IF NOT EXISTS `immunizations_schedules_options` (
+  `id` int(11) NOT NULL,
+  `schedule_id` int(11) DEFAULT NULL,
+  `code_id` int(11) DEFAULT NULL,
+  `seq` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `immunizations_schedules_options`
+--
+
+INSERT INTO `immunizations_schedules_options` (`id`, `schedule_id`, `code_id`, `seq`) VALUES
+(0, 13, 20, 10),
+(1, 1, 1, 10),
+(2, 2, 2, 10),
+(3, 2, 3, 20),
+(4, 2, 4, 30),
+(5, 2, 5, 40),
+(6, 3, 2, 10),
+(7, 3, 3, 20),
+(8, 3, 4, 30),
+(9, 3, 5, 40),
+(10, 4, 6, 10),
+(11, 4, 7, 20),
+(12, 4, 4, 30),
+(13, 4, 8, 40),
+(14, 4, 5, 50),
+(15, 4, 2, 60),
+(16, 5, 3, 10),
+(17, 5, 9, 20),
+(18, 5, 8, 30),
+(19, 6, 10, 10),
+(20, 6, 11, 20),
+(21, 6, 12, 30),
+(22, 6, 8, 40),
+(23, 7, 6, 10),
+(24, 7, 13, 20),
+(25, 7, 4, 30),
+(26, 8, 14, 10),
+(27, 9, 6, 10),
+(28, 9, 7, 20),
+(29, 9, 15, 30),
+(30, 9, 11, 40),
+(31, 9, 10, 50),
+(32, 10, 16, 10),
+(33, 10, 17, 20),
+(34, 10, 18, 30),
+(35, 11, 16, 10),
+(36, 12, 19, 10),
+(37, 2, 6, 50),
+(38, 2, 7, 60),
+(39, 2, 9, 70),
+(40, 3, 6, 50),
+(41, 3, 7, 60),
+(42, 3, 9, 70),
+(43, 4, 9, 70),
+(44, 12, 20, 20),
+(45, 9, 20, 60),
+(46, 10, 20, 40),
+(47, 11, 20, 20),
+(48, 7, 8, 40),
+(49, 8, 8, 20),
+(50, 13, 8, 20),
+(51, 13, 19, 30),
+(52, 9, 19, 60),
+(53, 10, 19, 50),
+(54, 11, 19, 30),
+(56, 10, 21, 12);
+#EndIF
