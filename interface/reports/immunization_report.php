@@ -13,6 +13,7 @@ require_once("$srcdir/patient.inc");
 require_once("$srcdir/formatting.inc.php");
 require_once("$webserver_root/library/globals.inc.php");
 require_once($webserver_root.'/library/CAIRsoap.php');
+//echo '<pre>'; var_dump($_POST); echo '</pre>'; exit;
 
 $IMM = array('username' => $IMM_sendingfacility,
     'password' => $IMM_password,
@@ -149,6 +150,7 @@ function format_ethnicity($ethnicity) {
   
 
 $D="\r";
+$delimiter = "------------------------------------------------------------------------------------------------------------------";
 $nowdate = date('Ymdhms');
 $now = date('YmdGi');
 $now1 = date('Y-m-d G:i');
@@ -177,6 +179,7 @@ if ($_POST['form_get_hl7']==='true') {
    * 
    */
 
+  $first = true;
   while ($r = sqlFetchArray($res)) {
     $content = '';
     $content .= "MSH|".     //1. Field Seperator R OK
@@ -330,50 +333,53 @@ if ($_POST['form_get_hl7']==='true') {
       "|||||||".        //15-21 ignored.
       "$D";
 
-
-
-
-      $cairSOAP = new CAIRsoap();
-      $cairSOAP->setFromGlobals($IMM)
-          ->initializeSoapClient();
-
-      $cairResponse = $cairSOAP->submitSingleMessage($content);
-
-      $response = explode("|", $cairResponse->return);
-      $capture = $response[14];
-
-
-
-      if (strpos($capture, "message received") !== false)
-      {
-            $success++;
-            $uquery = "Update immunizations set submitted = 1";
-            $uquery .= " Where id = ".$r['immunizationid'];
-
-
-      } else {
-
-            $failures++;
-            $uquery = "Update immunizations set submitted = 'F' ";
-            $uquery .= " Where id = ".$r['immunizationid'];
-
-      }
-
-         sqlQuery($uquery);
-
-        
-}
+      $content_str .= $first ? $content : "\n\n" . $delimiter . "\n\n" . $content;
+      $first = false;
+    }
 
     //Display to the user the summary
     //Display to the user the list of errorenous sent immunizations
     //
+}
 
-  
+if(isset($_POST['hl7_file_content'])) {
 
-  
+    $res = sqlStatement($query);
+    while ($r = sqlFetchArray($res)) {
+        $res_array[] =  $r;
+    }
+    $immunization_array = explode($delimiter, $_POST['hl7_file_content']);
+
+    $cairSOAP = new CAIRsoap();
+    $cairSOAP->setFromGlobals($IMM)
+      ->initializeSoapClient();
+
+    foreach ($immunization_array as $key => $immunization) {
+        $immunization = trim($immunization);
+
+        $cairResponse = $cairSOAP->submitSingleMessage($immunization);
+
+        $response = explode("|", $cairResponse->return);
+        $capture = $response[14];
+
+        if (strpos($capture, "message received") !== false)
+        {
+           $success++;
+           $uquery = "Update immunizations set submitted = 1";
+           $uquery .= " Where id = ".$res_array[$key]['immunizationid'];
 
 
+        } else {
 
+           $failures++;
+           $uquery = "Update immunizations set submitted = 'F' ";
+           $uquery .= " Where id = ".$res_array[$key]['immunizationid'];
+
+        }
+
+        sqlQuery($uquery);
+
+    }
 }
 ?>
 
@@ -532,6 +538,7 @@ onsubmit='return top.restoreSession()'>
  </tr>
 </table>
 </div> <!-- end of parameters -->
+</form>
 
 
 <?php
@@ -597,10 +604,43 @@ onsubmit='return top.restoreSession()'>
 </tbody>
 </table>
 </div> <!-- end of results -->
+
 <?php } else if ($_POST['form_get_hl7']){
 
-     echo " You have successfuly entered in $success immunizations.  "; ?> <br> <?php
-     echo " There were $failures submissions that have failed. ";
+?>
+    <style>
+        .hl7_file_text_area {
+            width: 100%;
+            height: 340px;
+        }
+        .hl7_file_block {
+           margin: 10px 0;
+        }
+        .hl7_file_block button {
+            cursor: pointer;
+        }
+
+    </style>
+     <br>
+     <span class="title">HL7 file</span>
+    <div class="hl7_file_block">
+
+        <form method='post' action='immunization_report.php'>
+            <textarea name="hl7_file_content" class="hl7_file_text_area">
+                <?php echo $content_str ?>
+            </textarea>
+            <br>
+            <a onclick="$('#form_refresh').attr('value','true'); $('#form_get_hl7').attr('value','false'); $('#theform').submit();" href="#">
+                <button type="button">Delete</button>
+            </a>
+            <button>Send</button>
+        </form>
+    </div>
+<?php
+    } else if ($_POST['hl7_file_content']){
+
+        echo " You have successfuly entered in $success immunizations.  "; ?> <br> <?php
+        echo " There were $failures submissions that have failed. ";
         if ($failures > 0) echo "Please check your email account that CAIR communicates with you to get the reason. ";
 
     }else{ ?>
@@ -608,7 +648,7 @@ onsubmit='return top.restoreSession()'>
           <?php echo xl('Click Refresh to view all results, or please input search criteria above to view specific results.', 'e' ); ?>
         </div>
         <?php } ?>
-</form>
+
 
 <script language='JavaScript'>
  Calendar.setup({inputField:"form_from_date", ifFormat:"%Y-%m-%d", button:"img_from_date"});

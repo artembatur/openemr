@@ -103,8 +103,7 @@ class CAIRsoap {
 	}
 
 	public function initializeSoapClient() {
-                
-            
+
 		return $this->setSoapClient(new SoapClient($this->getWsdlUrl(), $this->getCerts() ));
 	}
 
