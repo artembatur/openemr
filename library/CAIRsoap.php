@@ -81,7 +81,6 @@ class CAIRsoap {
 		return $this->wsdlUrl;
 	}
 
-               
 	public function setFromGlobals($globalsArray) {
 		$this->setUsername($globalsArray['username']);
 		$this->setPassword($globalsArray['password']);
@@ -104,25 +103,31 @@ class CAIRsoap {
 
 	public function initializeSoapClient() {
 
-		return $this->setSoapClient(new SoapClient($this->getWsdlUrl(), $this->getCerts() ));
+		//return $this->setSoapClient(new SoapClient($this->getWsdlUrl(), $this->getCerts() ));
+		return $this->setSoapClient(new SoapClient($this->getWsdlUrl(), array( 'soap_version' => SOAP_1_2) ));
 	}
 
 	public function submitSingleMessage($message) {
-		return $this->getSoapClient()->submitSingleMessage(
-			array(
-				'username'		=> $this->getUsername(),
-				'password'		=> $this->getPassword(),
-				'facilityID'	=> $this->getFacility(),
-				'hl7Message'	=> $message
-			)
-		);
+		//submitSingleMessage connectivityTest
+		try {
+			return $this->getSoapClient()->submitSingleMessage(
+				array(
+					'username'		=> $this->getUsername(),
+					'password'		=> $this->getPassword(),
+					'facilityID'	=> $this->getFacility(),
+					'hl7Message'	=> $message
+				)
+			);
+		}
+		catch (Exception $e) {
+			echo $e->getMessage();
+			exit;
+		}
 	}
 
-        public function getSentMessage(){
-            
-             
-            
-        }
-               
-        
+	public function getSentMessage(){
+
+
+
+	}
 }

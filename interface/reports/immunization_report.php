@@ -13,7 +13,6 @@ require_once("$srcdir/patient.inc");
 require_once("$srcdir/formatting.inc.php");
 require_once("$webserver_root/library/globals.inc.php");
 require_once($webserver_root.'/library/CAIRsoap.php');
-//echo '<pre>'; var_dump($_POST); echo '</pre>'; exit;
 
 $IMM = array('username' => $IMM_sendingfacility,
     'password' => $IMM_password,
@@ -182,19 +181,29 @@ if ($_POST['form_get_hl7']==='true') {
   $first = true;
   while ($r = sqlFetchArray($res)) {
     $content = '';
-    $content .= "MSH|".     //1. Field Seperator R OK
-                "^~\&|".    //2. Encoding Characters R OK
-                "OPENEMR|". //3. Sending App optional OK
-                $IMM_sendingfacility."|". //4. Sending facility OK
-                "|".        //5. receiving application Ignored  OK
-                $IMM_receivingfacility."|". //6. Receiving Facility OK
-                $nowdate."|". //7. date/time message OK
-                "|".       //8. Security - ignored OK
-                $IMM_messageType."|". // 9. message type - Required OK
-                date('Ymdhms').$r['patientid'].preg_replace("/[^A-Za-z0-9 ]/", '', $r['immunizationtitle'])."|".  //  OK 10. Message control ID (must be unique for a given day) Required
-                $IMM_processID."|". //11. Processing ID (either P_roduction T_raining D_debugging
-                $IMM_hl7versionID . //12 Version ID (2.5.1 as of current) OK
-                $D;
+    $content .=
+        "MSH|".     //1. Field Seperator R OK
+        "^~\&|".    //2. Encoding Characters R OK
+        "OPENEMR|". //3. Sending App optional OK
+        $IMM_sendingfacility."|". //4. Sending facility OK
+        "|".        //5. receiving application Ignored  OK
+        $IMM_receivingfacility."|". //6. Receiving Facility OK
+        $nowdate."|". //7. date/time message OK
+        "|".       //8. Security - ignored OK
+        $IMM_messageType."|". // 9. message type - Required OK
+        date('Ymdhms').$r['patientid'].preg_replace("/[^A-Za-z0-9 ]/", '', $r['immunizationtitle'])."|".  //  OK 10. Message control ID (must be unique for a given day) Required
+        "P|". //11. Processing ID (Only value accepted is “P” for production. All other values will cause themessage to be rejected.)
+        $IMM_hl7versionID . "|". //12 Version ID (2.5.1 as of current) OK
+        "|".     //13. Sequence number
+        "|".     //14. Continuation pointer
+        "NE|".     //15. Accept acknowledgment type
+        "NE|".     //16. Application acknowledgment type
+        "|".     //17. Country code
+        "|".     //18. Character set
+        "|".     //19. Principal language of message
+        "|".     //20. Alternate character set handling scheme
+        "Z23^CDCPHINVS|".     //21. Sites may use this field to assert adherence to, or reference, a message profile
+        $IMM_CAIR_ID . $D;     //22. Responsible Sending Org
     
     if ($r['sex']==='Male') $r['sex'] = 'M';
     if ($r['sex']==='Female') $r['sex'] = 'F';
@@ -243,9 +252,6 @@ if ($_POST['form_get_hl7']==='true') {
         "|" . // 34. Last Update Facility
         "|" . // 35. Species Code
         "|" . // 36. Breed Code
-        "|" . // 37. Breed Code
-        "|" . // 38. Production Class Code
-        ""  . // 39. Tribal Citizenship
         $D;
     
     //PD1
@@ -269,12 +275,47 @@ if ($_POST['form_get_hl7']==='true') {
             "^^^|". // 11. Publicity Code (may be empty)
             $r['data_sharing']."|". // 12. Protection Indicator (R)
             $r['data_sharing_date']. // 13. Protection Indicator effective date
+        "|". // 14. Place of worship
+        "|". // 15. Advance directive code
+        "|". // 16. Immunization registry status
+        "|". // 17. Immunization registry status effective date
+        "|". // 18. Publicity code effective date
             $D ;
             
             
     $content .= "ORC" . // ORC mandatory for RXA
         "|" . 
-        "RE" .
+        "RE|" . //1. Order Control
+        "|" . //2. Placer Order Number
+        "|" . //3. Filler Order Number
+        "|" . //4. Placer Group Number
+        "|" . //5. Order Status
+        "|" . //6. Response Flag
+        "|" . //7. Quantity/Timing
+        "|" . //8. Parent
+        "|" . //9. Date/Time of Transaction
+        "|" . //10. Entered By
+        "|" . //11. Verified By
+        "|" . //12. Ordering Provider
+        "|" . //13. Enterer's Location
+        "|" . //14. Call Back Phone Number
+        "|" . //15. Order Effective Date/Time
+        "|" . //16. Order Control Code Reason
+        "|" . //17. Entering Organization
+        "|" . //18. Entering Device
+        "|" . //19. Action By
+        "|" . //20. Advanced Beneficiary Notice Code
+        "|" . //21. Ordering Facility Name
+        "|" . //22. Ordering Facility Address
+        "|" . //23. Ordering Facility Phone Number
+        "|" . //24. Ordering Provider Address
+        "|" . //25. Order Status Modifier
+        "|" . //26. Advanced Beneficiary Notice Override Reason
+        "|" . //27. Filler's Expected Availability Date/Time
+        "|" . //28. Confidentiality Code
+        "|" . //29. Order Type
+        "|" . //30. Enterer Authorization Mode
+        "|" . //31. Parent Universal Service Identifier
         $D;
         
     
@@ -330,7 +371,7 @@ if ($_POST['form_get_hl7']==='true') {
       "|".              //12 eff date of ref range values (ignored)
       "|".              //13 User defined access Checks (ignored)
       "|".              //14 Date/Time of the Observation (required, but may be empty)
-      "|||||||".        //15-21 ignored.
+      "||||||||||".        //15-25 ignored.
       "$D";
 
       $content_str .= $first ? $content : "\n\n" . $delimiter . "\n\n" . $content;
