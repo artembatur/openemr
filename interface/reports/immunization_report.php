@@ -13,6 +13,12 @@ require_once("$srcdir/patient.inc");
 require_once("$srcdir/formatting.inc.php");
 require_once("$webserver_root/library/globals.inc.php");
 require_once($webserver_root.'/library/CAIRsoap.php');
+$dsn = "mysql:host=". $sqlconf['host'] .";dbname=" . $sqlconf['dbase'] . ";charset=utf8";
+$opt = array(
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+);
+$pdo = new PDO($dsn, $sqlconf['login'], $sqlconf['pass'], $opt);
 
 $IMM = array('username' => $IMM_sendingfacility,
     'password' => $IMM_password,
@@ -88,6 +94,22 @@ function format_ethnicity($ethnicity) {
 		   return ("U^Unknown^HL70189");
 	}
  }
+
+function getErrorsArray($responseArray) {
+
+    $errorArray = array();
+    foreach($responseArray as $resp) {
+
+        if(strpos($resp, 'Informational Error') === false){
+            continue;
+        }
+        $resp = explode('ERR',$resp)[0];
+        $resp = explode('Informational Error',$resp)[1];
+        $errorArray[] = substr(trim($resp), 2);
+    }
+
+    return $errorArray;
+}
 
 
   $query = 
@@ -395,31 +417,41 @@ if(isset($_POST['hl7_file_content'])) {
     $cairSOAP->setFromGlobals($IMM)
       ->initializeSoapClient();
 
+    $errors = '';
     foreach ($immunization_array as $key => $immunization) {
         $immunization = trim($immunization);
 
         $cairResponse = $cairSOAP->submitSingleMessage($immunization);
 
         $response = explode("|", $cairResponse->return);
-        $capture = $response[14];
+        $errorsArray = getErrorsArray($response);
 
-        if (strpos($capture, "message received") !== false)
+        $sql = "UPDATE immunizations SET submitted = :submitted,
+            WHERE id = :id";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':submitted', $submitted, PDO::PARAM_INT);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $id = 1;
+
+        if (empty($errorsArray))
         {
-           $success++;
-           $uquery = "Update immunizations set submitted = 1";
-           $uquery .= " Where id = ".$res_array[$key]['immunizationid'];
-
+            $success++;
+            $submitted = 1;
 
         } else {
+            $errors .= $delimiter . "<br>";
+            $errors .= 'Message "'.$res_array[$key]['immunizationtitle']. '" contains errors:<br>';
+            $errors .= '<ul>';
+            foreach ($errorsArray as $error) {
+                $errors .= '<li>' . $error . '</li>';
+            }
+            $errors .= '</ul>';
 
-           $failures++;
-           $uquery = "Update immunizations set submitted = 'F' ";
-           $uquery .= " Where id = ".$res_array[$key]['immunizationid'];
-
+            $failures++;
+            $submitted = 'F';
         }
 
-        sqlQuery($uquery);
-
+        $stmt->execute();
     }
 }
 ?>
@@ -682,6 +714,9 @@ onsubmit='return top.restoreSession()'>
 
         echo " You have successfuly entered in $success immunizations.  "; ?> <br> <?php
         echo " There were $failures submissions that have failed. ";
+        if($errors) {
+            echo '<br><span style="color: red">' .$errors . '</span>';
+        }
         if ($failures > 0) echo "Please check your email account that CAIR communicates with you to get the reason. ";
 
     }else{ ?>
