@@ -426,12 +426,9 @@ if(isset($_POST['hl7_file_content'])) {
         $response = explode("|", $cairResponse->return);
         $errorsArray = getErrorsArray($response);
 
-        $sql = "UPDATE immunizations SET submitted = :submitted,
+        $sql = "UPDATE immunizations SET submitted = :submitted
             WHERE id = :id";
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':submitted', $submitted, PDO::PARAM_INT);
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $id = 1;
+        $id = $res_array[$key]['immunizationid'];
 
         if (empty($errorsArray))
         {
@@ -451,7 +448,7 @@ if(isset($_POST['hl7_file_content'])) {
             $submitted = 'F';
         }
 
-        $stmt->execute();
+        $stmt->execute(array('submitted' => $submitted, 'id' => $id)));
     }
 }
 ?>
