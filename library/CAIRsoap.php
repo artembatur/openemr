@@ -108,13 +108,7 @@ class CAIRsoap {
 	}
 
 	public function submitSingleMessage($message) {
-		$zzzzzzz = 'MSH|^~\&|OPENEMR|DE-005520||CAIRLO|20160916010947||VXU^V04^VXU_V04|201609160109471meningococcal MCV4P|P|2.5.1|||
-PID|||1^^^^PI||Shaw^Ted||19470311|M||2106-3^^HL70005|222 1st Avenue^^San Diego^CA^92101^^M||^PRN^^^^619^5557568|^WPN^^^^619^5559867||M||||||U^Unknown^HL70189|||||||||||||||
-PD1|||^^^^^^^^^30SANTIAGOP||||||||^^^|N||||||
-ORC|RE|||||||||||||||||||||||||||||||
-RXA|0|1|20160908|20160908|114^meningococcal MCV4P^CVX|999|mL||00^^NIP001||^^^30SANTIAGOP
-RXR|IM^^HL70162^^^|^^HL70163^^^||||
-OBX|1|CE|64994-7^^LN^^^||V02^^||||||F';
+
 		//submitSingleMessage connectivityTest
 		try {
 			return $this->getSoapClient()->submitSingleMessage(
@@ -123,7 +117,7 @@ OBX|1|CE|64994-7^^LN^^^||V02^^||||||F';
 					'username'		=> $this->getUsername(),
 					'password'		=> $this->getPassword(),
 					'facilityID'	=> $this->getFacility(),
-					'hl7Message'	=> $zzzzzzz
+					'hl7Message'	=> $message
 				)
 			);
 		}
