@@ -112,7 +112,6 @@ class CAIRsoap {
 		//submitSingleMessage connectivityTest
 		try {
 			return $this->getSoapClient()->submitSingleMessage(
-			//$return = $this->getSoapClient()->submitSingleMessage(
 				array(
 					'username'		=> $this->getUsername(),
 					'password'		=> $this->getPassword(),

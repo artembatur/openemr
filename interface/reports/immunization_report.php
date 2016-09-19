@@ -422,12 +422,12 @@ if(isset($_POST['hl7_file_content'])) {
         $immunization = trim($immunization);
 
         $cairResponse = $cairSOAP->submitSingleMessage($immunization);
-
         $response = explode("|", $cairResponse->return);
         $errorsArray = getErrorsArray($response);
 
         $sql = "UPDATE immunizations SET submitted = :submitted
             WHERE id = :id";
+        $stmt = $pdo->prepare($sql);
         $id = $res_array[$key]['immunizationid'];
 
         if (empty($errorsArray))
@@ -445,10 +445,10 @@ if(isset($_POST['hl7_file_content'])) {
             $errors .= '</ul>';
 
             $failures++;
-            $submitted = 'F';
+            $submitted = 0;
         }
 
-        $stmt->execute(array('submitted' => $submitted, 'id' => $id)));
+        $stmt->execute(array('submitted' => $submitted, 'id' => $id));
     }
 }
 ?>
