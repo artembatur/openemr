@@ -10,7 +10,7 @@
         .immunization_codes th {
             text-align: left;
         }
-        .immunization_code_form input {
+        .immunization_code_form input, .immunization_code_form select {
             width: 400px;
         }
         .error {
@@ -54,7 +54,15 @@
         </tr>
         <tr>
             <td><label for="cccc">Default site</label></td>
-            <td><input type="text" name="immunization_code[default_site]" value="<?php if(isset($result['default_site'])) echo $result['default_site'] ?>"></td>
+            <td>
+                <?php
+                $value = '';
+                if(isset($result['default_site'])) {
+                    $value = $result['default_site'];
+                }
+                echo generate_select_list('immunization_code[default_site]', 'Imm_Administrative_Site__CAIR', $value,'Select Default Site', ' ');
+                ?>
+            </td>
         </tr>
         <tr>
             <td><label for="cccc">Comments</label></td>
@@ -62,10 +70,19 @@
         </tr>
         <tr>
             <td><label for="cccc">Drug route</label></td>
-            <td><input type="text" name="immunization_code[drug_route]" value="<?php if(isset($result['drug_route'])) echo $result['drug_route'] ?>"></td>
+            <td>
+                <?php
+                $value = '';
+                if(isset($result['drug_route'])) {
+                    $value = $result['drug_route'];
+                }
+                echo generate_select_list('immunization_code[drug_route]', 'Drug_Route', $value,'Select Drug Route', ' ');
+                ?>
+            </td>
         </tr>
     </table>
     <input type="hidden" name="immunization_code[id]" value="<?php if(isset($result['id'])) echo $result['id'] ?>">
+    <input type="hidden" name="immunization_code[schedule_id]" value="<?php if(isset($_GET['schedule_id'])) echo $_GET['schedule_id'] ?>">
     <button><?php echo $action == 'add' ? 'Add' : 'Save';?></button>
 </form>
 </body>

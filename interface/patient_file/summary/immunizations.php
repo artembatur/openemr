@@ -12,7 +12,7 @@ include_once("../../globals.php");
 include_once("$srcdir/sql.inc");
 include_once("$srcdir/options.inc.php");
 include_once("$srcdir/immunization_helper.php");
-
+//echo '<pre>'; var_dump($_GET); echo '</pre>'; exit;
 if (isset($_GET['mode'])) {
     /*
 	 * THIS IS A BUG. IF NEW IMMUN IS ADDED AND USER PRINTS PDF, 

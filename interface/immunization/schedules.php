@@ -16,6 +16,21 @@ $opt = array(
 );
 $pdo = new PDO($dsn, $sqlconf['login'], $sqlconf['pass'], $opt);
 
+if(isset($_POST['age_group_id'])) {
+    $age_group_id = $_POST['age_group_id'];
+    if(empty($age_group_id)) {
+        exit('');
+    }
+    $query = $pdo->prepare("SELECT *
+        FROM immunizations_schedules ims
+        JOIN immunizations_schedules_options iso ON ims.id = iso.schedule_id
+        JOIN immunizations_schedules_codes isc ON isc.id = iso.code_id
+        WHERE ims.id = :id");
+    $query->execute(array('id' =>  $age_group_id));
+    $rows = $query->fetchAll();
+    require_once 'temp/schedule_list.php';
+    exit;
+}
 if(isset($_POST['immunization_schedule'])) {
     $post = validationImmunizationCode($_POST['immunization_schedule']);
 
@@ -84,7 +99,7 @@ if(isset($_GET['action'])) {
     }
 }
 
-$results = $pdo->query("SELECT * FROM immunizations_schedules");
+$results = $pdo->query("SELECT id,description FROM immunizations_schedules ORDER BY age DESC");
 $rows = $results->fetchAll();
 require_once 'temp/view_table_schedule.php';
 

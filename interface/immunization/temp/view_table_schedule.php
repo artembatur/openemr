@@ -49,36 +49,37 @@
     }
     ?>
 </div>
-<span class="title"><?php xl('Immunization Schedules ','e');?></span>
-<a class="more" href="/interface/immunization/schedules.php?action=add">Add new</a>
-<br><br>
-<table cellspacing="0" class="immunization_codes">
-    <thead>
-    <tr>
-        <th>Description</th>
-        <th>Age</th>
-        <th>Age Max</th>
-        <th>Frequency</th>
-        <td></td>
-    </tr>
-    </thead>
-    <tbody>
+<label>Select Age:</label>
+<select id="select_age_group">
+    <option value="">Age group</option>
     <?php
     foreach($rows as $row) {
         ?>
-        <tr>
-            <td><?=$row['description']?></td>
-            <td><?=$row['age']?></td>
-            <td><?=$row['age_max']?></td>
-            <td><?=$row['frequency']?></td>
-            <td><a href="/interface/immunization/schedules.php?action=edit&id=<?=$row['id']?>"">Edit</a>
-                <a href="/interface/immunization/schedules.php?action=del&id=<?=$row['id']?>" onclick="return confirm('Are you sure you want to delete this schedule?') ? true : false">Del</a>
-            </td>
-        </tr>
+        <option value="<?=$row['id']?>"><?=$row['description']?></option>
         <?php
     }
     ?>
-    </tbody>
-</table>
+</select>
+<br><br>
+<div id="schedules_table"></div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#select_age_group').change(function() {
+            var age_group_id = $(this).val();
+
+            $.ajax({
+                dataType: "html",
+                type: "POST",
+                url: "/interface/immunization/schedules.php",
+                data: {age_group_id: age_group_id},
+                success: function(response){
+                    $('#schedules_table').html(response);
+                }
+            });
+
+        });
+    });
+</script>
 </body>
 </html>
