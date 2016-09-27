@@ -12,7 +12,7 @@ include_once("../../globals.php");
 include_once("$srcdir/sql.inc");
 include_once("$srcdir/options.inc.php");
 include_once("$srcdir/immunization_helper.php");
-//echo '<pre>'; var_dump($_GET); echo '</pre>'; exit;
+
 if (isset($_GET['mode'])) {
     /*
 	 * THIS IS A BUG. IF NEW IMMUN IS ADDED AND USER PRINTS PDF, 
@@ -413,15 +413,13 @@ var mypcc = '<?php echo htmlspecialchars( $GLOBALS['phone_country_code'], ENT_QU
             <textarea class='text' name="note" id="note" rows=5 cols=25><?php echo htmlspecialchars( $note, ENT_NOQUOTES); ?></textarea>          </td>
         </tr>
         <tr>
-          <td colspan="3" align="center">
-
-	    <input type="button" name="save" id="save" value="<?php echo htmlspecialchars( xl('Save Immunization'), ENT_QUOTES); ?>">
-	
-            <input type="button" name="print" id="print" value="<?php echo htmlspecialchars( xl('Print Record') . xl('PDF','',' (',')'), ENT_QUOTES); ?>">
-	
-	    <input type="button" name="printHtml" id="printHtml" value="<?php echo htmlspecialchars( xl('Print Record') . xl('HTML','',' (',')'), ENT_QUOTES); ?>">
-            
-            <input type="reset" name="clear" id="clear" value="<?php echo htmlspecialchars( xl('Clear'), ENT_QUOTES); ?>">          </td>
+            <td colspan="3" align="center">
+                <input type="button" name="save" id="save" value="<?php echo htmlspecialchars( xl('Save Immunization'), ENT_QUOTES); ?>">
+                <input type="button" name="print" id="print" value="<?php echo htmlspecialchars( xl('Print Record') . xl('PDF','',' (',')'), ENT_QUOTES); ?>">
+                <input type="button" name="printHtml" id="printHtml" value="<?php echo htmlspecialchars( xl('Print Record') . xl('HTML','',' (',')'), ENT_QUOTES); ?>">
+                <input type="reset" name="clear" id="clear" value="<?php echo htmlspecialchars( xl('Clear'), ENT_QUOTES); ?>">
+                <input type="button" value="<?php echo htmlspecialchars( xl('Cancel'), ENT_QUOTES); ?>" onclick="history.go(-1);return false;">
+            </td>
         </tr>
       </table>
 </form>

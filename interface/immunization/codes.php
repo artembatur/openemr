@@ -48,20 +48,22 @@ if(isset($_POST['immunization_code'])) {
         }
 
     } else {
-        $stmt = $pdo->prepare("INSERT INTO immunizations_schedules_codes (description, manufacturer, cvx_code, proc_codes, justify_codes, default_site, comments, drug_route) VALUES (?,?,?,?,?,?,?,?)");
-        $insert = $stmt->execute(array($post['description'], $post['manufacturer'], $post['cvx_code'], $post['proc_codes'], $post['justify_codes'], $post['default_site'], $post['comments'], $post['drug_route']));
-
-        if($insert) {
-
-            if($post['schedule_id']){
+        try {
+            $pdo->setAttribute(PDO :: ATTR_ERRMODE, PDO :: ERRMODE_EXCEPTION);
+            $pdo->beginTransaction();
+            $stmt = $pdo->prepare("INSERT INTO immunizations_schedules_codes (description, manufacturer, cvx_code, proc_codes, justify_codes, default_site, comments, drug_route) VALUES (?,?,?,?,?,?,?,?)");
+            $insert = $stmt->execute(array($post['description'], $post['manufacturer'], $post['cvx_code'], $post['proc_codes'], $post['justify_codes'], $post['default_site'], $post['comments'], $post['drug_route']));
+            if ($post['schedule_id']) {
                 $last_insert_id = $pdo->query("SELECT LAST_INSERT_ID() as insert_id");
                 $insert_id = $last_insert_id->fetch();
                 $stmt = $pdo->prepare("INSERT INTO immunizations_schedules_options (schedule_id, code_id) VALUES (?,?)");
                 $insert_schedule = $stmt->execute(array($post['schedule_id'], $insert_id['insert_id']));
             }
             $successMessage = 'Code added success!';
-        } else {
-            $errorMessage = 'SQL error';
+            $pdo->commit();
+        } catch (Exception $e) {
+            $pdo->rollBack();
+            $errorMessage = 'SQL error: ' . $e->getMessage();
         }
     }
 }
